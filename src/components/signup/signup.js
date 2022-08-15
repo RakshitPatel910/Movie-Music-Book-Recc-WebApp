@@ -1,26 +1,28 @@
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import customCss from './style.js'
-// import { makeStyles } from "@material-ui/core/styles";
-// import { useState } from "react"
-function Signup() {
-  // const {isLogin,setIsLogin} = useState(false);
-  const classes = customCss()
-  return (
-    <>
-      <div className="signup-container">
-        <TextField id="outlined-basic" label="Email" variant="outlined" /> 
-        <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-        />
-        <Button className={classes.Button} variant="contained">Login</Button>
-      </div>
-    </>
-  );
+
+function Signup(){
+    return (
+      <>
+        <div className="signup">
+          <div className="name">
+            <TextField className="firstName" label="First Name" />
+            <TextField className="middleName" label="Middle Name" />
+            <TextField className="lastName" label="Last Name" />
+          </div>
+          <TextField className="email" label="Email" />
+          <TextField
+            className="password"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+          />
+          <TextField className="password" label="Confirm Password" />
+          <Button className="button" style={{backgroundColor:"black"}} variant="contained">Sign Up</Button>
+        </div>
+      </>
+    );
 }
 
-export default Signup;
+export default Signup
