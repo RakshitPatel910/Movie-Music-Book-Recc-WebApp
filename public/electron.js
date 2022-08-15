@@ -11,8 +11,8 @@ function createWindow () {
     height: 600,
     show: true,
     frame: true, // it enable or disable default navbar 
-    fullscreenable: false, 
-    resizable:false,
+    fullscreenable:true, 
+    resizable:true,
     transparent: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
