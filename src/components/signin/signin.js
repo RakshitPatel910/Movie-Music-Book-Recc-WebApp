@@ -16,8 +16,10 @@ import './style.css'
 
 function Signin() {
 
-  var [profile,setProfile] = useState({
-    email:"",
+  
+
+  const [profile,setProfile] = useState({
+    email: "",
     password:""
   })
   
@@ -68,13 +70,13 @@ function Signin() {
   return (
     <>
       <div className="signup-container">
-        <TextField className="email"  label="Email" value={profile.email} onChange={(e)=>{setProfile({email:e.target.value})}} /> 
+        <TextField className="email"  label="Email" value={profile.email} onChange={(e)=>{setProfile({...profile,email:e.target.value})}} /> 
         <TextField className="password"
           label="Password"
           type={passwordShown ? "text":"password"}
           autoComplete="current-password"
           value={profile.password}
-          onChange={(e)=>{setProfile({password:e.target.value})}}
+          onChange={(e)=>{setProfile({...profile,password:e.target.value})}} //...profile initailly will set old value of field and then change the changing field
         />
         <IconButton onClick={togglePassword} style={{color:"black"}}>{passwordShown ? <VisibilityOffIcon/> : <VisibilityIcon/>}</IconButton>
         <Button className="button" style={{backgroundColor:"black"}} variant="contained" onClick={()=>{console.log(profile.email,profile.password)}}>Login</Button>
@@ -89,3 +91,4 @@ function Signin() {
 }
 
 export default Signin;
+
