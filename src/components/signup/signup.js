@@ -3,12 +3,14 @@ import Button from "@mui/material/Button";
 import Grid from '@mui/material/Grid';
 // import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
-// import VisibilityIcon from "@mui/icons-material/Visibility";
-// import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Fab from "@mui/material/Fab";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import {useState} from 'react';
@@ -26,16 +28,19 @@ function Signup() {
     lastName:"",
   });
 
+  var passwordLength = profile.password.length;
+  console.log(passwordLength)
+
   // const [confirmPassword,setConfirmPassword] = useState("");
   // var passwordChecking ;
 
-  // const [passwordShown,setPasswordShown] = useState(false);
+  const [passwordShown,setPasswordShown] = useState(false);
   // const [user, setUSer] = useState({});
 
-  // const togglePassword=()=>{
-  //   setPasswordShown(!passwordShown)
-  //   console.log(passwordShown)
-  // };
+  function togglePassword(){
+    setPasswordShown(!passwordShown)
+    console.log(passwordShown)
+  };
 
   // function checkPassword(){
   //   if(confirmPassword !== profile.password){
@@ -152,18 +157,77 @@ function Signup() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={profile.email}
+                  onChange={(e) => {
+                    setProfile({ ...profile, email: e.target.value });
+                  }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={11} sm={11}>
                 <TextField
                   required
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={passwordShown ? "text" : "password"}
                   id="password"
                   autoComplete="new-password"
+                  value={profile.password}
+                  onChange={(e) => {
+                    setProfile({ ...profile, password: e.target.value });
+                  }}
                 />
+              </Grid>
+              <Grid item xs={1} sm={1}>
+                <Fab
+                  size="small"
+                  color="blue"
+                  sx={{ alignItems: "center", mt: 1, mb: 0 }}
+                  onClick={togglePassword}
+                >
+                  {passwordShown ? (
+                    <VisibilityOffIcon
+                      sx={{ color: "blue", alignSelf: "center" }}
+                    />
+                  ) : (
+                    <VisibilityIcon
+                      sx={{ color: "blue", alignSelf: "center" }}
+                    />
+                  )}
+                  {/* <VisibilityIcon sx={{color:"blue",alignSelf:"center"}}/> */}
+                </Fab>
+              </Grid>
+              <Grid item xs={10} sm={10} sx={{mt:1}}>
+                <LinearProgress
+                  variant="determinate"
+                  value={
+                    passwordLength === 0 ? 0
+                      :  passwordLength > 0 && passwordLength <= 2
+                      ? 20
+                      :  passwordLength > 2 && passwordLength <= 4
+                      ? 40
+                      :  passwordLength > 4 && passwordLength <= 6
+                      ? 60
+                      : passwordLength > 6 && passwordLength <= 8
+                      ? 80
+                      : passwordLength > 8 && passwordLength <= 10
+                      ? 100
+                      : passwordLength > 10 && passwordLength <= 12
+                      ? 100
+                      : 100
+                  }
+                />
+              </Grid>
+              <Grid item xs={2} sm={2}>
+                {passwordLength <= 2
+                  ? "very weak"
+                  : passwordLength > 2 && passwordLength <= 4
+                  ? "weak"
+                  : passwordLength > 4 && passwordLength <= 6
+                  ? "strong"
+                  : passwordLength > 6 && passwordLength <= 8
+                  ? "very strong"
+                  : "very strong"}
               </Grid>
             </Grid>
             <Button
@@ -176,7 +240,7 @@ function Signup() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
+                <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

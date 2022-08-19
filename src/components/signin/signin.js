@@ -2,8 +2,9 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Avatar from '@mui/material/Avatar';
-// import VisibilityIcon from "@mui/icons-material/Visibility";
-// import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Fab from "@mui/material/Fab";
 // import IconButton from "@mui/material/IconButton";
 import {useState} from 'react';
 // import jwt_decode from 'jwt-decode'
@@ -35,13 +36,13 @@ function Signin() {
 
   
   // const [user,setUser] = useState({});
-  // const [passwordShown,setPasswordShown] = useState(false); 
+  const [passwordShown,setPasswordShown] = useState(false); 
 
   // const google = window.google
 
-  // const togglePassword=()=>{
-  //   setPasswordShown(!passwordShown);
-  // }
+  function togglePassword(){
+    setPasswordShown(!passwordShown);
+  }
 
   // function handleCallbackResponse(res){
   //   console.log("encoded JWT ID token"+ res.credential);
@@ -107,18 +108,42 @@ function Signin() {
               value={profile.email} 
               onChange={(e)=>{setProfile({...profile,email:e.target.value})}}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={profile.password}
-              onChange={(e)=>{setProfile({...profile,password:e.target.value})}} //...profile initailly will set old value of field and then change the changing field
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={11} sm={11}>
+                <TextField
+                  required 
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type={passwordShown ? "text" : "password"}
+                  id="password"
+                  autoComplete="new-password"
+                  value={profile.password}
+                  onChange={(e) => {
+                    setProfile({ ...profile, password: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={1} sm={1}>
+                <Fab
+                  size="small"
+                  color="blue"
+                  sx={{ alignItems: "center", mt: 1, mb: 0 }}
+                  onClick={togglePassword}
+                >
+                  {passwordShown ? (
+                    <VisibilityOffIcon
+                      sx={{ color: "blue", alignSelf: "center" }}
+                    />
+                  ) : (
+                    <VisibilityIcon
+                      sx={{ color: "blue", alignSelf: "center" }}
+                    />
+                  )}
+                  {/* <VisibilityIcon sx={{color:"blue",alignSelf:"center"}}/> */}
+                </Fab>
+              </Grid>
+            </Grid>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
