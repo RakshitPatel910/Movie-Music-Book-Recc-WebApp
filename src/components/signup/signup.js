@@ -11,20 +11,20 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-// import {useEffect,useState} from 'react';
+import {useState} from 'react';
 // import jwt_decode from 'jwt-decode'
 import "./style.css";
 
 function Signup() {
   // const google = window.google;
 
-  // const [profile, setProfile] = useState({
-  //   email:"",
-  //   password:"",
-  //   firstName:"",
-  //   middleName:"",
-  //   lastName:"",
-  // });
+  const [profile, setProfile] = useState({
+    email:"",
+    password:"",
+    firstName:"",
+    middleName:"",
+    lastName:"",
+  });
 
   // const [confirmPassword,setConfirmPassword] = useState("");
   // var passwordChecking ;
@@ -76,7 +76,7 @@ function Signup() {
 
   return (
     <>
-      <Container >
+      <Container>
         <Box
           sx={{
             marginTop: 8,
@@ -100,7 +100,7 @@ function Signup() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={4}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -109,9 +109,28 @@ function Signup() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  value={profile.firstName}
+                  onChange={(e) => {
+                    setProfile({ ...profile, firstName: e.target.value });
+                  }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  autoComplete="given-name"
+                  name="middleName"
+                  required
+                  fullWidth
+                  id="middleName"
+                  label="Middle Name"
+                  autoFocus
+                  value={profile.middleName}
+                  onChange={(e) => {
+                    setProfile({ ...profile, middleName: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
                 <TextField
                   required
                   fullWidth
@@ -119,6 +138,10 @@ function Signup() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={profile.lastName}
+                  onChange={(e) => {
+                    setProfile({ ...profile, lastName: e.target.value });
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -153,7 +176,7 @@ function Signup() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

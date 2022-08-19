@@ -1,11 +1,20 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import IconButton from "@mui/material/IconButton";
-import {useEffect,useState} from 'react';
-import jwt_decode from 'jwt-decode'
+import Avatar from '@mui/material/Avatar';
+// import VisibilityIcon from "@mui/icons-material/Visibility";
+// import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+// import IconButton from "@mui/material/IconButton";
+import {useState} from 'react';
+// import jwt_decode from 'jwt-decode'
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 // import customCss from './style.js'
 import './style.css'
 
@@ -25,70 +34,126 @@ function Signin() {
   
 
   
-  const [user,setUser] = useState({});
-  const [passwordShown,setPasswordShown] = useState(false); 
+  // const [user,setUser] = useState({});
+  // const [passwordShown,setPasswordShown] = useState(false); 
 
-  const google = window.google
+  // const google = window.google
 
-  const togglePassword=()=>{
-    setPasswordShown(!passwordShown);
-  }
+  // const togglePassword=()=>{
+  //   setPasswordShown(!passwordShown);
+  // }
 
-  function handleCallbackResponse(res){
-    console.log("encoded JWT ID token"+ res.credential);
-    var userObject = jwt_decode(res.credential); 
-    console.log(userObject);
-    setUser(userObject);
-    document.getElementById("signInDiv").hidden = true //// hide button after login in
-  }
+  // function handleCallbackResponse(res){
+  //   console.log("encoded JWT ID token"+ res.credential);
+  //   var userObject = jwt_decode(res.credential); 
+  //   console.log(userObject);
+  //   setUser(userObject);
+  //   document.getElementById("signInDiv").hidden = true //// hide button after login in
+  // }
   
-  function handleSingOut(event){
-    setUser({});
-    document.getElementById("signInDiv").hidden = false
-  }
+  // function handleSingOut(event){
+  //   setUser({});
+  //   document.getElementById("signInDiv").hidden = false
+  // }
 
-  useEffect(()=>{
-    // /* global google*/
-    google.accounts.id.initialize({
-      client_id:
-        "472882567063-bt4odj909cbaiim0t4k94p725o4ptugk.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
+  // useEffect(()=>{
+  //   // /* global google*/
+  //   google.accounts.id.initialize({
+  //     client_id:
+  //       "472882567063-bt4odj909cbaiim0t4k94p725o4ptugk.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse,
+  //   });
  
-    google.accounts.id.renderButton( //render sign in button
-      document.getElementById("signInDiv"),
-      {theme:"outline",size:"large"}
-    )
+  //   google.accounts.id.renderButton( //render sign in button
+  //     document.getElementById("signInDiv"),
+  //     {theme:"outline",size:"large"}
+  //   )
 
-    google.accounts.id.prompt();  //automatically display accounts to login
+  //   google.accounts.id.prompt();  //automatically display accounts to login
 
-  },[])
+  // },[])
 
 
-  // const {isLogin,setIsLogin} = useState(false);
-  // const classes = customCss()
+  // // const {isLogin,setIsLogin} = useState(false);
+  // // const classes = customCss()
+
   return (
     <>
-      <div className="signup-container">
-        <TextField className="email"  label="Email" value={profile.email} onChange={(e)=>{setProfile({...profile,email:e.target.value})}} /> 
-        <TextField className="password"
-          label="Password"
-          type={passwordShown ? "text":"password"}
-          autoComplete="current-password"
-          value={profile.password}
-          onChange={(e)=>{setProfile({...profile,password:e.target.value})}} //...profile initailly will set old value of field and then change the changing field
-        />
-        <IconButton onClick={togglePassword} style={{color:"black"}}>{passwordShown ? <VisibilityOffIcon/> : <VisibilityIcon/>}</IconButton>
-        <Button className="button" style={{backgroundColor:"black"}} variant="contained" onClick={()=>{console.log(profile.email,profile.password)}}>Login</Button>
-      </div> 
-      {
-        Object.keys(user).length !==0 ? <button onClick={(e)=> handleSingOut(e)}>Sign out</button> : console.log() //sign out button show when user logge in or else not
-      }
-    
-      <div id="signInDiv"></div>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'purple' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form"  sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={profile.email} 
+              onChange={(e)=>{setProfile({...profile,email:e.target.value})}}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={profile.password}
+              onChange={(e)=>{setProfile({...profile,password:e.target.value})}} //...profile initailly will set old value of field and then change the changing field
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
     </>
   );
 }
+
+// {
+//    Object.keys(user).length !==0 ? <button onClick={(e)=> handleSingOut(e)}>Sign out</button> : console.log() //sign out button show when user logge in or else not
+// }
+    
 
 export default Signin;
 
