@@ -3,7 +3,10 @@ import MovieCard from './components/Carousel/MovieCard/MovieCard';
 
 function App() {
   return (
-    <Carousel />
+    <>
+      <h1>NAVBAR</h1>
+      <Carousel />
+    </>
   );
 }
 

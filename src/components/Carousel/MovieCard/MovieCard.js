@@ -18,7 +18,7 @@ function MovieCard({ list }) {
                     <MoreHorizIcon fontSize="medium" />
                 </Button>
             </div>
-            <Typography className={classes.title} variant="body2" gutterBottom >{list.original_title}</Typography>
+            {/* <Typography className={classes.title} variant="body2" gutterBottom >{list.original_title}</Typography> */}
         </Card>
         
     )

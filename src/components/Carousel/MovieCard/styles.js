@@ -26,6 +26,9 @@ export default makeStyles({
     transition: '0.5s',
     '&:hover': {
       transform: 'scale(1.1, 1.075)',
+    },
+    '&:not(:hover)': {
+      opacity: 0.9
     }
   },
 

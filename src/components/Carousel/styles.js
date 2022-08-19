@@ -4,14 +4,16 @@ export default makeStyles((theme) => ({
   container: {
     // display: 'flex',
     // justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    overflow: 'hidden'
   },
   slider: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 3,
+    margin: '15px 3px',
     perspective: 100,
-    cursor: 'grab'
+    cursor: 'grab',
+    // overflow: 'auto'
   }
 }));
