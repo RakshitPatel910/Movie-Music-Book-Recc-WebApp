@@ -80,7 +80,7 @@ function Signin() {
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container >
         <Box
           sx={{
             marginTop: 8,
@@ -95,8 +95,10 @@ function Signin() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form"  sx={{ mt: 1 }}>
-            <TextField
+          <Box component="form"  sx={{ mt: 1 ,width:"60%"}} >
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+              <TextField
               margin="normal"
               required
               fullWidth
@@ -108,7 +110,7 @@ function Signin() {
               value={profile.email} 
               onChange={(e)=>{setProfile({...profile,email:e.target.value})}}
             />
-            <Grid container spacing={2}>
+              </Grid>
               <Grid item xs={11} sm={11}>
                 <TextField
                   required 
@@ -143,21 +145,24 @@ function Signin() {
                   {/* <VisibilityIcon sx={{color:"blue",alignSelf:"center"}}/> */}
                 </Fab>
               </Grid>
-            </Grid>
-            <FormControlLabel
+              <Grid item xs={12} sm={12}>
+              <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+              </Grid>
+              <Grid item xs={12} sm={12}>
+              <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
+              sx={{ mt: 1, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              </Grid>
+              <Grid container >
+              <Grid item xs sx={{ml:2}}>
                 <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
                   Forgot password?
                 </Link>
@@ -166,6 +171,7 @@ function Signin() {
                 <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
                   {"Don't have an account? Sign Up"}
                 </Link>
+              </Grid>
               </Grid>
             </Grid>
           </Box>
