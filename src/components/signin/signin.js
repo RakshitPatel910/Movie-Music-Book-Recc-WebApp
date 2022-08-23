@@ -22,18 +22,11 @@ import './style.css'
 // import { makeStyles } from "@material-ui/core/styles";
 // import { useState } from "react"
 
-
-
 function Signin() {
-
-  
-
   const [profile,setProfile] = useState({
     email: "",
     password:""
   })
-  
-
   
   // const [user,setUser] = useState({});
   const [passwordShown,setPasswordShown] = useState(false); 
