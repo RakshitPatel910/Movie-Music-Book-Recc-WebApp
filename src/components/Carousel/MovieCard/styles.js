@@ -1,11 +1,20 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles({
+
+  container: {
+    padding: '0 0.32rem',
+    minWidth: 'calc(100% / 10)',
+
+  },
+
   media: {
     // height: '115px',
     // height: '100%',
     // width: '132px', 
+    margin: '0.32rem',
     aspectRatio: '185 / 278',
+    borderRadius: '5px',
     // maxHeight: '100%',
     // maxWidth: '185px',
     // paddingTop: '56.25%',
@@ -17,11 +26,15 @@ export default makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    // padding: '0.32rem',
     // maxWidth: 132,
-    minWidth: 132,
+    // minWidth: 132,
+    minWidth: 'calc(100% / 10)',
+    // flex: 'calc(100% / 10.77)',
     borderRadius: '5px',
+    boxShadow: 'none', 
     // height: '70%',
-    margin: '0.34rem',
+    // margin: '0.32rem',
     position: 'relative',
     overflow: 'hidden',
     transition: '0.5s',

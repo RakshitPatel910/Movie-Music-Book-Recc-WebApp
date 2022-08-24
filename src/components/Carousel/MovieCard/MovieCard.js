@@ -8,6 +8,8 @@ function MovieCard({ list }) {
     const classes = useStyles();
 
     return (
+        // <div className={classes.container}>
+
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={`https://image.tmdb.org/t/p/w185${list.poster_path}`} title={list.original_title} />
             <div className={classes.overlay2}>
@@ -20,6 +22,7 @@ function MovieCard({ list }) {
             </div>
             {/* <Typography className={classes.title} variant="body2" gutterBottom >{list.original_title}</Typography> */}
         </Card>
+        // </div>
         
     )
 }

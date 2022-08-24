@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import MovieCard from './MovieCard/MovieCard';
-import { Grid, CircularProgress } from '@material-ui/core';
+import { Grid, CircularProgress, Typography } from '@material-ui/core';
 // import { motion } from 'framer-motion'; 
 // import InfiniteScroll from "react-infinite-scroll-component";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -12,7 +12,7 @@ import useStyles from "./styles.js";
 function Carousel() {
 
     const [movieList, setMovieList] = useState([]);
-    const classes = useStyles(1);
+    const classes = useStyles();
     const carousel = useRef(0);
     const slider = useRef(null);
     const [translatePage, setTranslatePage] = useState(0);
@@ -34,37 +34,67 @@ function Carousel() {
     }, [])
 
     const onHandleClick = (num) => {
-        setTranslatePage(translatePage + num)
+        // setTranslatePage(translatePage + num)
+
+        if( (translatePage === 0 && num === 1) || ( translatePage === 1 || translatePage === 2 ) || (translatePage === 3 && num === -1 ) ) {
+            setTranslatePage(translatePage + num);
+        }
     }
 
     return (
         <>
 
-            {!movieList.length ? <CircularProgress color="secondary" /> : (
-                <div ref={carousel} className={classes.container}>
-                    
-                    <button className={`${classes.handle} ${classes.leftHandle}`} onClick={() => onHandleClick(1)}>
-                        <ArrowBackIosNewIcon 
-                            style={{transition: '150ms ease-in-out'}} 
-                            className={classes.leftHandleArrow} 
-                        />
-                    </button>
+            {/* <div className={classes.carouselTitle}>
+                <Typography variant="h4" >
+                    Popular Now
+                    <ArrowForwardIosIcon 
+                        style={{transition: '150ms ease-in-out', stroke: "#000000", strokeWidth: 1.5}}
+                        className={classes.titleArrow} 
+                        fontSize="small"
+                    />
+                </Typography>
+            </div> */}
 
-                    <div ref={slider} id='slid' style={{ '--slider-index': translatePage }} className={classes.slider}>
-                        {movieList.map((movie) => (
-                            <MovieCard list={movie} key={movie.id} />
-                        ))}
+                <div ref={carousel} className={classes.container}>
+                    <div className={classes.carouselTitle}>
+                        <Typography className={classes.listName} variant="h4" >
+                            Popular Now
+                            <ArrowForwardIosIcon 
+                                style={{transition: '150ms ease-in-out', stroke: "#000000", strokeWidth: 1.5}}
+                                className={classes.titleArrow} 
+                                fontSize="small"
+                            />
+                        </Typography>
+                        <button className={classes.viewMore} variant="body2" >
+                            view more
+                        </button>
                     </div>
 
-                    <button className={`${classes.handle} ${classes.rightHandle}`} onClick={() => onHandleClick(-1)}>
-                        <ArrowForwardIosIcon 
-                            style={{transition: '150ms ease-in-out'}}
-                            className={classes.rightHandleArrow} 
-                        />
-                    </button>
+                    {!movieList.length ? <CircularProgress color="secondary" style={{margin: '3.3%'}} /> : (
+                        <div className={classes.slider}>
+                            <button className={`${classes.handle} ${classes.leftHandle}`} onClick={() => onHandleClick(-1)}>
+                                <ArrowBackIosNewIcon 
+                                    style={{transition: '150ms ease-in-out'}} 
+                                    className={classes.leftHandleArrow} 
+                                    />
+                            </button>
+
+                            <div ref={slider} id='slid' style={{ '--slider-index': translatePage }} className={classes.moviesList}>
+                                {movieList.map((movie) => (
+                                    <MovieCard list={movie} key={movie.id} />
+                                    ))}
+                            </div>
+
+                            <button className={`${classes.handle} ${classes.rightHandle}`} onClick={() => onHandleClick(1)}>
+                                <ArrowForwardIosIcon 
+                                    style={{transition: '150ms ease-in-out'}}
+                                    className={classes.rightHandleArrow} 
+                                    />
+                            </button>
+                        </div>
+                    )}
 
                 </div>
-            )}
 
 
 

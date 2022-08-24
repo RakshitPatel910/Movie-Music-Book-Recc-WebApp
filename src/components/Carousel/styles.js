@@ -4,34 +4,76 @@ export default makeStyles((theme) => ({
 
   container: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     width: '100%',
     overflow: 'hidden',
     '&:hover $handle':{
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
-    '&:hover $leftHandleArrow, &:hover $rightHandleArrow': {
+    '&:hover $leftHandleArrow, &:hover $rightHandleArrow, &:hover $titleArrow': {
       opacity: '1'
     },
   },
 
+  carouselTitle: {
+    width: '330px',
+    margin: '5px 3.3%',
+    padding: '0.34rem 0.47rem 0 0.47rem',
+    display: 'flex',
+    flexDirection: 'row',
+    '&:hover $viewMore': {
+      transform: 'translateX(230px)',
+      opacity: 1
+    }
+  },
+  
+  listName: {
+  },
+
+  titleArrow: {
+    margin: '0 5px',
+    strokeWidth: 2,
+    opacity: 0
+  },
+
+  viewMore: {
+    alignSelf: 'center',
+    position: 'absolute',
+    margin: '0 10px',
+    fontSize: '1.2rem',
+    opacity: 0,
+    transition: '500ms ease-in-out, opacity 500ms ease-in-out',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    border: 'none',
+    cursor: 'pointer',
+  },
+
   slider: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+
+  moviesList: {
     // '--slider-index': 2,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    width: '93%',
-    margin: '6px 3px',
+    width: '93.4%',
+    margin: '6px 0.32rem',
     perspective: 100,
     // overflow: 'auto',
     transform: 'translateX(calc(var(--slider-index) * -100%))',
     // transform: 'translateX(-00%)'
-    transition: '0.75s cubic-bezier(0.72,-0.01, 0.12, 1)',
+    transition: '750ms ease-in-out',
+    // transition: '0.75s cubic-bezier(0.72,-0.01, 0.12, 1)';
   },
 
   handle: {
-    width: '3.3%',
-    height: '199px',
+    width: '3.2815rem',
+    // width: 'calc(0.38 * calc(100% / 10.77))',
+    // height: '199px',
+    aspectRatio: '50.069 / 199',
     border: 'none',
     borderRadius: '5px',
     backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -42,6 +84,8 @@ export default makeStyles((theme) => ({
     // '&:hover': {
     //   backgroundColor: 'rgba(0, 0, 0, 0.5)',
     // },
+    flexGrow: 0,
+    flexShrink: 0
   },
 
   leftHandle: {
