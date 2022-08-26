@@ -79,9 +79,17 @@ function Home(){
         >
           <Box
             className="movieInfo"
-            sx={{ margin: "10px 0px", height: "65vh", width: "40%" }}
+            sx={{
+              margin: "10px 0px",
+              height: "65vh",
+              width: "40%",
+            }}
           >
-            <img src={image} alt="" className="poster" />
+            <img
+              src={image}
+              alt=""
+              className="poster"
+            />
           </Box>
           <Box
             className="movieInfo"
@@ -89,10 +97,9 @@ function Home(){
               margin: "10px 0px",
               height: "65vh",
               width: "60%",
-              boxShadow: "0 0 80px 80px black",
             }}
           >
-            <img src={image} alt="" className="poster" style={{}} />
+            {/* <img src={image} alt="" className="poster" style={{}} /> */}
           </Box>
         </Container>
       </>
