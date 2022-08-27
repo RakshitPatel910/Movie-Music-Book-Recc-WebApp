@@ -23,7 +23,8 @@ function Carousel() {
         const movies1 = await fetchMovies(1);
         const movies2 = await fetchMovies(2);
         // const m3 = movies1.data.results.concat(movies2.data.results);
-        setMovieList(movies1.data.results.concat(movies2.data.results))
+        setMovieList(movies1.data.results.concat(movies2.data.results));
+        // setMovieList(movies2.data.results.slice(10).concat(movies1.data.results).concat(movies2.data.results.slice(0, 10)));
         // console.log(m3);
         // console.log(slider.current.scrollWidth);
         // console.log(slider.current.offsetWidth);
@@ -38,6 +39,13 @@ function Carousel() {
 
         if( (translatePage === 0 && num === 1) || ( translatePage === 1 || translatePage === 2 ) || (translatePage === 3 && num === -1 ) ) {
             setTranslatePage(translatePage + num);
+            // if ( num === 1 ) {
+            //     setTranslatePage(translatePage + num);
+            //     setMovieList(movieList.concat(movieList.slice(0, 10)));
+            // }
+        }
+        if ( (translatePage === 3 && num === 1) || (translatePage === 0 && num === -1) ) {
+            setTranslatePage( translatePage - (3 * num));
         }
     }
 
