@@ -12,40 +12,32 @@ import useStyles from "./styles.js";
 function Carousel() {
 
     const [movieList, setMovieList] = useState([]);
+    const [translatePage, setTranslatePage] = useState(0);
+    const [cardsOnPage, setCardsOnPage] = useState(10);
     const classes = useStyles();
     const carousel = useRef(0);
-    const slider = useRef(null);
-    const [translatePage, setTranslatePage] = useState(0);
+    const progressBar = useRef(null);
 
     const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}`);
 
     const getMovies = async () => {
         const movies1 = await fetchMovies(1);
         const movies2 = await fetchMovies(2);
-        // const m3 = movies1.data.results.concat(movies2.data.results);
         setMovieList(movies1.data.results.concat(movies2.data.results));
-        // setMovieList(movies2.data.results.slice(10).concat(movies1.data.results).concat(movies2.data.results.slice(0, 10)));
-        // console.log(m3);
-        // console.log(slider.current.scrollWidth);
-        // console.log(slider.current.offsetWidth);
     }
 
     useEffect( () => { 
         getMovies();
+        progressBar.current.children[0].classList.add(`${classes.active}`)
     }, [])
 
-    const onHandleClick = (num) => {
-        // setTranslatePage(translatePage + num)
+    const onHandleClick = (num, currentPage) => {
+        if( (currentPage === 0 && num === 1) || ( currentPage >= 1 || currentPage <= (40 / cardsOnPage - 2) ) || (currentPage === (40 / cardsOnPage - 1) && num === -1 ) ) {
+            setTranslatePage(currentPage + num);
 
-        if( (translatePage === 0 && num === 1) || ( translatePage === 1 || translatePage === 2 ) || (translatePage === 3 && num === -1 ) ) {
-            setTranslatePage(translatePage + num);
-            // if ( num === 1 ) {
-            //     setTranslatePage(translatePage + num);
-            //     setMovieList(movieList.concat(movieList.slice(0, 10)));
-            // }
         }
-        if ( (translatePage === 3 && num === 1) || (translatePage === 0 && num === -1) ) {
-            setTranslatePage( translatePage - (3 * num));
+        if ( (currentPage === (40 / cardsOnPage - 1) && num === 1) || (currentPage === 0 && num === -1) ) {
+            setTranslatePage( currentPage - ((40 / cardsOnPage - 1) * num));
         }
     }
 
@@ -64,36 +56,48 @@ function Carousel() {
             </div> */}
 
                 <div ref={carousel} className={classes.container}>
-                    <div className={classes.carouselTitle}>
-                        <Typography className={classes.listName} variant="h4" >
-                            Popular Now
-                            <ArrowForwardIosIcon 
-                                style={{transition: '150ms ease-in-out', stroke: "#000000", strokeWidth: 1.5}}
-                                className={classes.titleArrow} 
-                                fontSize="small"
-                            />
-                        </Typography>
-                        <button className={classes.viewMore} variant="body2" >
-                            view more
-                        </button>
+                    <div className={classes.titleContainer}>
+                        <div className={classes.carouselTitle}>
+                            <Typography className={classes.listName} variant="h4" >
+                                Popular Now
+                                <ArrowForwardIosIcon 
+                                    style={{transition: '150ms ease-in-out', stroke: "#000000", strokeWidth: 1.5}}
+                                    className={classes.titleArrow} 
+                                    fontSize="small"
+                                    />
+                            </Typography>
+                            <button className={classes.viewMore} variant="body2" >
+                                view more
+                            </button>
+                        </div>
+
+                        <div ref={progressBar} className={classes.progressBar}>
+                                <div className={`${classes.progressItem} ${translatePage===0 ? classes.active : {}}`}></div>
+                                <div className={`${classes.progressItem} ${translatePage===1 ? classes.active : {}}`}></div>
+                                <div className={`${classes.progressItem} ${translatePage===2 ? classes.active : {}}`}></div>
+                                <div className={`${classes.progressItem} ${translatePage===3 ? classes.active : {}}`}></div>
+
+                                
+
+                        </div>
                     </div>
 
                     {!movieList.length ? <CircularProgress color="secondary" style={{margin: '3.3%'}} /> : (
                         <div className={classes.slider}>
-                            <button className={`${classes.handle} ${classes.leftHandle}`} onClick={() => onHandleClick(-1)}>
+                            <button className={`${classes.handle} ${classes.leftHandle}`} onClick={() => onHandleClick(-1, translatePage)}>
                                 <ArrowBackIosNewIcon 
                                     style={{transition: '150ms ease-in-out'}} 
                                     className={classes.leftHandleArrow} 
                                     />
                             </button>
 
-                            <div ref={slider} id='slid' style={{ '--slider-index': translatePage }} className={classes.moviesList}>
+                            <div style={{ '--slider-index': translatePage }} className={classes.moviesList}>
                                 {movieList.map((movie) => (
                                     <MovieCard list={movie} key={movie.id} />
                                     ))}
                             </div>
 
-                            <button className={`${classes.handle} ${classes.rightHandle}`} onClick={() => onHandleClick(1)}>
+                            <button className={`${classes.handle} ${classes.rightHandle}`} onClick={() => onHandleClick(1, translatePage)}>
                                 <ArrowForwardIosIcon 
                                     style={{transition: '150ms ease-in-out'}}
                                     className={classes.rightHandleArrow} 

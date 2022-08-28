@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-
+  
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -16,8 +16,16 @@ export default makeStyles((theme) => ({
     },
   },
 
+  titleContainer: {
+    margin: '0 5rem 0 0',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
   carouselTitle: {
-    width: '330px',
+    // width: '330px',
+    // width: '25%',
     margin: '5px 3.3%',
     padding: '0.34rem 0.47rem 0 0.47rem',
     display: 'flex',
@@ -43,10 +51,30 @@ export default makeStyles((theme) => ({
     margin: '0 10px',
     fontSize: '1.2rem',
     opacity: 0,
-    transition: '500ms ease-in-out, opacity 500ms ease-in-out',
+    transition: '500ms ease-in-out, opacity 300ms ease-in-out',
     backgroundColor: 'rgba(0, 0, 0, 0)',
     border: 'none',
     cursor: 'pointer',
+  },
+
+  progressBar: {
+    padding: '0 2rem',
+    display: 'flex',
+    gap: '1rem',
+    // backgroundColor: 'red',
+    alignItems: 'center'
+  },
+
+  progressItem: {
+    flex: '0 0 2rem',
+    minWidth: '3rem',
+    height: '0.3rem',
+    borderRadius: '2rem',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
+
+  active:{
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
 
   slider: {
