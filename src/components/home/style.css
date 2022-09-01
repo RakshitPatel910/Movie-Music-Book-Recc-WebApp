@@ -231,11 +231,12 @@ i {
     position: relative;
     display: block;
     width: 1062px;
-    height: 479px;
+    /* height: 479px; */
     margin: 100px auto;
     overflow: hidden;
     border-radius: 10px;
     transition: all 0.4s;
     margin-top: -70px;
+    overflow: auto;
 }
 

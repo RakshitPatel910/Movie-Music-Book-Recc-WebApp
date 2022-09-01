@@ -1,6 +1,11 @@
 import * as React from "react";
 import axios from "axios";
 import { useState,useEffect} from "react";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import AddIcon from "@mui/icons-material/Add";
@@ -68,7 +73,7 @@ function Home(){
     const [title,setTitle] = useState("");
     const [runTime,SetRunTime] = useState("")
     const [releaseDate,setReleaseDate] = useState("")
-    // const [review,setReview] = useState([])
+    const [review,setReview] = useState([])
   
 
     const theme = useTheme();
@@ -87,10 +92,10 @@ function Home(){
         `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=en-US`
       );
 
-    // const fetchReview = () =>
-    //   axios.get(
-    //     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${key}&language=en-US&page=1`
-    //   );
+    const fetchReview = () =>
+      axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${key}&language=en-US&page=1`
+      );
 
 
 
@@ -111,15 +116,15 @@ function Home(){
           }
         }
 
-        // async function getReview(){
-        //   const result = await fetchReview()
-        //   if(isMounted){
-        //     setReview(result.data.results);
-        //   }
-        // }
+        async function getReview(){
+          const result = await fetchReview()
+          if(isMounted){
+            setReview(result.data.results);
+          }
+        }
 
         getMovie();
-        // getReview()
+        getReview()
         return()=>{
           isMounted = false;
         };
@@ -139,13 +144,13 @@ function Home(){
             padding: "10px 50px",
           }}
         >
-          <div class="movie_card" id="bright">
-            <div class="info_section">
-              <div class="movie_header">
-                <img class="locandina" alt="movieImage" src={image} />
+          <div className="movie_card" id="bright">
+            <div className="info_section">
+              <div className="movie_header">
+                <img className="locandina" alt="movieImage" src={image} />
                 <h1>{title}</h1>
                 <h4>{releaseDate.slice(0, 4)}, David Ayer</h4>
-                <span class="minutes">{runTime} min</span>
+                <span className="minutes">{runTime} min</span>
                 <p class="type">
                   {genre.map((e) => (
                     <>{`${e.name} `}</>
@@ -181,7 +186,13 @@ function Home(){
           </div>
 
           <div className="info">
-            <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
+            <Box
+              sx={{
+                bgcolor: "background.paper",
+                width: "100%",
+                overflow: "auto",
+              }}
+            >
               <AppBar position="static">
                 <Tabs
                   value={value}
@@ -196,7 +207,7 @@ function Home(){
                     },
                   }}
                 >
-                  <Tab label="Info"  {...a11yProps(0)} />
+                  <Tab label="Info" {...a11yProps(0)} />
                   <Tab label="Cast" {...a11yProps(1)} />
                   <Tab label="reviews" {...a11yProps(2)} />
                 </Tabs>
@@ -205,16 +216,36 @@ function Home(){
                 axis={theme.direction === "rtl" ? "x-reverse" : "x"}
                 index={value}
                 onChangeIndex={handleChangeIndex}
-                sx={{height:"100%"}}
+                sx={{ height: "100%" }}
               >
-                <TabPanel value={value} index={0} dir={theme.direction} >
+                <TabPanel value={value} index={0} dir={theme.direction}>
                   Item One
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                   Item Two
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                  Item Three
+                  {review.map((e) => {
+                    console.log(e.author_details.avatar_path);
+                    return (
+                      <>
+                        <Card sx={{ margin: "10px" }}>
+                          <CardHeader
+                            avatar={
+                              <Avatar
+                                src={e.author_details.avatar_path}
+                              ></Avatar>
+                            }
+                            title={e.author_details.username}
+                            subheader={e.author_details.name}
+                          />
+                          <CardContent>
+                            <Typography>{e.content}</Typography>
+                          </CardContent>
+                        </Card>
+                      </>
+                    );
+                  })}
                 </TabPanel>
               </SwipeableViews>
             </Box>
