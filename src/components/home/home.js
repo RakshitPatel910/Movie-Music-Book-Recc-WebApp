@@ -74,6 +74,7 @@ function Home(){
     const [runTime,SetRunTime] = useState("")
     const [releaseDate,setReleaseDate] = useState("")
     const [review,setReview] = useState([])
+    const [video,setVideo] = useState()
     // const [avatar,setAvatar] = useState("");
   
 
@@ -96,6 +97,11 @@ function Home(){
     const fetchReview = () =>
       axios.get(
         `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${key}&language=en-US&page=1`
+      );
+
+    const fetchVideo = () =>
+      axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}&language=en-US`
       );
 
 
@@ -124,8 +130,17 @@ function Home(){
           }
         }
 
+        async function getVideo(){
+          const result = await fetchVideo()
+          if(isMounted){
+            console.log(result.data.results[0].key);
+            setVideo(result.data.results[0].key);
+          }
+        }
+
         getMovie();
-        getReview()
+        getReview();
+        getVideo();
         return()=>{
           isMounted = false;
         };
@@ -209,8 +224,8 @@ function Home(){
                   }}
                 >
                   <Tab label="Info" {...a11yProps(0)} />
-                  <Tab label="Cast" {...a11yProps(1)} />
-                  <Tab label="reviews" {...a11yProps(2)} />
+                  <Tab label="Trailer" {...a11yProps(1)} />
+                  <Tab label="Reviews" {...a11yProps(2)} />
                 </Tabs>
               </AppBar>
               <SwipeableViews
@@ -221,20 +236,22 @@ function Home(){
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
                   info
-
-                  
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                  cast
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video}`}
+                    title="React.js Project to Embed Youtube Video in IFrame inside Browser Without any Library in Javascript"
+                    height="600"
+                    width="1000"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    // allowfullscreen
+                  ></iframe>
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                   {review.map((e) => {
-                    console.log(e.author_details.avatar_path+"ogstr");
                     var str = `${e.author_details.avatar_path}`;
                     // setAvatar(`https://image.tmdb.org/t/p/w185${str}`);
-                    var newStr = str.replace(/\//g, "");
-                    
-                    console.log(newStr+"newstr")
                     return (
                       <>
                         <Card sx={{ margin: "10px" }}>
