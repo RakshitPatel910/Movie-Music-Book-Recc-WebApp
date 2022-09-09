@@ -4,7 +4,7 @@ import { useState,useEffect} from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
+// import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -74,6 +74,7 @@ function Home(){
     const [runTime,SetRunTime] = useState("")
     const [releaseDate,setReleaseDate] = useState("")
     const [review,setReview] = useState([])
+    // const [avatar,setAvatar] = useState("");
   
 
     const theme = useTheme();
@@ -219,21 +220,28 @@ function Home(){
                 sx={{ height: "100%" }}
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                  Item One
+                  info
+
+                  
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                  Item Two
+                  cast
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                   {review.map((e) => {
-                    console.log(e.author_details.avatar_path);
+                    console.log(e.author_details.avatar_path+"ogstr");
+                    var str = `${e.author_details.avatar_path}`;
+                    // setAvatar(`https://image.tmdb.org/t/p/w185${str}`);
+                    var newStr = str.replace(/\//g, "");
+                    
+                    console.log(newStr+"newstr")
                     return (
                       <>
                         <Card sx={{ margin: "10px" }}>
                           <CardHeader
                             avatar={
                               <Avatar
-                                src={e.author_details.avatar_path}
+                                src={`https://image.tmdb.org/t/p/w185${str}`}
                               ></Avatar>
                             }
                             title={e.author_details.username}
