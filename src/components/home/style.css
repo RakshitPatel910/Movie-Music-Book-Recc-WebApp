@@ -240,3 +240,69 @@ i {
     overflow: auto;
 }
 
+
+.customHR{
+  
+    /* visibility: hidden; */
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+  
+}
+
+.overall_info{
+  margin: auto;
+  
+  width:80%;
+  height: 60%;
+  background: transparent;
+  /* background-image: linear-gradient(to down, #000c19, rgba(255, 255, 255, 0.75), #000c19); */
+  border-radius: 2px;
+}
+
+.overall_info p{
+  margin-left: 63px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.overall_info p img{
+  width:50px;
+  height: 50px;
+  border-radius: 2px;
+  margin: 10px 10px;
+
+}
+
+.overall_info h1{
+  text-align: center;
+  padding-left: 0px;
+}
+
+.overall_info h4{
+  color: #9ac7fa;
+    margin: 0px 0px;
+    padding: 0px 0px;
+    margin-left: 160px;
+    padding-top: 5px;
+}
+
+.overall_info h3{
+  font-size: 20px;
+  margin-left: 63px;
+  padding-top:19px;
+}
+
+.overall_info a{
+  margin-left: 63px;
+  
+}
+  
+ 
