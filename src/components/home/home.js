@@ -4,6 +4,7 @@ import { useState,useEffect} from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
+import Chip from "@mui/material/Chip";
 // import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -20,9 +21,10 @@ import Typography from "@mui/material/Typography";
 import './style.css'
 
 
+
 const key = "f20575175c2deae7974eb547727d1ace";
-// const id = 550
-const id = 278;
+const id = 550
+// const id = 278;
 // const id = 244786;
 // const path = `https://image.tmdb.org/t/p/w185${list.poster_path}`
 
@@ -75,6 +77,8 @@ function Home(){
     const [releaseDate,setReleaseDate] = useState("")
     const [review,setReview] = useState([])
     const [video,setVideo] = useState()
+    const [info,setInfo] = useState([])
+    const [lang,setLang] = useState([])
     // const [avatar,setAvatar] = useState("");
   
 
@@ -120,8 +124,11 @@ function Home(){
             setTitle(result.data.title)
             SetRunTime(result.data.runtime);
             setReleaseDate(result.data.release_date);
+            setInfo(result.data)
+            setLang(result.data.spoken_languages)
           }
         }
+
 
         async function getReview(){
           const result = await fetchReview()
@@ -183,12 +190,12 @@ function Home(){
                       <AddIcon sx={{ height: "60px" }} />
                     </i>
                   </li>
-                  <li>
+                  {/* <li>
                     <i class="material-icons"></i>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <i class="material-icons">chat_bubble</i>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -235,7 +242,21 @@ function Home(){
                 sx={{ height: "100%" }}
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                  info
+                  <h1 style={{ color: "black" }}>{title}</h1>
+                  <h3>Budget {info.budget}</h3>
+                  <h3>Revenue {info.revenue}</h3>
+                  <h3>
+                    Language{" "}
+                    {lang.map((e) => (
+                      <>{e.english_name}</>
+                    ))}
+                  </h3>
+                  <h3>Tagline {info.tagline}</h3>
+                  <h3>status {info.status}</h3>
+                  <h3>companies</h3>
+                  <h3>countries</h3>
+                  <h3>social media link</h3>
+                  <h3>og link</h3>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                   <iframe
