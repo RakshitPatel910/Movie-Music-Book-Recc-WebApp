@@ -1,20 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-import Home from './components/Home/Home';
+import './App.css';
+// import Signup from './components/signup/signup.js';
+// import Signin from './components/signin/signin.js'
 import Carousel from './components/Carousel/Carousel';
-
+ import Home from './components/home/home.js' 
 function App() {
   return (
-    <BrowserRouter>
-      <Container maxWidth="lg">            
-        <Switch>
-          <Route path="/" exact component={Home} />
-          {/* <Route path="/auth" exact component={Auth} /> */}
-        </Switch>
-      </Container>
-    </BrowserRouter>
-  );
-}
+    <>
+      {/* <Signup/> */}
+      {/* <Signin/> */}
+
+      <Home/>
+      {/* <Carousel /> */}
+    </>
+  )
+} 
+
 
 export default App;
