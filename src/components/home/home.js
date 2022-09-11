@@ -282,6 +282,7 @@ function Home() {
                       </>
                     }
                   </p>
+                  <hr className="customHR"></hr>
                   {/* {console.log(company)} */}
                   <h3>Production company</h3>
                   {company.map((e) =>
@@ -323,7 +324,7 @@ function Home() {
                       </>
                     )
                   )}
-
+                  <hr className="customHR"></hr>
                   <h3>Production Countries</h3>
                   <p>
                     {country.map((e) => (
@@ -335,7 +336,7 @@ function Home() {
                       />
                     ))}
                   </p>
-
+                  <hr className="customHR"></hr>
                   <a
                     href={info.homepage}
                     style={{ textDecoration: "none", color: "#8cd3ff" }}
@@ -380,7 +381,7 @@ function Home() {
                   // setAvatar(`https://image.tmdb.org/t/p/w185${str}`);
                   return (
                     <>
-                      <Card sx={{ margin: "10px" }}>
+                      <Card className="revCard" sx={{ margin: "10px" }}>
                         <CardHeader
                           avatar={
                             <Avatar
