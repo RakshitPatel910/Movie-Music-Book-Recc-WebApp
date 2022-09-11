@@ -6,8 +6,9 @@ import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Chip from "@mui/material/Chip";
 // import CardActions from "@mui/material/CardActions";
+import ImageIcon from "@mui/icons-material/Image";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
+import Box from "@mui/material/Box"; 
 import Container from "@mui/material/Container";
 import AddIcon from "@mui/icons-material/Add";
 import PropTypes from "prop-types";
@@ -17,7 +18,7 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-
+ 
 import "./style.css";
 
 const key = "f20575175c2deae7974eb547727d1ace";
@@ -60,6 +61,7 @@ function a11yProps(index) {
 }
 
 function Home() {
+
   const [value, setValue] = React.useState(0);
   const [image, setImage] = useState("");
   const [overview, setOverview] = useState("");
@@ -71,6 +73,8 @@ function Home() {
   const [video, setVideo] = useState();
   const [info, setInfo] = useState([]);
   const [lang, setLang] = useState([]);
+  const [company,setCompany] = useState([])
+  const [country,setCountry] = useState([])
   // const [avatar,setAvatar] = useState("");
 
   const theme = useTheme();
@@ -113,6 +117,8 @@ function Home() {
         setReleaseDate(result.data.release_date);
         setInfo(result.data);
         setLang(result.data.spoken_languages);
+        setCompany(result.data.production_companies);
+        setCountry(result.data.production_countries);
       }
     }
 
@@ -194,7 +200,8 @@ function Home() {
         <div className="info">
           <Box
             sx={{
-              bgcolor: "background.paper",
+              // bgcolor: "background.paper",
+              bgcolor: "#0d0d0c",
               width: "100%",
               overflow: "auto",
             }}
@@ -222,24 +229,133 @@ function Home() {
               onChangeIndex={handleChangeIndex}
               sx={{ height: "100%" }}
             >
-              <TabPanel value={value} index={0} dir={theme.direction}>
-                <h1 style={{ color: "black" }}>{title}</h1>
-                <h3>Budget {info.budget}</h3>
-                <h3>Revenue {info.revenue}</h3>
-                <h3>
-                  Language{" "}
-                  {lang.map((e) => (
-                    <>{e.english_name}</>
-                  ))}
-                </h3>
-                <h3>Tagline {info.tagline}</h3>
-                <h3>status {info.status}</h3>
-                <h3>companies</h3>
-                <h3>countries</h3>
-                <h3>social media link</h3>
-                <h3>og link</h3>
+              <TabPanel
+                value={value}
+                index={0}
+                dir={theme.direction}
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right , #000c19, #001823 , #000c19)",
+                  color: "#cfd6e1",
+                }}
+              >
+                <div className="overall_info">
+                  <h1 style={{ color: "#cfd6e1" }}>{title}</h1>
+                  <hr className="customHR"></hr>
+                  <p>
+                    Budget{" "}
+                    {
+                      <>
+                        <h4>{info.budget}</h4>
+                      </>
+                    }
+                  </p>
+                  <p>
+                    Revenue{" "}
+                    {
+                      <>
+                        <h4>{info.revenue}</h4>
+                      </>
+                    }
+                  </p>
+                  <p>
+                    Language{" "}
+                    {lang.map((e) => (
+                      <>
+                        <h4>{e.english_name}</h4>
+                      </>
+                    ))}
+                  </p>
+                  <p>
+                    Tagline{" "}
+                    {
+                      <>
+                        <h4>{info.tagline}</h4>
+                      </>
+                    }
+                  </p>
+                  <p>
+                    status{" "}
+                    {
+                      <>
+                        <h4>{info.status}</h4>
+                      </>
+                    }
+                  </p>
+                  <hr className="customHR"></hr>
+                  {/* {console.log(company)} */}
+                  <h3>Production company</h3>
+                  {company.map((e) =>
+                    // console.log(e.logo_path + "logo")
+                    e.logo_path == null ? (
+                      <>
+                        <p style={{ display: "flex", flexDirection: "row" }}>
+                          <ImageIcon sx={{ width: "50px", height: "50px" }} />
+                          <p
+                            style={{ display: "flex", flexDirection: "column" }}
+                          >
+                            <h4>{e.name}</h4>
+
+                            <h4 style={{ color: "#009dff" }}>
+                              {e.origin_country}
+                            </h4>
+                          </p>
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p style={{ display: "flex", flexDirection: "row" }}>
+                          <img
+                            src={`https://image.tmdb.org/t/p/w185${e.logo_path}`}
+                            alt=""
+                            srcset=""
+                            style={{ backgroundColor: "white" }}
+                          />
+                          <p
+                            style={{ display: "flex", flexDirection: "column" }}
+                          >
+                            <h4>{e.name}</h4>
+
+                            <h4 style={{ color: "#009dff" }}>
+                              {e.origin_country}
+                            </h4>
+                          </p>
+                        </p>
+                      </>
+                    )
+                  )}
+                  <hr className="customHR"></hr>
+                  <h3>Production Countries</h3>
+                  <p>
+                    {country.map((e) => (
+                      <Chip
+                        className="chip"
+                        label={e.name}
+                        color="primary"
+                        sx={{ margin: "5px" }}
+                      />
+                    ))}
+                  </p>
+                  <hr className="customHR"></hr>
+                  <a
+                    href={info.homepage}
+                    style={{ textDecoration: "none", color: "#8cd3ff" }}
+                    target="_blank"
+                  >
+                    More of Us
+                  </a>
+                </div>
               </TabPanel>
-              <TabPanel value={value} index={1} dir={theme.direction}>
+              <TabPanel
+                value={value}
+                index={1}
+                dir={theme.direction}
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right , #000c19, #001823 , #000c19)",
+                  color: "#cfd6e1",
+                }}
+              >
                 <iframe
                   src={`https://www.youtube.com/embed/${video}`}
                   title="React.js Project to Embed Youtube Video in IFrame inside Browser Without any Library in Javascript"
@@ -250,13 +366,22 @@ function Home() {
                   allowfullscreen
                 ></iframe>
               </TabPanel>
-              <TabPanel value={value} index={2} dir={theme.direction}>
+              <TabPanel
+                value={value}
+                index={2}
+                dir={theme.direction}
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right , #000c19, #001823 , #000c19)",
+                  color: "#cfd6e1",
+                }}
+              >
                 {review.map((e) => {
                   var str = `${e.author_details.avatar_path}`;
                   // setAvatar(`https://image.tmdb.org/t/p/w185${str}`);
                   return (
                     <>
-                      <Card sx={{ margin: "10px" }}>
+                      <Card className="revCard" sx={{ margin: "10px" }}>
                         <CardHeader
                           avatar={
                             <Avatar
@@ -282,4 +407,8 @@ function Home() {
   );
 }
 
+<<<<<<< HEAD
 export default Home;
+=======
+export default Home
+>>>>>>> 5572d917fefe97509496ddf983f35aca757ecef9

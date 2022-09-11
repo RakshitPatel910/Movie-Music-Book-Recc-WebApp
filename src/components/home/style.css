@@ -18,10 +18,15 @@
   margin: 0;
 }
 
+<<<<<<< HEAD
 /* html,
 body {
+=======
+html,
+body { 
+>>>>>>> 5572d917fefe97509496ddf983f35aca757ecef9
   margin: 0;
-  background: black;
+  /* background: black; */
   font-family: "Montserrat", helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -195,31 +200,15 @@ i {
   }
 }
 
-#bright {
-  box-shadow: 0px 0px 150px -45px rgba(255, 51, 0, 0.5);
-}
-#bright:hover {
-  box-shadow: 0px 0px 120px -55px rgba(255, 51, 0, 0.5);
-}
 
-#tomb {
-  box-shadow: 0px 0px 150px -45px rgba(19, 160, 134, 0.6);
-}
-#tomb:hover {
-  box-shadow: 0px 0px 120px -55px rgba(19, 160, 134, 0.6);
-}
+
+
 
 /* .tomb_back {
      background: url("https://fsmedia.imgix.net/cd/c9/5e/ba/4817/4d9a/93f0/c776ec32ecbc/lara-crofts-neck-looks-unnatural-in-the-new-poster-for-tomb-raider.png");
  } */
 
-#ave {
-  box-shadow: 0px 0px 150px -45px rgba(199, 147, 75, 0.7);
-  margin-bottom: 200px;
-}
-#ave:hover {
-  box-shadow: 0px 0px 120px -55px rgba(199, 147, 75, 0.7);
-}
+
 
 /* .ave_back {
      background: url("https://www.gannett-cdn.com/-mm-/c03fd140debe8ad4c05cf81a5cad7ad61a12ce52/c=0-1580-2985-3266&r=x803&c=1600x800/local/-/media/2017/06/09/USATODAY/USATODAY/636326272873599176-Black-Panther-Teaser.jpg");
@@ -240,3 +229,75 @@ i {
     overflow: auto;
 }
 
+
+.customHR{
+  
+    /* visibility: hidden; */
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+  
+}
+
+.overall_info{
+  margin: auto;
+  
+  width:80%;
+  height: 60%;
+  background: transparent;
+  /* background-image: linear-gradient(to down, #000c19, rgba(255, 255, 255, 0.75), #000c19); */
+  border-radius: 2px;
+}
+
+.overall_info p{
+  margin-left: 63px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.overall_info p img{
+  width:50px;
+  height: 50px;
+  border-radius: 2px;
+  margin: 10px 10px;
+
+}
+
+.overall_info h1{
+  text-align: center;
+  padding-left: 0px;
+}
+
+.overall_info h4{
+  color: #9ac7fa;
+    margin: 0px 0px;
+    padding: 0px 0px;
+    margin-left: 160px;
+    padding-top: 5px;
+}
+
+.overall_info h3{
+  font-size: 20px;
+  margin-left: 63px;
+  padding-top:19px;
+}
+
+.overall_info a{
+  margin-left: 63px;
+  
+}
+
+
+
+.revCard{
+  background-color: #1AA7EC;
+}
+  
+ 
