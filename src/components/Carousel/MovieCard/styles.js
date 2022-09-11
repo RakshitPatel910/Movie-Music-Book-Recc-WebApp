@@ -26,6 +26,7 @@ export default makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    background: 'transparent',
     // padding: '0.32rem',
     // maxWidth: 132,
     // minWidth: 132,

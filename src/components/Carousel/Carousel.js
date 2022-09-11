@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import MovieCard from './MovieCard/MovieCard';
-import { Grid, CircularProgress, Typography } from '@material-ui/core';
+import { Grid, CircularProgress, Typography, Button } from '@material-ui/core';
 // import { motion } from 'framer-motion'; 
 // import InfiniteScroll from "react-infinite-scroll-component";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -64,11 +65,11 @@ function Carousel() {
                                     style={{transition: '150ms ease-in-out', stroke: "#000000", strokeWidth: 1.5}}
                                     className={classes.titleArrow} 
                                     fontSize="small"
-                                    />
+                            />
                             </Typography>
-                            <button className={classes.viewMore} variant="body2" >
+                            <Button component={Link} to="/searchresults" className={classes.viewMore} variant="body" >
                                 view more
-                            </button>
+                            </Button>
                         </div>
 
                         <div ref={progressBar} className={classes.progressBar}>
@@ -94,7 +95,7 @@ function Carousel() {
                             <div style={{ '--slider-index': translatePage }} className={classes.moviesList}>
                                 {movieList.map((movie) => (
                                     <MovieCard list={movie} key={movie.id} />
-                                    ))}
+                                ))}
                             </div>
 
                             <button className={`${classes.handle} ${classes.rightHandle}`} onClick={() => onHandleClick(1, translatePage)}>
