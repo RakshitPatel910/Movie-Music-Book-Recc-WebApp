@@ -18,11 +18,12 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
+import { useLocation } from 'react-router-dom'
  
 import "./style.css";
 
 const key = "f20575175c2deae7974eb547727d1ace";
-const id = 550;
+// const id = 550;
 // const id = 278;
 // const id = 244786;
 // const path = `https://image.tmdb.org/t/p/w185${list.poster_path}`
@@ -62,6 +63,8 @@ function a11yProps(index) {
 
 function Home() {
 
+  const location = useLocation()
+  const {id} = location.state
   const [value, setValue] = React.useState(0);
   const [image, setImage] = useState("");
   const [overview, setOverview] = useState("");
@@ -89,17 +92,17 @@ function Home() {
 
   const fetchMovie = () =>
     axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
     );
 
   const fetchReview = () =>
     axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${key}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=1`
     );
 
   const fetchVideo = () =>
     axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
     );
 
   useEffect(() => {
