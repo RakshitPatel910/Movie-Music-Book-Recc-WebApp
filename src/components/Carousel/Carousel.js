@@ -14,7 +14,7 @@ function Carousel() {
 
     const [movieList, setMovieList] = useState([]);
     const [translatePage, setTranslatePage] = useState(0);
-    const [cardsOnPage, setCardsOnPage] = useState(10);
+    const [cardsOnPage, setCardsOnPage] = useState(4);
     const classes = useStyles();
     const carousel = useRef(0);
     const progressBar = useRef(null);
