@@ -22,17 +22,14 @@
 body {
   margin: 0;
   /* background: black; */
-<<<<<<< HEAD
   /* font-family: "Montserrat", helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: 400; */
 /* } */ 
-=======
   /* font-family: "Montserrat", helvetica, arial, sans-serif; */
   /* font-size: 14px; */
   /* font-weight: 400; */
 /* }  */
->>>>>>> 605ac7a1ab690275537bf5ff2e11941f9090d13d
 
 .movie_card {
   position: relative;
