@@ -59,37 +59,39 @@ body {
   padding: 25px;
   height: 40%;
 }
-h1 {
+.movieinfo h1 {
     color: #fff;
     font-weight: 400;
     font-size: 40px;
-    padding-top: 37px;
+    padding-top: 16px;
     padding-left: 193px;
 }
 
-/* h4 {
+.movieinfo h4 {
   color: #9ac7fa;
     font-weight: 400;
     font-size: 16px;
     padding-left: 196px;
     padding-top:13px;
 
-} */
+}
 
 .minutes {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: -1px;
     color: #fff;
     padding: 5px;
     margin-left: 18px;
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.13);
+    padding-top: 0px;
 }
 
 .type {
   display: inline-block;
-  color: #cee4fd;
-  margin-left: 10px;
+    color: #cee4fd;
+    margin-left: 8px;
+    margin-top: 9px;
 }
 
 .locandina {
@@ -98,7 +100,7 @@ h1 {
     margin-right: 20px;
     margin-left: 42px;
     margin-top: 27px;
-    height: 171px;
+    height: 190px;
     box-shadow: 0 0 20px -10px rgb(0 0 0 / 50%);
 }
 
@@ -115,24 +117,24 @@ h1 {
   padding-left: 62px;
   padding-bottom: 20px;
 }
-ul {
+.movieinfo ul {
   list-style: none;
   padding: 0;
   margin-top: -30px;
 }
-li {
+.movieinfo li {
   display: inline-block;
   color: rgba(255, 255, 255, 0.4);
   transition: color 0.3s;
   transition-delay: 0.15s;
   margin: 0 10px;
 }
-li:hover {
+.movieinfo li:hover {
   transition: color 0.3s;
   color: rgba(255, 255, 255, 0.8);
 }
 
-i {
+.movieinfo i {
   font-size: 19px;
   cursor: pointer;
 }
@@ -278,8 +280,11 @@ i {
   color: #9ac7fa;
     margin: 0px 0px;
     padding: 0px 0px;
-    margin-left: 160px;
+    /* margin-left: 160px; */
     padding-top: 5px;
+    display: inline-block;
+    margin-inline-start: auto;
+    margin-inline-end: 61px;
 }
 
 .overall_info h3{
@@ -299,4 +304,8 @@ i {
   background-color: #1AA7EC;
 }
   
+
+.stats{
+  
+}
  

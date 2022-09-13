@@ -112,6 +112,7 @@ function Home() {
       const result = await fetchMovie();
       if (isMounted) {
         const path = result.data.poster_path;
+        
         setImage(`https://image.tmdb.org/t/p/w185${path}`);
         setOverview(result.data.overview);
         setGenre(result.data.genres);
@@ -135,8 +136,14 @@ function Home() {
     async function getVideo() {
       const result = await fetchVideo();
       if (isMounted) {
-        console.log(result.data.results[0].key);
-        setVideo(result.data.results[0].key);
+        console.log(result.data)
+        // console.log(result.data.results[0].key);
+        if(result.data.results.length == 0){
+          setVideo(null)
+        }
+        else{
+          setVideo(result.data.results[0].key);
+        }
       }
     }
 
@@ -152,6 +159,7 @@ function Home() {
     <>
       <Container
         maxWidth=""
+        className="movieinfo"
         sx={{
           height: "fit-content",
           display: "flex",
@@ -164,8 +172,9 @@ function Home() {
             <div className="movie_header">
               <img className="locandina" alt="movieImage" src={image} />
               <h1>{title}</h1>
-              <h4>{releaseDate.slice(0, 4)}, David Ayer</h4>
-              <span className="minutes">{runTime} min</span>
+              <h4>{releaseDate.slice(0, 4)}
+                <span className="minutes">{runTime} min</span> 
+              </h4>
               <p class="type">
                 {genre.map((e) => (
                   <>{`${e.name} `}</>
@@ -249,7 +258,7 @@ function Home() {
                     Budget{" "}
                     {
                       <>
-                        <h4>{info.budget}</h4>
+                        <h4 className="stats">{info.budget}</h4>
                       </>
                     }
                   </p>
@@ -257,7 +266,7 @@ function Home() {
                     Revenue{" "}
                     {
                       <>
-                        <h4>{info.revenue}</h4>
+                        <h4 className="stats">{info.revenue}</h4>
                       </>
                     }
                   </p>
@@ -273,7 +282,7 @@ function Home() {
                     Tagline{" "}
                     {
                       <>
-                        <h4>{info.tagline}</h4>
+                        <h4 className="stats">{info.tagline}</h4>
                       </>
                     }
                   </p>
@@ -281,7 +290,7 @@ function Home() {
                     status{" "}
                     {
                       <>
-                        <h4>{info.status}</h4>
+                        <h4 className="stats">{info.status}</h4>
                       </>
                     }
                   </p>
@@ -319,9 +328,9 @@ function Home() {
                           >
                             <h4>{e.name}</h4>
 
-                            <h4 style={{ color: "#009dff" }}>
+                            <h5 style={{ color: "#009dff" }}>
                               {e.origin_country}
-                            </h4>
+                            </h5>
                           </p>
                         </p>
                       </>
@@ -359,15 +368,23 @@ function Home() {
                   color: "#cfd6e1",
                 }}
               >
-                <iframe
-                  src={`https://www.youtube.com/embed/${video}`}
-                  title="React.js Project to Embed Youtube Video in IFrame inside Browser Without any Library in Javascript"
-                  height="600"
-                  width="1000"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
+                {video == null ? (
+                  <>
+                    <div className="error">Video not found</div>
+                  </>
+                ) : (
+                  <>
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video}`}
+                      title="React.js Project to Embed Youtube Video in IFrame inside Browser Without any Library in Javascript"
+                      height="600"
+                      width="1000"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </>
+                )}
               </TabPanel>
               <TabPanel
                 value={value}
