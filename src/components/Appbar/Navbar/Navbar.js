@@ -24,6 +24,9 @@ import ContactlessIcon from '@mui/icons-material/Contactless';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import FlashOnOutlinedIcon from '@mui/icons-material/FlashOnOutlined';
 import { Link } from 'react-router-dom';
+import AbcRoundedIcon from '@mui/icons-material/AbcRounded';
+
+
 
 const drawerWidth = 240;
 
@@ -65,11 +68,16 @@ export default function PersistentDrawerRight() {
     setOpen(false);
   };
 
+  
+
   return (
-    <Box sx={{ display: 'flex' }}>
+    
+    
+   
+    <Box sx={{ display: 'flex' }} marginRight={3} marginLeft={3} marginBottom={3} marginTop={1}  >
       <CssBaseline />
-      <AppBar sx={{background: "#FFC71A"}} position="ixfed" open={open}>
-        <Toolbar>
+      <AppBar sx={{background: "#5579C6" , borderRadius: '20px'}}   elevation={0} open={open}  >
+        <Toolbar >
         <IconButton size='large' color='inherit'>
                     <ContactlessIcon />
 
@@ -77,8 +85,9 @@ export default function PersistentDrawerRight() {
                     <Typography component={Link} to='/' variant='h4'  sx={{flexGrow:1,textDecoration:"none",color:"white"}}>
                         Movicon
                     </Typography>
+                    
         
-          <IconButton
+          <Avatar
             color="inherit"
             aria-label="open drawer"
             edge="end"
@@ -88,12 +97,13 @@ export default function PersistentDrawerRight() {
 
 
                     
-                    <Avatar ><FlashOnOutlinedIcon /></Avatar>
-                      
+                    <Avatar></Avatar>
                     
-                        <Button  color ='inherit'><Typography variant='h5'>USERNAME</Typography></Button>
+                    
 
-          </IconButton>
+
+          </Avatar>
+          
           
         </Toolbar>
       </AppBar>
@@ -110,7 +120,7 @@ export default function PersistentDrawerRight() {
         anchor="right"
         open={open}
       >
-        <DrawerHeader  sx={{background: "#F5FF5C  "}}>
+        <DrawerHeader  sx={{background: "#7697A0"}}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -119,7 +129,7 @@ export default function PersistentDrawerRight() {
         <Button>
 
 
-        <Avatar ><SentimentSatisfiedAltIcon /></Avatar>
+        <Avatar ></Avatar>
         </Button>
         
                       
@@ -130,12 +140,12 @@ export default function PersistentDrawerRight() {
 
         <List>
           {['MY ACCOUNT', 'SIGN OUT', 'APP INFO'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem style={{ color: "black" }} key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <AssessmentRoundedIcon /> : <ExitToAppOutlinedIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={text}  />
               </ListItemButton>
             </ListItem>
           ))}
@@ -143,5 +153,8 @@ export default function PersistentDrawerRight() {
         
       </Drawer>
     </Box>
+    
+
   );
 }
+// hello

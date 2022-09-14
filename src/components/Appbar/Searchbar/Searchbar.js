@@ -23,7 +23,8 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
-import { Button } from '@mui/material';
+import { Button,Avatar,FormControl,OutlinedInput,value,handleChange,InputAdornment } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const drawerWidth = 240;
 const Item = styled(Paper)(({ theme }) => ({
@@ -58,19 +59,14 @@ export default function PersistentDrawerLeft() {
   };
 
 
-  return (
-    
-    
-   
-    <Box sx={{ display: 'flex' }}>
-       
-       
+  return ( 
+    <Box sx={{ display: 'flex' }}  >
       <CssBaseline />
       
       <Grid container spacing={1} columns={10}>
-      <Grid item xs={0.3}><Item></Item></Grid>
+      <Grid item xs={0.25}><Item></Item></Grid>
       
-        <Grid item xs={0.4}>
+        <Grid item xs={0.42}>
           <Item>
           <IconButton         
           color="inherit"
@@ -84,11 +80,17 @@ export default function PersistentDrawerLeft() {
         </IconButton>
           </Item>
         </Grid>
-        <Grid item xs={7}><Item></Item></Grid>
+        <Grid item xs={1.6}><Item></Item></Grid>
         
-        <Grid item xs={2}>
+        <Grid item xs={7.4}>
           <Item >
-        <TextField fullWidth label="Search" id="fullWidth" />
+          <FormControl fullWidth id="fullWidth" variant="outlined">
+          <OutlinedInput
+          
+            placeholder="Search"
+            endAdornment={<InputAdornment position="end"><Avatar>< SearchIcon/></Avatar></InputAdornment>}
+              />
+        </FormControl> 
             </Item>
         </Grid>
       </Grid>
@@ -107,7 +109,7 @@ export default function PersistentDrawerLeft() {
         anchor="left"
         open={open}
       >
-        <DrawerHeader sx={{background: "#F5FF5C  "}}>
+        <DrawerHeader sx={{background: "#7697A0"}}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -121,7 +123,7 @@ export default function PersistentDrawerLeft() {
           <ListItemIcon>
           <AnchorIcon />
           </ListItemIcon>
-            <ListItemText primary='ACTION' />
+            <ListItemText style={{ color: "black" }} primary='ACTION' />
           </ListItem>          
           </ListItemButton>
 
@@ -130,7 +132,7 @@ export default function PersistentDrawerLeft() {
           <ListItemIcon>
           <AcUnitIcon />
           </ListItemIcon>
-            <ListItemText primary='THRILLER' />
+            <ListItemText style={{ color: "black" }} primary='THRILLER' />
           </ListItem>          
           </ListItemButton>
 
@@ -139,7 +141,7 @@ export default function PersistentDrawerLeft() {
           <ListItemIcon>
           <FavoriteBorderIcon />
           </ListItemIcon>
-            <ListItemText primary='ROMANCE' />
+            <ListItemText style={{ color: "black" }} primary='ROMANCE' />
           </ListItem>          
           </ListItemButton>
 
@@ -148,7 +150,7 @@ export default function PersistentDrawerLeft() {
           <ListItemIcon>
           <AccountTreeIcon />
           </ListItemIcon>
-            <ListItemText primary='ADVENTURE' />
+            <ListItemText style={{ color: "black" }} primary='ADVENTURE' />
           </ListItem>          
           </ListItemButton>
 
@@ -157,7 +159,7 @@ export default function PersistentDrawerLeft() {
           <ListItemIcon>
           <ColorLensIcon />
           </ListItemIcon>
-            <ListItemText primary='DRAMA' />
+            <ListItemText style={{ color: "black" }} primary='DRAMA' />
           </ListItem>          
           </ListItemButton>
 
