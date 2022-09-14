@@ -21,9 +21,12 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import ContactlessIcon from "@mui/icons-material/Contactless";
 //import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
-import FlashOnOutlinedIcon from "@mui/icons-material/FlashOnOutlined";
-import { Link } from "react-router-dom";
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import FlashOnOutlinedIcon from '@mui/icons-material/FlashOnOutlined';
+import { Link } from 'react-router-dom';
+import AbcRoundedIcon from '@mui/icons-material/AbcRounded';
+
+
 
 const drawerWidth = 240;
 
@@ -65,22 +68,26 @@ export default function PersistentDrawerRight() {
     setOpen(false);
   };
 
+  
+
   return (
-    <Box sx={{ display: "flex" }}>
+    
+    
+   
+    <Box sx={{ display: 'flex' }} marginRight={3} marginLeft={3} marginBottom={3} marginTop={1}  >
       <CssBaseline />
-      <AppBar sx={{ backgroundColor: "#FFC71A" }} position="ixfed" open={open}>
-        <Toolbar>
-          <IconButton size="large" color="inherit" component={Link} to="/">
-            <ContactlessIcon />
-          </IconButton>
-          <Typography
-            variant="h4"
-            sx={{ flexGrow: 1, textDecoration: "none", color: "white" }}
-          >
-            Movicon
-          </Typography>
-            
-          <IconButton
+      <AppBar sx={{background: "#5579C6" , borderRadius: '20px'}}   elevation={0} open={open}  >
+        <Toolbar >
+        <IconButton size='large' color='inherit'>
+                    <ContactlessIcon />
+
+                    </IconButton>
+                    <Typography component={Link} to='/' variant='h4'  sx={{flexGrow:1,textDecoration:"none",color:"white"}}>
+                        Movicon
+                    </Typography>
+                    
+        
+          <Avatar
             color="inherit"
             aria-label="open drawer"
             edge="end"
@@ -91,10 +98,16 @@ export default function PersistentDrawerRight() {
               <FlashOnOutlinedIcon />
             </Avatar>
 
-            <Button color="inherit">
-              <Typography variant="h5">USERNAME</Typography>
-            </Button>
-          </IconButton>
+
+                    
+                    <Avatar></Avatar>
+                    
+                    
+
+
+          </Avatar>
+          
+          
         </Toolbar>
       </AppBar>
 
@@ -110,7 +123,7 @@ export default function PersistentDrawerRight() {
         anchor="right"
         open={open}
       >
-        <DrawerHeader sx={{ background: "#F5FF5C  " }}>
+        <DrawerHeader  sx={{background: "#7697A0"}}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
@@ -121,9 +134,9 @@ export default function PersistentDrawerRight() {
         </DrawerHeader>
 
         <Button>
-          <Avatar>
-            <SentimentSatisfiedAltIcon />
-          </Avatar>
+
+
+        <Avatar ></Avatar>
         </Button>
 
         <Button color="inherit">
@@ -132,8 +145,8 @@ export default function PersistentDrawerRight() {
         <Divider />
 
         <List>
-          {["MY ACCOUNT", "SIGN OUT", "APP INFO"].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {['MY ACCOUNT', 'SIGN OUT', 'APP INFO'].map((text, index) => (
+            <ListItem style={{ color: "black" }} key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? (
@@ -142,12 +155,15 @@ export default function PersistentDrawerRight() {
                     <ExitToAppOutlinedIcon />
                   )}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={text}  />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
     </Box>
+    
+
   );
 }
+// hello
