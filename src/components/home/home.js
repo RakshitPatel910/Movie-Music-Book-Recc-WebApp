@@ -8,7 +8,7 @@ import Chip from "@mui/material/Chip";
 // import CardActions from "@mui/material/CardActions";
 import ImageIcon from "@mui/icons-material/Image";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box"; 
+import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import AddIcon from "@mui/icons-material/Add";
 import PropTypes from "prop-types";
@@ -18,8 +18,8 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import { useLocation } from 'react-router-dom'
- 
+import { useLocation } from "react-router-dom";
+
 import "./style.css";
 
 const key = "f20575175c2deae7974eb547727d1ace";
@@ -62,9 +62,8 @@ function a11yProps(index) {
 }
 
 function Home() {
-
-  const location = useLocation()
-  const {id} = location.state
+  const location = useLocation();
+  const { id } = location.state;
   const [value, setValue] = React.useState(0);
   const [image, setImage] = useState("");
   const [overview, setOverview] = useState("");
@@ -73,11 +72,11 @@ function Home() {
   const [runTime, SetRunTime] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
   const [review, setReview] = useState([]);
-  const [video, setVideo] = useState();
+  const [video, setVideo] = useState([]);
   const [info, setInfo] = useState([]);
   const [lang, setLang] = useState([]);
-  const [company,setCompany] = useState([])
-  const [country,setCountry] = useState([])
+  const [company, setCompany] = useState([]);
+  const [country, setCountry] = useState([]);
   // const [avatar,setAvatar] = useState("");
 
   const theme = useTheme();
@@ -112,7 +111,7 @@ function Home() {
       const result = await fetchMovie();
       if (isMounted) {
         const path = result.data.poster_path;
-        
+
         setImage(`https://image.tmdb.org/t/p/w185${path}`);
         setOverview(result.data.overview);
         setGenre(result.data.genres);
@@ -136,13 +135,12 @@ function Home() {
     async function getVideo() {
       const result = await fetchVideo();
       if (isMounted) {
-        console.log(result.data)
+        console.log(result.data);
         // console.log(result.data.results[0].key);
-        if(result.data.results.length == 0){
-          setVideo(null)
-        }
-        else{
-          setVideo(result.data.results[0].key);
+        if (result.data.results.length == 0) {
+          setVideo(null);
+        } else {
+          setVideo(result.data.results);
         }
       }
     }
@@ -172,8 +170,9 @@ function Home() {
             <div className="movie_header">
               <img className="locandina" alt="movieImage" src={image} />
               <h1>{title}</h1>
-              <h4>{releaseDate.slice(0, 4)}
-                <span className="minutes">{runTime} min</span> 
+              <h4>
+                {releaseDate.slice(0, 4)}
+                <span className="minutes">{runTime} min</span>
               </h4>
               <p class="type">
                 {genre.map((e) => (
@@ -274,7 +273,15 @@ function Home() {
                     Language{" "}
                     {lang.map((e) => (
                       <>
-                        <h4>{e.english_name}</h4>
+                        <h4>
+                        <Chip
+                          className="chip"
+                          label={e.english_name}
+                          color="primary"
+                          sx={{ margin: "5px" }}
+                          />
+                        </h4>
+                        {/* <h4>{e.english_name}</h4> */}
                       </>
                     ))}
                   </p>
@@ -308,9 +315,9 @@ function Home() {
                           >
                             <h4>{e.name}</h4>
 
-                            <h4 style={{ color: "#009dff" }}>
+                            <h5 style={{ color: "#009dff" }}>
                               {e.origin_country}
-                            </h4>
+                            </h5>
                           </p>
                         </p>
                       </>
@@ -373,17 +380,19 @@ function Home() {
                     <div className="error">Video not found</div>
                   </>
                 ) : (
-                  <>
-                    <iframe
-                      src={`https://www.youtube.com/embed/${video}`}
-                      title="React.js Project to Embed Youtube Video in IFrame inside Browser Without any Library in Javascript"
-                      height="600"
-                      width="1000"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  </>
+                  video.map((e) => (
+                    <>
+                      <iframe
+                        src={`https://www.youtube.com/embed/${e.key}`}
+                        title="React.js Project to Embed Youtube Video in IFrame inside Browser Without any Library in Javascript"
+                        height="600"
+                        width="1000"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      ></iframe>
+                    </>
+                  ))
                 )}
               </TabPanel>
               <TabPanel

@@ -255,7 +255,7 @@ body {
 }
 
 .overall_info p{
-  margin-left: 63px;
+  margin-left: 159px;
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 20px;
@@ -284,7 +284,7 @@ body {
     padding-top: 5px;
     display: inline-block;
     margin-inline-start: auto;
-    margin-inline-end: 61px;
+    margin-inline-end: 154px;
 }
 
 .overall_info h3{
@@ -305,7 +305,3 @@ body {
 }
   
 
-.stats{
-  
-}
- 
