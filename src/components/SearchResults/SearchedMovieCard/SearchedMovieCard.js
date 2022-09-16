@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import { Chip, Typography } from '@material-ui/core';
 import { moviesGenre } from '../../../constants/genreId.js';
 import useStyles from "./styles.js";
 
@@ -14,13 +14,21 @@ function SearchedMovieCard({ list }) {
             </div>
             <div className={classes.info}>
                 <Typography className={classes.title} gutterBottom>{list.title}</Typography>
-                <Typography variant='caption' gutterBottom>{
-                    list.genre_ids.map((genres) => (
+
+                <div className={classes.genreList}>
+                    {list.genre_ids.map((genres) => (
                         moviesGenre.map((genreList) => (
-                            genres===genreList.id?`${genreList.name}, `:''
+                            genres===genreList.id ?
+                            <Typography className={classes.genreChip} variant='caption' gutterBottom>
+                                {genreList.name}
+                            </Typography> : ''
                         ))
-                    ))
-                }</Typography>
+                    ))}
+                </div>
+
+                <Chip className={classes.ratingChip}>
+                    chip
+                </Chip>
             </div>
         </div>
     )

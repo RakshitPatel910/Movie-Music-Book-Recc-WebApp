@@ -17,21 +17,20 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbar />
-      <Searchbar />
-        {/* <Routes>
-          <Route path="/" exact element={<Carousel/>} />
-          <Route path="/searchresults" exact element={<SearchResults/>} />
-          <Route path="/movieinfo" exact element={<Home/>} />
-          <Route path="/signin" exact element={<Signin/>} />
-          <Route path="/signup" exact element={<Signup/>} />
-        </Routes> 
-      {/* <Home/> */}
-      {/* <Signup/>
-      <Signin/> */}
+        <Navbar />
+        <Searchbar />
+          <Routes>
+            <Route path="/" exact element={<Carousel/>} />
+            <Route path="/searchresults" exact element={<SearchResults/>} />
+            <Route path="/movieinfo" exact element={<Home/>} />
+            {/* <Route path="/signin" exact element={<Signin/>} />
+            <Route path="/signup" exact element={<Signup/>} /> */}
+          </Routes> 
+        {/* <Home/>  */}
+        <Signup/>
+        <Signin/>
       </BrowserRouter>
 
-      {/* <Carousel /> */}
     </>
   );
 } 

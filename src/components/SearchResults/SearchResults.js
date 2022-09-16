@@ -50,7 +50,7 @@ function SearchResults() {
                 </p>
               }
             >
-                <Grid className={classes.container} container alignItems='stretch' spacing={4} >
+                <Grid className={classes.container} container alignItems='stretch' spacing={3} >
                     <Grid item xs={12}>
                         <Typography variant='h3'>Popular Now</Typography>
                     </Grid>

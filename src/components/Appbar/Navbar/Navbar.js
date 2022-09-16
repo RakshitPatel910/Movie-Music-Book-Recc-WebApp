@@ -76,7 +76,7 @@ export default function PersistentDrawerRight() {
    
     <Box sx={{ display: 'flex' }} marginRight={3} marginLeft={3} marginBottom={3} marginTop={1}  >
       <CssBaseline />
-      <AppBar sx={{background: "#5579C6" , borderRadius: '20px'}}   elevation={0} open={open}  >
+      <AppBar style={{background: "#5579C6" , borderRadius: '20px'}}   elevation={0} open={open}  >
         <Toolbar >
         <IconButton size='large' color='inherit'>
                     <ContactlessIcon />
