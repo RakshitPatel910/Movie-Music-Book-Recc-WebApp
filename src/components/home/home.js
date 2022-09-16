@@ -309,7 +309,7 @@ function Home() {
                     e.logo_path == null ? (
                       <>
                         <p style={{ display: "flex", flexDirection: "row" }}>
-                          <ImageIcon sx={{ width: "50px", height: "50px" }} />
+                          <ImageIcon sx={{ width: "70px", height: "70px" }} />
                           <p
                             style={{ display: "flex", flexDirection: "column" }}
                           >
@@ -345,7 +345,7 @@ function Home() {
                   )}
                   <hr className="customHR"></hr>
                   <h3>Production Countries</h3>
-                  <p>
+                  <p style={{margin:"0px",justifyContent:"center"}}>
                     {country.map((e) => (
                       <Chip
                         className="chip"
