@@ -19,14 +19,14 @@ function App() {
       <BrowserRouter>
       <Navbar />
       <Searchbar />
-        {/* <Routes>
+        <Routes>
           <Route path="/" exact element={<Carousel/>} />
           <Route path="/searchresults" exact element={<SearchResults/>} />
           <Route path="/movieinfo" exact element={<Home/>} />
           <Route path="/signin" exact element={<Signin/>} />
           <Route path="/signup" exact element={<Signup/>} />
         </Routes> 
-      {/* <Home/> */}
+      {/* <Home/>
       {/* <Signup/>
       <Signin/> */}
       </BrowserRouter>
