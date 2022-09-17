@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -60,7 +60,7 @@ export default function PersistentDrawerLeft() {
 
 
   return ( 
-    <Box sx={{ display: 'flex' }}  >
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       
       <Grid container spacing={1} columns={10}>
@@ -84,8 +84,9 @@ export default function PersistentDrawerLeft() {
         
         <Grid item xs={7.4}>
           <Item >
-          <FormControl fullWidth id="fullWidth" variant="outlined">
+          <FormControl fullWidth id="fullWidth" variant="outlined" size="small" >
           <OutlinedInput
+          
           
             placeholder="Search"
             endAdornment={<InputAdornment position="end"><Avatar>< SearchIcon/></Avatar></InputAdornment>}
