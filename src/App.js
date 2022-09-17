@@ -17,8 +17,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
-        <Searchbar />
+        {/* <Navbar />
+        <Searchbar /> */}
           <Routes>
             <Route path="/" exact element={<Carousel/>} />
             <Route path="/searchresults" exact element={<SearchResults/>} />
@@ -27,8 +27,8 @@ function App() {
             <Route path="/signup" exact element={<Signup/>} /> */}
           </Routes> 
         {/* <Home/>  */}
-        <Signup/>
-        <Signin/>
+        {/* <Signup/>
+        <Signin/> */}
       </BrowserRouter>
 
     </>
