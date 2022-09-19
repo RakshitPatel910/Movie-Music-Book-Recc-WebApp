@@ -25,7 +25,6 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import FlashOnOutlinedIcon from '@mui/icons-material/FlashOnOutlined';
 import { Link } from 'react-router-dom';
 import AbcRoundedIcon from '@mui/icons-material/AbcRounded';
-import { borderRadius } from "@mui/system";
 
 
 
@@ -72,20 +71,23 @@ export default function PersistentDrawerRight() {
   
 
   return (
-
-    <Box sx={{ display: 'flex'}} marginBottom={3} marginRight={3} marginLeft={3} marginTop={2.5}  >
+    
+    
+   
+    <Box sx={{ display: 'flex' }} marginRight={3} marginLeft={3} marginBottom={3} marginTop={1}  >
       <CssBaseline />
-      <AppBar sx={{background: "#5579C6" , borderRadius: '20px'}}  position='xifed'  elevation={0} open={open}   >
+      <AppBar style={{background: "#5579C6" , borderRadius: '20px'}}   elevation={0} open={open}  >
         <Toolbar >
-        <IconButton size='large' color='inherit'  component={Link} to='/'>
+        <IconButton size='large' color='inherit'>
                     <ContactlessIcon />
 
                     </IconButton>
-                    <Typography variant='h4'  sx={{flexGrow:1,textDecoration:"none",color:"white"}} >
+                    <Typography component={Link} to='/' variant='h4'  sx={{flexGrow:1,textDecoration:"none",color:"white"}}>
                         Movicon
                     </Typography>
-                  
-          <IconButton
+                    
+        
+          <Avatar
             color="inherit"
             aria-label="open drawer"
             edge="end"
@@ -94,8 +96,18 @@ export default function PersistentDrawerRight() {
           >
             <Avatar>
               <FlashOnOutlinedIcon />
-            </Avatar>                  
-          </IconButton>    
+            </Avatar>
+
+
+                    
+                    <Avatar></Avatar>
+                    
+                    
+
+
+          </Avatar>
+          
+          
         </Toolbar>
       </AppBar>
 
@@ -154,4 +166,4 @@ export default function PersistentDrawerRight() {
 
   );
 }
-
+// hello

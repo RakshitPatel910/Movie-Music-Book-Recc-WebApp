@@ -37,14 +37,14 @@ export default makeStyles({
     
     info: {
         width: '100%',
-        padding:'2.5rem 1rem 0.5rem 1rem',
+        padding:'0.5rem 1rem',
         borderRadius: '0.5rem',
         color: 'white',
         // backgroundColor: 'rgb(255 255 255 / 12%)',
-        // backgroundColor: '#282828',
+        backgroundColor: '#282828',
         // backgroundColor: 'black',
         position: 'relative',
-        background: ' linear-gradient(to bottom, #282828 50%, rgba(85, 121, 198, 0.3) 100%)',
+        // background: 'linear-gradient(to right, #0d0d0c 70%, transparent 100%)',
 
     },
 
@@ -67,18 +67,12 @@ export default makeStyles({
 
     ratingChip:{
         width: '5rem',
-        fontSize: '1rem',
-        color: 'white',
         position: 'absolute',
         right:'-2%',
-        // bottom: '-2%',
-        top: '-2%',
+        bottom: '-2%',
         backgroundColor: '#5579C6',
         // backgroundColor: 'rgb(255,215,0)',
-        borderRadius: '2%',
-        display: 'flex',
-        flexDirection: 'row-reverse',
-        justifyContent: 'left'
+        borderRadius: '2%'
     },
 
 });
