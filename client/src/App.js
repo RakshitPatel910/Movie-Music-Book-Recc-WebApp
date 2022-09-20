@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
         {/* <Searchbar /> */}
           <Routes>
             <Route path="/" exact element={<Carousel/>} />

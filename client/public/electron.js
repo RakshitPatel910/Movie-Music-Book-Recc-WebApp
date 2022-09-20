@@ -7,8 +7,8 @@ const isDev  = require('electron-is-dev')
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1300,
+    height: 800,
     show: true,
     frame: true, // it enable or disable default navbar 
     fullscreenable:true, 
