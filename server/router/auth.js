@@ -19,15 +19,16 @@ router.post('/signup',(req,res)=>{
     User.findOne({email:email}) //email(database email):email(user register email)
         .then((userExist)=>{
             if(userExist){ // checking if user already exist 
-                 res.status(422).json({error:"Email already exist"})
+                res.status(422).json({error:"Email already exist"})
             } 
-
-            const user = new User({name,email,phone,password}) //creating new document
-
-            user.save().then(()=>{ //saving the document in db
-                res.status(201).json({message: "signup successfully"})
-            })
-            .catch((err)=> res.status(500).json({error:"Failed register"}))
+            else{
+                const user = new User({name,email,phone,password}) //creating new document
+                 
+                user.save().then(()=>{ //saving the document in db
+                    res.status(201).json({message: "signup successfully"})
+                })
+                .catch((err)=> res.status(500).json({error:"Failed register"}))
+            }
   
  
         }) 

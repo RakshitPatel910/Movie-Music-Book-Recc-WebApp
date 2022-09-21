@@ -5,11 +5,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from './components/Appbar/Navbar/Navbar.js';
 import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
-import Signup from './components/Signup/Signup.js';
-import Signin from './components/Signin/Signin.js';
-import Carousel from './components/Carousel/Carousel';
-import Home from './components/Home/Home.js';
-import SearchResults from './components/SearchResults/SearchResults'; 
+
+import Home from './components/Home/Home.js'
+
+
 
 
 
@@ -20,15 +19,10 @@ function App() {
         {/* <Navbar /> */}
         {/* <Searchbar /> */}
           <Routes>
-            <Route path="/" exact element={<Carousel/>} />
-            <Route path="/searchresults" exact element={<SearchResults/>} />
-            <Route path="/movieinfo" exact element={<Home/>} />
-            {/* <Route path="/signin" exact element={<Signin/>} />
-            <Route path="/signup" exact element={<Signup/>} /> */}
+            <Route path="/home" exact element={<Home/>} />
+            
+           
           </Routes> 
-        {/* <Home/>  */}
-        {/* <Signup/> */}
-        {/* <Signin/> */}
       </BrowserRouter>
 
     </>
