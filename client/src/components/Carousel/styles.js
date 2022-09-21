@@ -37,6 +37,7 @@ export default makeStyles((theme) => ({
   },
   
   listName: {
+    color: 'white'
   },
 
   titleArrow: {
@@ -50,6 +51,7 @@ export default makeStyles((theme) => ({
     position: 'absolute',
     margin: '0 10px',
     fontSize: '1.2rem',
+    color: 'white',
     opacity: 0,
     transition: '500ms ease-in-out, opacity 300ms ease-in-out',
     backgroundColor: 'rgba(0, 0, 0, 0)',

@@ -7,10 +7,11 @@ import { Grid, CircularProgress, Typography, Button } from '@material-ui/core';
 // import InfiniteScroll from "react-infinite-scroll-component";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { moviesGenre } from '../../constants/genreId.js';
 
 import useStyles from "./styles.js";
 
-function Carousel() {
+function Carousel({ genre, title }) {
 
     const [movieList, setMovieList] = useState([]);
     const [translatePage, setTranslatePage] = useState(0);
@@ -19,7 +20,7 @@ function Carousel() {
     const carousel = useRef(0);
     const progressBar = useRef(null);
 
-    const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}`);
+    const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genre}`);
 
     const getMovies = async () => {
         const movies1 = await fetchMovies(1);
@@ -60,16 +61,17 @@ function Carousel() {
                     <div className={classes.titleContainer}>
                         <div className={classes.carouselTitle}>
                             <Typography className={classes.listName} variant="h4" >
-                                Popular Now
+                                {title}
                                 <ArrowForwardIosIcon 
                                     style={{transition: '150ms ease-in-out', stroke: "#000000", strokeWidth: 1.5}}
                                     className={classes.titleArrow} 
                                     fontSize="small"
                             />
                             </Typography>
-                            <Button component={Link} to="/searchresults" className={classes.viewMore} variant="body" >
+                            <Button component={Link} to={`/home/${title}`} className={classes.viewMore} variant="body" state={{ genreId:`${genre}` }} >
                                 view more
                             </Button>
+                            {/* state={{id:`${list.id}`, title:`${title}`}} */}
                         </div>
 
                         <div ref={progressBar} className={classes.progressBar}>
@@ -111,7 +113,7 @@ function Carousel() {
 
 
 
-            <h2>2nd Slider</h2>
+            {/* <h2>2nd Slider</h2> */}
             {/* {!movieList.length ? <CircularProgress color="secondary" /> : (
                 <div ref={carousel} className={classes.container}>
                     <div ref={slider} id="slider"

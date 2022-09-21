@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -10,9 +11,11 @@ function SearchResults() {
     const classes = useStyles();
     const [movieList, setMovieList] = useState([]);
     const [page, setPage] = useState(1);
-    const [totalResults, setTotalResult] = useState(0)
+    const [totalResults, setTotalResult] = useState(0);
 
-    const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}`);
+    const{ genre_name } = useParams();
+
+    const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genre=${genre_name}`);
 
     const getMovies = async () => {
       const movies = await fetchMovies(page);
@@ -56,7 +59,7 @@ function SearchResults() {
                     </Grid>
                     {movieList.map((movie) => (
                       <Grid className={classes.items} item xs={4}>
-                            <SearchedMovieCard list={movie} key={movie.id} />
+                            <SearchedMovieCard list={movie} key={movie.id} genre_name={genre_name} />
                         </Grid>
                     ))}
                 </Grid>              
