@@ -10,7 +10,7 @@ router.get('/' , (req,res)=>{
 
 router.post('/signup',(req,res)=>{
 
-    const {name , email , phone , password} = req.body //object destructuring 
+    const {name , email , phone , password , watchlist} = req.body //object destructuring 
 
     if(!name || !email || !phone || !password){
         return res.status(422).json({error:"PLz fill all credentials"})
@@ -22,7 +22,7 @@ router.post('/signup',(req,res)=>{
                 res.status(422).json({error:"Email already exist"})
             } 
             else{
-                const user = new User({name,email,phone,password}) //creating new document
+                const user = new User({name,email,phone,password,watchlist}) //creating new document
                  
                 user.save().then(()=>{ //saving the document in db
                     res.status(201).json({message: "signup successfully"})
@@ -33,11 +33,10 @@ router.post('/signup',(req,res)=>{
  
         }) 
         // .catch(err=>{console.log(err)}) 
-
-    console.log(name)  
-    console.log(email)
     // res.send("post req send")
     // res.json({message:req.body.name})
 })
+
+
 
 module.exports = router; 
