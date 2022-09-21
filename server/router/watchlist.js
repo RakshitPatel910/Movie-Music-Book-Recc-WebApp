@@ -1,14 +1,21 @@
 const express = require('express')
 
-const router  = express.Router()
+const router1  = express.Router()
 
 require('../db/conn')
-const User = require('../model/userSchema')
+const User = require("../model/userSchema");
 
-router.post('./addToWatchlist',(req,res)=>{
-    const {_id,movieID} = req.body
-
-    User.findById({_id:_id}).then((user) => res.status(200).json({message:"found the user"})).catch((err)=>console.log(err))
+router1.patch('./addtowatchlist', async (req,res)=>{
+    const {_id,movieId} = req.body
+    const data  = await User.findById({_id:_id})
+    let user  = new User({...data}) 
+    console.log(user)   
 })
 
-module.exports = router; 
+router1.post('./getWatchlist', async (req,res)=>{
+    const{_id} =  req.body
+    const data = await User.findById(_id)
+    console.log(data)
+})
+
+module.exports = router1; 
