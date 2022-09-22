@@ -1,21 +1,37 @@
 const express = require('express')
-
-const router1  = express.Router()
-
-require('../db/conn')
+const router = express.Router();
+const mongoose = require('mongoose')
+require("../db/conn");
 const User = require("../model/userSchema");
 
-router1.patch('./addtowatchlist', async (req,res)=>{
+router.post('/addToWatchlist',async (req,res)=>{
     const {_id,movieId} = req.body
-    const data  = await User.findById({_id:_id})
-    let user  = new User({...data}) 
-    console.log(user)   
+    // const id = mongoose.Types.ObjectId(_id)
+    const user = await User.findById(_id)
+    user.watchlist.map(e=>{
+        if(e.movieId == movieId){
+            return res.status(404).json({message:"Movie is already added to Watchlist",status:false})
+        }
+    })
+    const newMovie = {
+        "movieId":`${movieId}`
+    }
+    user.watchlist.push(newMovie)
+    const updatedUser = await User.findByIdAndUpdate(_id,user)
+    return res.json({message:"Movie added to Watchlist",status:true})
+})
+ 
+router.post('/deleteFromWatchlist',async (req,res)=>{
+    const {_id,movieId} = req.body
+    const user = await User.findById(_id)
+    for(let i=0;i<user.watchlist.length;i++){
+        if(user.watchlist[i].movieId == movieId){
+            user.watchlist.splice(i,i+1)
+        }
+    }
+    console.log(user)
+    const updatedData = await User.findByIdAndUpdate(_id,user)
+    res.json({message:"Movie removed from Watchlist",status:true})
 })
 
-router1.post('./getWatchlist', async (req,res)=>{
-    const{_id} =  req.body
-    const data = await User.findById(_id)
-    console.log(data)
-})
-
-module.exports = router1; 
+module.exports = router;

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 
 const userSchema = new mongoose.Schema({
-   _id:String,
+   
     name:{
         type: String,
         required: true
@@ -25,14 +25,9 @@ const userSchema = new mongoose.Schema({
             movieId:String
         }
     ]
-
-
-    
     
 }) 
 
-
-
-const  User = mongoose.model('USER',userSchema)
+const  User = mongoose.model('User',userSchema)
 
 module.exports = User;

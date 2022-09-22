@@ -10,9 +10,9 @@ require('./db/conn')
 // const User = require('./model/userSchema')
 
 app.use(express.json()) // to convert incoming data in express to json
-// app.use(require('./router/auth')) // we link router file to rout easy
+app.use(require('./router/auth')); // we link router file to rout easy
 app.use(require('./router/watchlist'))
- 
+  
 const port = process.env.PORT;
 
 // %40 = @  username = zakespy password= Exodus@123
