@@ -22,7 +22,14 @@ const userSchema = new mongoose.Schema({
     },
     watchlist:[
         {
-            movieId:String
+            movieId:String,
+            isWatching: Boolean,
+            isWatched: Boolean,
+            genre:[
+                {
+                    genreId:String
+                }
+            ]
         }
     ]
     
