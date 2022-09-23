@@ -1,9 +1,12 @@
 const express = require('express')
+const axios = require('axios')
 const router = express.Router();
 const mongoose = require('mongoose')
 require("../db/conn");
 const User = require("../model/userSchema");
- 
+
+const key = process.env.key
+
 router.get('/getWatchlist',async (req,res)=>{
     const {_id} = req.body
     const user = await User.findById(_id)
@@ -31,18 +34,46 @@ router.get('/getGenre',async (req,res)=>{
 router.post('/addToWatchlist',async (req,res)=>{
     const {_id,movieId} = req.body
     // const id = mongoose.Types.ObjectId(_id)
+    const movie = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=en-US`
+    )
+    // console.log(movie.data)
+    const date = new Date().toDateString()
+    console.log(date)
+    const data = movie.data.genres
+    let genre = []
+    data.map(e=>{
+        genre.push({
+            "genreId": `${e.id}`
+        })
+    })
+    console.log(genre)
     const user = await User.findById(_id)
+    let count = 0;
     user.watchlist.map(e=>{
         if(e.movieId == movieId){
-            return res.status(404).json({message:"Movie is already added to Watchlist",status:false})
-        }
+            count++;
+        } 
     })
-    const newMovie = {
-        "movieId":`${movieId}`
+    if(count > 0){
+        return res
+        .status(404)
+        .json({ message: "Movie is already added to Watchlist", status: false });
     }
-    user.watchlist.push(newMovie)
-    const updatedUser = await User.findByIdAndUpdate(_id,user)
-    return res.json({message:"Movie added to Watchlist",status:true})
+    else{
+        const newMovie = {
+          movieId: `${movieId}`,
+          genre: [],
+          date: date,
+        };
+        genre.map(e=>{
+            newMovie.genre.push(e)
+        })
+        user.watchlist.push(newMovie)
+        console.log(user)
+        const updatedUser = await User.findByIdAndUpdate(_id,user)
+        return res.json({message:"Movie added to Watchlist",status:true})
+    }
 })
  
 router.post('/deleteFromWatchlist',async (req,res)=>{
@@ -97,7 +128,7 @@ router.post('/addToWatchedlist',async (req,res)=>{
             e.isWatching = false
         }
     })  
-    console.log(user)
+    await User.findByIdAndUpdate(_id,user)
     return res.json({message:"Successfully added to watched list",status:true})
 })
 
@@ -110,7 +141,7 @@ router.get('/getWatchingList',async (req,res)=>{
             data.push(e)
         }
     })
-    
+
     return res.json({WatchingMovie:data,status:true})
 })
 
@@ -123,7 +154,8 @@ router.post('/addToWatchinglist',async (req,res)=>{
             e.isWatched = false
         }
     })
-    return res.jo
+    await User.findByIdAndUpdate(_id, user);
+    return res.json({message:"Successfully added to Watching list",status:true})
     
 })
 
