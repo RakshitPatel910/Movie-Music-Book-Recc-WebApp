@@ -58,5 +58,75 @@ router.post('/deleteFromWatchlist',async (req,res)=>{
     res.json({message:"Movie removed from Watchlist",status:true})
 })
 
+router.post('/deleteWatchlist',async (req,res)=>{
+    const {_id}  = req.body
+    let user = await User.findById(_id)
+   
+    for(let i=0;i<=user.watchlist.length;i++){
+        if(user.watchlist.length == 0){
+            break;
+        }
+        else{
+            user.watchlist.splice(i,i+1)
+            i--;
+        }
+    }
+    await User.findByIdAndUpdate(_id,user)
+    return res.json({message:"Watchlist deleted",status:true})
+})
+
+router.get('/getWatchedlist',async (req,res)=>{
+    const {_id} = req.body
+    let data = []
+    let user = await User.findById(_id)
+    user.watchlist.map(e=>{
+        if(e.isWatched == true){
+            data.push(e)
+        }
+    })
+    return res.json({watched:data,status:true})
+
+})
+
+router.post('/addToWatchedlist',async (req,res)=>{
+    const {_id,movieId} = req.body
+    let user = await User.findById(_id)
+    user.watchlist.map(e=>{
+        if(e.movieId == movieId){
+            e.isWatched = true
+            e.isWatching = false
+        }
+    })  
+    console.log(user)
+    return res.json({message:"Successfully added to watched list",status:true})
+})
+
+router.get('/getWatchingList',async (req,res)=>{
+    const {_id}  = req.body
+    const user = await User.findById(_id)
+    let data = []
+    user.watchlist.map(e=>{
+        if(e.isWatching == true){
+            data.push(e)
+        }
+    })
+    
+    return res.json({WatchingMovie:data,status:true})
+})
+
+router.post('/addToWatchinglist',async (req,res)=>{
+    const {_id,movieId} = req.body
+    let user = await User.findById(_id)
+    user.watchlist.map(e=>{
+        if(e.movieId == movieId){
+            e.isWatching = true
+            e.isWatched = false
+        }
+    })
+    return res.jo
+    
+})
+
+
 
 module.exports = router;
