@@ -21,6 +21,10 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    '&:hover $viewMore': {
+      transform: 'translateX(230px)',
+      opacity: 1
+    }
   },
 
   carouselTitle: {
@@ -30,10 +34,7 @@ export default makeStyles((theme) => ({
     padding: '0.34rem 0.47rem 0 0.47rem',
     display: 'flex',
     flexDirection: 'row',
-    '&:hover $viewMore': {
-      transform: 'translateX(230px)',
-      opacity: 1
-    }
+    
   },
   
   listName: {
@@ -70,13 +71,13 @@ export default makeStyles((theme) => ({
   progressItem: {
     flex: '0 0 2rem',
     minWidth: '3rem',
-    height: '0.3rem',
+    height: '0.1rem',
     borderRadius: '2rem',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: 'rgba(140, 140, 140, 1)',
   },
 
   active:{
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: '#5579C6',
   },
 
   slider: {

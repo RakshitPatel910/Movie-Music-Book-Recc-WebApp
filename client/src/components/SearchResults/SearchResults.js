@@ -25,7 +25,7 @@ function SearchResults() {
     }
 
     const getMoreMovies = async () => {
-      const moreMovies = await fetchMovies(page + 1);
+      const moreMovies = await fetchMovies(page + 1, genreId);
       setPage(page + 1);
       setTimeout(async () => {
         setMovieList(movieList.concat(moreMovies.data.results));
