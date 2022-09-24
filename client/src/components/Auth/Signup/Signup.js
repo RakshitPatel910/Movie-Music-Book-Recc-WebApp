@@ -14,9 +14,11 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import {useState} from 'react';
+import axios from 'axios';
+import  xmlhttprequest from 'xmlhttprequest'
 // import jwt_decode from 'jwt-decode'
 import "./style.css";
-
+const xhr = new XMLHttpRequest();
 function Signup() {
   // const google = window.google;
 
@@ -29,7 +31,7 @@ function Signup() {
   });
 
   var passwordLength = profile.password.length;
-  console.log(passwordLength)
+  // console.log(passwordLength)
 
   // const [confirmPassword,setConfirmPassword] = useState("");
   // var passwordChecking ;
@@ -41,6 +43,25 @@ function Signup() {
     setPasswordShown(!passwordShown)
     console.log(passwordShown)
   };
+
+  
+
+  function submit(){
+    // console.log(profile)
+    // xhr.open('POST','http://localhost:3010/signup')
+    // xhr.setRequestHeader("Content-Type", "application/json")
+    // // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    // xhr.send(profile)
+
+    // axios.post('http://localhost:3010/signup',{
+    //   firstName:profile.firstName,
+    //   middleNamw:profile.middleName,   
+    //   lastName:profile.lastName,
+    //   email:profile.email,
+    //   password:profile.password
+    // })
+    
+  }
 
   // function checkPassword(){
   //   if(confirmPassword !== profile.password){
@@ -197,16 +218,17 @@ function Signup() {
                   {/* <VisibilityIcon sx={{color:"blue",alignSelf:"center"}}/> */}
                 </Fab>
               </Grid>
-              <Grid item xs={10} sm={10} sx={{mt:1}}>
+              <Grid item xs={10} sm={10} sx={{ mt: 1 }}>
                 <LinearProgress
                   variant="determinate"
                   value={
-                    passwordLength === 0 ? 0
-                      :  passwordLength > 0 && passwordLength <= 2
+                    passwordLength === 0
+                      ? 0
+                      : passwordLength > 0 && passwordLength <= 2
                       ? 20
-                      :  passwordLength > 2 && passwordLength <= 4
+                      : passwordLength > 2 && passwordLength <= 4
                       ? 40
-                      :  passwordLength > 4 && passwordLength <= 6
+                      : passwordLength > 4 && passwordLength <= 6
                       ? 60
                       : passwordLength > 6 && passwordLength <= 8
                       ? 80
@@ -231,10 +253,13 @@ function Signup() {
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              // type="submit"  
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => {
+                submit();
+              }}
             >
               Sign Up
             </Button>

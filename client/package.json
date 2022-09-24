@@ -31,7 +31,8 @@
     "react-swipeable-views": "^0.14.0",
     "slick-carousel": "^1.8.1",
     "wait-on": "^6.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xmlhttprequest": "^1.8.0"
   },
   "main": "public/electron.js",
   "scripts": {

@@ -3,38 +3,44 @@ const mongoose = require('mongoose')
 
 
 const userSchema = new mongoose.Schema({
-   
-    name:{
-        type: String,
-        required: true
-    },
-    email:{
-        type:  String,
-        required: true
-    },
-    phone:{
-        type: Number,
-        required: false
-    },
-    password:{
-        type:String,
-        required: true
-    },
-    watchlist:[
+  firstName: {
+    type: String,
+    required: true,
+  },
+  middleName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: Number,
+    required: false,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  watchlist: [
+    {
+      movieId: String,
+      isWatching: Boolean,
+      isWatched: Boolean,
+      genre: [
         {
-            movieId:String,
-            isWatching: Boolean,
-            isWatched: Boolean,
-            genre:[
-                {
-                    genreId:String
-                }
-            ],
-            date: Date
-        }
-    ]
-    
-}) 
+          genreId: String,
+        },
+      ],
+      date: Date,
+    },
+  ],
+}); 
 
 const  User = mongoose.model('User',userSchema)
 
