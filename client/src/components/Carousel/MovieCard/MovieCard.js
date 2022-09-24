@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+// import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 import useStyles from "./styles.js";
 
@@ -17,7 +18,7 @@ function MovieCard({ list }) {
                     style={{color: 'white'}} 
                     size="small" 
                     onClick={() => {}}>
-                    <MoreHorizIcon fontSize="medium" />
+                    <AddIcon fontSize="medium" />
                 </Button>
             </div>
             {/* <Typography className={classes.title} variant="body2" gutterBottom >{list.original_title}</Typography> */}

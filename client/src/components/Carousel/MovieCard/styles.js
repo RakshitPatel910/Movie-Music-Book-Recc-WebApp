@@ -62,7 +62,7 @@ export default makeStyles({
   overlay2: {
     position: 'absolute',
     top: '2px',
-    right: '2px',
+    right: '-14px',
     color: 'white',
   },
   
