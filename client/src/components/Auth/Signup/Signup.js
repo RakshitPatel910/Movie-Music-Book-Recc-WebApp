@@ -18,7 +18,7 @@ import axios from 'axios';
 // import  xmlhttprequest from 'xmlhttprequest'
 // import jwt_decode from 'jwt-decode'
 import "./style.css";
-// const xhr = new XMLHttpRequest();
+const xhr = new XMLHttpRequest();
 function Signup() {
   // const google = window.google;
 
@@ -46,21 +46,14 @@ function Signup() {
 
   
 
-  function submit(){
-    // console.log(profile)
-    // xhr.open('POST','http://localhost:3010/signup')
-    // xhr.setRequestHeader("Content-Type", "application/json")
-    // // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-    // xhr.send(profile)
-
-    // axios.post('http://localhost:3010/signup',{
-    //   firstName:profile.firstName,
-    //   middleNamw:profile.middleName,   
-    //   lastName:profile.lastName,
-    //   email:profile.email,
-    //   password:profile.password
-    // })
+  async function submit(){
     
+    await axios.post('http://localhost:3010/signup',{
+      userName:profile.firstName,
+      email:profile.email,
+      password:profile.password
+    })
+
   }
 
   // function checkPassword(){

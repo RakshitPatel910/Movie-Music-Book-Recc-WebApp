@@ -1,14 +1,11 @@
 const express = require('express');
-var cors = require('cors')
+
 const router  = express.Router();
 
 require('../db/conn')
 const User = require("../model/userSchema")
 
-var corsOptions = {
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+
 
 router.post('/signin',async (req,res)=>{
     
@@ -27,21 +24,21 @@ router.post('/signin',async (req,res)=>{
 
 })
 
-router.post("/signup", cors(corsOptions), (req, res) => {
+router.post("/signup", (req, res) => {
 //   res.header("Access-Control-Allow-Origin", "*");
-  const { name, email, phone, password } = req.body; //object destructuring
+  const { userName , email, password } = req.body; //object destructuring
 
-  if (!name || !email || !phone || !password) {
-    return res.status(422).json({ error: "PLz fill all credentials" });
+  if (!userName || !email || !password) {
+    return res.status(400).json({ error: "PLz fill all credentials" });
   }
 
   User.findOne({ email: email }) //email(database email):email(user register email)
     .then((userExist) => {
       if (userExist) {
         // checking if user already exist
-        res.status(422).json({ error: "Email already exist", status: false });
+        return res.status(400).json({ message: "Email already exist", status: false });
       } else {
-        const user = new User({ name, email, phone, password }); //creating new document
+        const user = new User({ userName, email, password }); //creating new document
 
         user
           .save()
@@ -52,7 +49,7 @@ router.post("/signup", cors(corsOptions), (req, res) => {
               .json({ message: "signup successfully", status: true });
           })
           .catch((err) =>
-            res.status(500).json({ error: "Failed register", status: false })
+            res.status(500).json({ message: "Failed register", status: false })
           );
       }
     })

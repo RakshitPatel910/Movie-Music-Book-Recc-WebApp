@@ -111,7 +111,7 @@ function Movieinfo() {
       const result = await fetchMovie();
       if (isMounted) {
         const path = result.data.poster_path;
-
+        
         setImage(`https://image.tmdb.org/t/p/w185${path}`);
         setOverview(result.data.overview);
         setGenre(result.data.genres);

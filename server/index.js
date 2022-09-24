@@ -1,17 +1,19 @@
 const dotenv = require('dotenv')
 const { application } = require('express');
-
+const cors = require('cors')
 const express = require('express');
 const app = express()
 
-dotenv.config({path:'./config.env'})
+dotenv.config({path:'./config.env'}) 
 
 require('./db/conn')
 // const User = require('./model/userSchema')
 
 app.use(express.json()) // to convert incoming data in express to json
+app.use(cors())
 app.use(require('./router/auth')); // we link router file to rout easy
 app.use(require('./router/watchlist'))
+
 // app.all('*',function(req,res,next){
 //     res.setHeader(
 //       "Access-Control-Allow-Headers",
