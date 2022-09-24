@@ -48,12 +48,20 @@ function Signup() {
 
   async function submit(){
     
-    await axios.post('http://localhost:3010/signup',{
-      userName:profile.firstName,
-      email:profile.email,
-      password:profile.password
-    })
+    if(profile.email == "" || profile.password == "" || profile.firstName == ""){
+      alert("Fill all credentials")
+    }
+    else{
+        const data  = await axios.post('http://localhost:3010/signup',{
+        userName:profile.firstName,
+        email:profile.email,
+        password:profile.password
+      })
 
+      if(data.data.status == false){
+        alert("Email already exist")
+      }
+    }
   }
 
   // function checkPassword(){

@@ -46,6 +46,9 @@ function Signin() {
     if(data.data.status == true){
       console.log("status is true")
     }
+    else{
+      alert('User doesnt exist')
+    }
     
   }
  
