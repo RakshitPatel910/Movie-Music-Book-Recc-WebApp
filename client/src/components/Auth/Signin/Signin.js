@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from 'axios';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Avatar from '@mui/material/Avatar';
@@ -37,6 +38,17 @@ function Signin() {
     setPasswordShown(!passwordShown);
   }
 
+  async function submit(){
+    const data = await axios.post('http://localhost:3010/signin',{
+      email:profile.email,
+      password:profile.password
+    })
+    if(data.data.status == true){
+      console.log("status is true")
+    }
+    
+  }
+ 
   // function handleCallbackResponse(res){
   //   console.log("encoded JWT ID token"+ res.credential);
   //   var userObject = jwt_decode(res.credential); 
@@ -146,10 +158,13 @@ function Signin() {
               </Grid>
               <Grid item xs={12} sm={12}>
               <Button
-              type="submit"
+              // type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 1, mb: 2 }}
+              onClick={()=>{
+                submit()
+              }}
               >
                 Sign In
               </Button>

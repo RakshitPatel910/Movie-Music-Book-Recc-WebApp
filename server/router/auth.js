@@ -1,36 +1,55 @@
 const express = require('express');
-
+const bcrypt = require('bcrypt');
 const router  = express.Router();
 
 require('../db/conn')
 const User = require("../model/userSchema")
+const saltRound = parseInt(process.env.SALTROUND); 
+const salt = bcrypt.genSaltSync(saltRound);
+
+function encryption(data){
+    return bcrypt.hash(data, salt);
+} 
+
 
 
 
 router.post('/signin',async (req,res)=>{
     
     const {email,password} = req.body
-
-    const data = await User.find({email:email,password:password}).then(e=>{
+    
+    const data = await User.findOne({email:email}).then(e=>{
+        console.log(e)
         if(e.length == 0){
             return res
               .status(404)
               .json({ error: "User does not exist", status: false });
-        }
+        } 
         else{
-           return res.json({ message: "Successfully Logged in", status: true }); 
+            if (bcrypt.compareSync(password, e.password)) {
+                console.log("user exists");
+                return res.json({
+                    message: "Successfully Logged in",
+                    status: true,
+                }); 
+            }
         }
     })
+
+  
+    
 
 })
 
 router.post("/signup", (req, res) => {
 //   res.header("Access-Control-Allow-Origin", "*");
   const { userName , email, password } = req.body; //object destructuring
-
+    const newPassword = encryption(password)
   if (!userName || !email || !password) {
     return res.status(400).json({ error: "PLz fill all credentials" });
   }
+
+
 
   User.findOne({ email: email }) //email(database email):email(user register email)
     .then((userExist) => {
@@ -38,7 +57,7 @@ router.post("/signup", (req, res) => {
         // checking if user already exist
         return res.status(400).json({ message: "Email already exist", status: false });
       } else {
-        const user = new User({ userName, email, password }); //creating new document
+        const user = new User({ userName, email, password:newPassword }); //creating new document
 
         user
           .save()

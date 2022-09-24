@@ -10,10 +10,13 @@ import Home from './components/Home/Home.js';
 import Auth from './components/Auth/Auth';
 import Movieinfo from './components/Movieinfo/Movieinfo.js';
 import SearchResults from './components/SearchResults/SearchResults.js';
+import dotenv from 'dotenv'
+
+dotenv.config({ path: "../config.env" });  
 
 function App() {
   return (
-    <>
+    <> 
       <BrowserRouter>
         {/* <Navbar /> */}
         {/* <Searchbar /> */}
