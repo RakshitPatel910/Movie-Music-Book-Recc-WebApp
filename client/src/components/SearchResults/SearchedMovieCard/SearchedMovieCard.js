@@ -21,7 +21,7 @@ function SearchedMovieCard({ list, genre_name }) {
                     {list.genre_ids.map((genres) => (
                         moviesGenre.map((genreList) => (
                             genres===genreList.id ?
-                            <Typography component={Link} to="/" className={classes.genreChip} variant='caption' gutterBottom >
+                            <Typography component={Link} to={`/home/${genreList.name}-${genreList.id}`} className={classes.genreChip} variant='caption' gutterBottom >
                                 {genreList.name}
                             </Typography> : ''
                         ))

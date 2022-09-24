@@ -15,10 +15,10 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import {useState} from 'react';
 import axios from 'axios';
-import  xmlhttprequest from 'xmlhttprequest'
+// import  xmlhttprequest from 'xmlhttprequest'
 // import jwt_decode from 'jwt-decode'
 import "./style.css";
-const xhr = new XMLHttpRequest();
+// const xhr = new XMLHttpRequest();
 function Signup() {
   // const google = window.google;
 

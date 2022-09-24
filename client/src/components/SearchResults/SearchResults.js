@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -9,16 +9,17 @@ import useStyles from "./styles.js";
 
 function SearchResults() {
     const classes = useStyles();
+    const navigate = useNavigate();
     const [movieList, setMovieList] = useState([]);
     const [page, setPage] = useState(1);
     const [totalResults, setTotalResult] = useState(0);
 
-    const{ genre_name } = useParams();
+    const{ genre_name, genreId } = useParams();
 
-    const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genre=${genre_name}`);
+    const fetchMovies = (page, genre) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genre}`);
 
     const getMovies = async () => {
-      const movies = await fetchMovies(page);
+      const movies = await fetchMovies(page, genreId);
       setMovieList(movies.data.results);
       setTotalResult(totalResults + 20);
     }
@@ -34,7 +35,7 @@ function SearchResults() {
 
     useEffect( () => { 
       getMovies();
-    }, [])
+    }, [navigate])
 
     return (
       <>
