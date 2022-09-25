@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { styled, useTheme} from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,7 +25,6 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import { Button,Avatar,FormControl,OutlinedInput,value,handleChange,InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-
 
 const drawerWidth = 240;
 const Item = styled(Paper)(({ theme }) => ({
@@ -61,7 +60,7 @@ export default function PersistentDrawerLeft() {
 
 
   return ( 
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }}  >
       <CssBaseline />
       
       <Grid container spacing={1} columns={10}>
@@ -85,9 +84,8 @@ export default function PersistentDrawerLeft() {
         
         <Grid item xs={7.4}>
           <Item >
-          <FormControl fullWidth id="fullWidth" variant="outlined" size="small" >
+          <FormControl fullWidth id="fullWidth" variant="outlined">
           <OutlinedInput
-          
           
             placeholder="Search"
             endAdornment={<InputAdornment position="end"><Avatar>< SearchIcon/></Avatar></InputAdornment>}
@@ -168,7 +166,6 @@ export default function PersistentDrawerLeft() {
         </List>
        
       </Drawer>
-     
     </Box>
   );
 }
