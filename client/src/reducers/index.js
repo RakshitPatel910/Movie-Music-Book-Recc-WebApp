@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({  });
+import genreSelector from './genreSelector'
+
+export default combineReducers({ genreSelector });

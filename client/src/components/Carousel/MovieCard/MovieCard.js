@@ -18,7 +18,7 @@ function MovieCard({ list }) {
                     style={{color: 'white'}} 
                     size="small" 
                     onClick={() => {}}>
-                    <AddIcon fontSize="medium" />
+                    <AddIcon className={classes.addToWatchlistBtn} fontSize="medium" />
                 </Button>
             </div>
             {/* <Typography className={classes.title} variant="body2" gutterBottom >{list.original_title}</Typography> */}

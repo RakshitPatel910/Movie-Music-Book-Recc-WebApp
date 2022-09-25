@@ -63,7 +63,14 @@ export default makeStyles({
     position: 'absolute',
     top: '2px',
     right: '-14px',
-    color: 'white',
+    // color: 'white',
   },
+  
+  addToWatchlistBtn: {
+    color: '#9e9e9e',
+    '&:hover': {
+      color: 'white',
+    } 
+  }
   
 });
