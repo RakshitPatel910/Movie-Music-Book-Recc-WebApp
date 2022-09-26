@@ -7,7 +7,7 @@ const User = require("../model/userSchema")
 const saltRound = parseInt(process.env.SALTROUND); 
 const salt = bcrypt.genSaltSync(saltRound);
 
-function encryption(data){
+async function encryption(data){
     return bcrypt.hash(data, salt);
 } 
 
@@ -43,34 +43,34 @@ router.post('/signin',async (req,res)=>{
 
 })
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
 //   res.header("Access-Control-Allow-Origin", "*");
   const { userName , email, password } = req.body; //object destructuring
-    const newPassword = encryption(password)
+  const newPassword = await encryption(password)
 //   if (!userName || !email || !password) {
 //     return res.status(400).json({ message: "PLz fill all credentials" ,status:false});
 //   }
 
 
 
-  User.findOne({ email: email }) //email(database email):email(user register email)
-    .then((userExist) => {
+ await User.findOne({ email: email }) //email(database email):email(user register email)
+    .then(async (userExist) => {
       if (userExist) {
         // checking if user already exist
         return res.json({ message: "Email already exist", status: false });
       } else {
         const user = new User({ userName, email, password:newPassword }); //creating new document
 
-        user
+        await user
           .save()
           .then(() => {
             //saving the document in db
-            res
+            return res
               .status(201)
               .json({ message: "signup successfully", status: true });
           })
           .catch((err) =>
-            res.status(500).json({ message: "Failed register", status: false })
+             res.status(500).json({ message: "Failed register", status: false })
           );
       }
     })

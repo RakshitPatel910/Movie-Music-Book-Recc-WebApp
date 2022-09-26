@@ -21,12 +21,11 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import ContactlessIcon from "@mui/icons-material/Contactless";
 //import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import FlashOnOutlinedIcon from '@mui/icons-material/FlashOnOutlined';
-import { Link } from 'react-router-dom';
-import AbcRoundedIcon from '@mui/icons-material/AbcRounded';
-
-
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import FlashOnOutlinedIcon from "@mui/icons-material/FlashOnOutlined";
+import { Link } from "react-router-dom";
+import AbcRoundedIcon from "@mui/icons-material/AbcRounded";
+import { borderRadius } from "@mui/system";
 
 const drawerWidth = 240;
 
@@ -68,51 +67,49 @@ export default function PersistentDrawerRight() {
     setOpen(false);
   };
 
-  
-
   return (
-    
-    
-   
-    <Box sx={{ display: 'flex' }} marginRight={3} marginLeft={3} marginBottom={3} marginTop={1}  >
-      <CssBaseline />
-      <AppBar style={{background: "#5579C6" , borderRadius: '20px'}}   elevation={0} open={open}  >
-        <Toolbar >
-        <IconButton size='large' color='inherit'>
-                    <ContactlessIcon />
+    <Box
+      style={{ display: "flex" ,overflow :'hidden'}}
+      marginBottom={3}
+      marginRight={3}
+      marginLeft={3}
+      marginTop={2.5}
 
-                    </IconButton>
-                    <Typography component={Link} to='/' variant='h4'  sx={{flexGrow:1,textDecoration:"none",color:"white"}}>
-                        Movicon
-                    </Typography>
-                    
-        
-          <Avatar
+    >
+    
+      <AppBar
+        style={{ background: "#5579C6", borderRadius: "20px" }}
+        position="xifed"
+        elevation={0}
+        open={open}
+      >
+        <Toolbar>
+          <IconButton size="large" color="inherit" component={Link} to="/home">
+            <ContactlessIcon />
+          </IconButton>
+          <Typography
+            variant="h4"
+            style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
+          >
+            Movicon
+          </Typography>
+
+          <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
-            sx={{ ...(open && { display: "none" }) }}
+            style={{ ...(open && { display: "none" }) }}
           >
             <Avatar>
               <FlashOnOutlinedIcon />
             </Avatar>
-
-
-                    
-                    <Avatar></Avatar>
-                    
-                    
-
-
-          </Avatar>
-          
-          
+          </IconButton>
         </Toolbar>
       </AppBar>
 
       <Drawer
-        sx={{
+        style={{
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
@@ -123,7 +120,7 @@ export default function PersistentDrawerRight() {
         anchor="right"
         open={open}
       >
-        <DrawerHeader  sx={{background: "#7697A0"}}>
+        <DrawerHeader style={{ background: "#7697A0" }}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
@@ -134,9 +131,7 @@ export default function PersistentDrawerRight() {
         </DrawerHeader>
 
         <Button>
-
-
-        <Avatar ></Avatar>
+          <Avatar></Avatar>
         </Button>
 
         <Button color="inherit">
@@ -145,7 +140,7 @@ export default function PersistentDrawerRight() {
         <Divider />
 
         <List>
-          {['MY ACCOUNT', 'SIGN OUT', 'APP INFO'].map((text, index) => (
+          {["MY ACCOUNT", "SIGN OUT", "APP INFO"].map((text, index) => (
             <ListItem style={{ color: "black" }} key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -155,15 +150,12 @@ export default function PersistentDrawerRight() {
                     <ExitToAppOutlinedIcon />
                   )}
                 </ListItemIcon>
-                <ListItemText primary={text}  />
+                <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
     </Box>
-    
-
   );
 }
-// hello

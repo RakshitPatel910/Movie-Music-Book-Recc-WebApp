@@ -18,7 +18,7 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import "./style.css";
 
@@ -64,6 +64,7 @@ function a11yProps(index) {
 function Movieinfo() {
   const location = useLocation();
   const { id } = location.state;
+  const { movie_id } = useParams();
   const [value, setValue] = React.useState(0);
   const [image, setImage] = useState("");
   const [overview, setOverview] = useState("");
@@ -79,6 +80,7 @@ function Movieinfo() {
   const [country, setCountry] = useState([]);
   // const [avatar,setAvatar] = useState("");
 
+
   const theme = useTheme();
 
   const handleChange = (event, newValue) => {
@@ -91,17 +93,17 @@ function Movieinfo() {
 
   const fetchMovie = () =>
     axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movie_id}?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
     );
 
   const fetchReview = () =>
     axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/${movie_id}/reviews?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=1`
     );
 
   const fetchVideo = () =>
     axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
     );
 
   useEffect(() => {

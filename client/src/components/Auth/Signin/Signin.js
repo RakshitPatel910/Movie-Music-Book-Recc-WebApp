@@ -8,6 +8,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Fab from "@mui/material/Fab";
 // import IconButton from "@mui/material/IconButton";
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 // import jwt_decode from 'jwt-decode'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -23,12 +24,13 @@ import './style.css'
 // import { makeStyles } from "@material-ui/core/styles";
 // import { useState } from "react"
 
-function Signin() {
+function Signin({ isSignUp, setIsSignUp }) {
   const [profile,setProfile] = useState({
     email: "",
     password:""
   })
   
+  const navigate = useNavigate()
   // const [user,setUser] = useState({});
   const [passwordShown,setPasswordShown] = useState(false); 
 
@@ -45,10 +47,13 @@ function Signin() {
     })
     if(data.data.status == true){
       console.log("status is true")
+      navigate("/home");
     }
     else{
       alert('User doesnt exist')
     }
+
+    
     
   }
  
@@ -179,7 +184,7 @@ function Signin() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
+                <Link href="#" variant="body2" sx={{textDecoration:"none"}} onClick={()=>{setIsSignUp(1)}}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

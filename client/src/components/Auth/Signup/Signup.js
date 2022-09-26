@@ -14,12 +14,15 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 // import  xmlhttprequest from 'xmlhttprequest'
 // import jwt_decode from 'jwt-decode'
 import "./style.css";
 const xhr = new XMLHttpRequest();
-function Signup() {
+
+
+function Signup({ setIsSignUp }) {
   // const google = window.google;
 
   const [profile, setProfile] = useState({
@@ -35,7 +38,7 @@ function Signup() {
 
   // const [confirmPassword,setConfirmPassword] = useState("");
   // var passwordChecking ;
-
+  const navigate = useNavigate()
   const [passwordShown,setPasswordShown] = useState(false);
   // const [user, setUSer] = useState({});
 
@@ -60,6 +63,8 @@ function Signup() {
 
       if(data.data.status == false){
         alert("Email already exist")
+      }else{
+        setIsSignUp(0);
       }
     }
   }
@@ -266,7 +271,7 @@ function Signup() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+                <Link href="#" variant="body2" sx={{ textDecoration: "none" }} onClick={()=>{setIsSignUp(0)}}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

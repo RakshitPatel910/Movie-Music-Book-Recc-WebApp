@@ -6,10 +6,11 @@ import Navbar from './components/Appbar/Navbar/Navbar.js';
 import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 
-import Home from './components/Home/Home.js';
+import Appbar from './components/Appbar/Appbar.js';
 import Auth from './components/Auth/Auth';
-import Movieinfo from './components/Movieinfo/Movieinfo.js';
-import SearchResults from './components/SearchResults/SearchResults.js';
+import Home from './components/Home/Home.js';
+// import Movieinfo from './components/Movieinfo/Movieinfo.js';
+// import SearchResults from './components/SearchResults/SearchResults.js';
 import dotenv from 'dotenv'
 
 dotenv.config({ path: "../config.env" });  
@@ -20,6 +21,7 @@ function App() {
       <BrowserRouter>
         {/* <Navbar /> */}
         {/* <Searchbar /> */}
+        <Appbar/>
           <Routes>
             <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} />
