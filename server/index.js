@@ -13,6 +13,7 @@ app.use(express.json()) // to convert incoming data in express to json
 app.use(cors())
 app.use(require('./router/auth')); // we link router file to rout easy
 app.use(require('./router/watchlist'))
+app.use(require('./router/user'))
 
 // app.all('*',function(req,res,next){
 //     res.setHeader(

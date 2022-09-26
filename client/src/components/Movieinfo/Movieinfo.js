@@ -20,6 +20,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import { useLocation, useParams } from "react-router-dom";
 
+
 import "./style.css";
 
 const key = "f20575175c2deae7974eb547727d1ace";
@@ -82,6 +83,15 @@ function Movieinfo() {
 
 
   const theme = useTheme();
+
+  const addToWatchlist = async (movie_id) => {
+    const movieId = await axios.post("http://localhost:3010/addToWatchlist", 
+    {
+      _id: "633159a3f4d16ffa0cd797bb",
+      movieId: movie_id,
+    });
+    console.log("movie id ",movie_id)
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -188,9 +198,17 @@ function Movieinfo() {
             <div class="movie_social">
               <ul>
                 <li>
-                  <i class="material-icons">
-                    <AddIcon sx={{ height: "60px" }} />
-                  </i>
+                  <Chip
+                    label="Add to Watchlist"
+                    color="primary"
+                    sx={{ backgroundColor: "#0055b3" }}
+                    onClick={() => {
+                      addToWatchlist(movie_id);
+                    }}
+                  />
+                  {/* <i class="material-icons">
+                    <AddIcon sx={{ height: "100px" }} />
+                  </i> */}
                 </li>
                 {/* <li>
                             <i class="material-icons"></i>
@@ -227,13 +245,21 @@ function Movieinfo() {
                 aria-label="full width tabs example"
                 TabIndicatorProps={{
                   style: {
-                    backgroundColor: "violet",
+                    backgroundColor: "#4B4B4B",
                   },
                 }}
               >
-                <Tab label="Info" {...a11yProps(0)} />
-                <Tab label="Trailer" {...a11yProps(1)} />
-                <Tab label="Reviews" {...a11yProps(2)} />
+                <Tab label="Info" {...a11yProps(0)} sx={{ color: "white" }} />
+                <Tab
+                  label="Trailer"
+                  {...a11yProps(1)}
+                  sx={{ color: "white" }}
+                />
+                <Tab
+                  label="Reviews"
+                  {...a11yProps(2)}
+                  sx={{ color: "white" }}
+                />
               </Tabs>
             </AppBar>
             <SwipeableViews
@@ -276,11 +302,11 @@ function Movieinfo() {
                     {lang.map((e) => (
                       <>
                         <h4>
-                        <Chip
-                          className="chip"
-                          label={e.english_name}
-                          color="primary"
-                          sx={{ margin: "5px" }}
+                          <Chip
+                            className="chip"
+                            label={e.english_name}
+                            color="primary"
+                            sx={{ margin: "5px" }}
                           />
                         </h4>
                         {/* <h4>{e.english_name}</h4> */}
@@ -347,7 +373,7 @@ function Movieinfo() {
                   )}
                   <hr className="customHR"></hr>
                   <h3>Production Countries</h3>
-                  <p style={{margin:"0px",justifyContent:"center"}}>
+                  <p style={{ margin: "0px", justifyContent: "center" }}>
                     {country.map((e) => (
                       <Chip
                         className="chip"
