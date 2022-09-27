@@ -64,7 +64,7 @@ router.post('/addToWatchlist',async (req,res)=>{
         const newMovie = {
           movieId: `${movieId}`,
           genre: [],
-          date: date,
+          date: date.toLocaleString(),
         };
         genre.map(e=>{
             newMovie.genre.push(e)

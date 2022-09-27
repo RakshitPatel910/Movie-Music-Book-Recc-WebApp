@@ -85,7 +85,7 @@ body {
 }
 
 .type {
-  display: inline-block;
+  display: flex;
     color: #cee4fd;
     margin-left: 8px;
     margin-top: 9px;
