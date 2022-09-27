@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from './components/Appbar/Navbar/Navbar.js';
 import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
-import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import Forgpass from './components/Auth/Forgpass.js'
 
 import Appbar from './components/Appbar/Appbar.js';
 import Auth from './components/Auth/Auth';
@@ -19,12 +19,13 @@ function App() {
   return (
     <> 
       <BrowserRouter>
-        {/* <Navbar /> */}
-        {/* <Searchbar /> */}
-        <Appbar/>
+        <Navbar />
+        <Searchbar />
+        {/* <Appbar/> */}
+        <Forgpass />
           <Routes>
-            <Route path="/" exact element={<Auth />} />
-            <Route path="/home/*"  element={<Home />} />
+            {/* <Route path="/" exact element={<Auth />} />
+            <Route path="/home/*"  element={<Home />} /> */}
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
           </Routes> 
@@ -33,8 +34,6 @@ function App() {
     </>
   );
 } 
-// afasfasfasdfsf9000
-//hi here testing
 
 export default App;
  
