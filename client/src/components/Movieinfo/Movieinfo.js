@@ -275,19 +275,28 @@ function Movieinfo() {
                   <hr className="customHR"></hr>
                   <p>
                     Budget{" "}
-                    {
+                    {info.budget == "" || info.budget == null || info.budget === 0 ? (
+                      <>
+                        <h4 className="stats">NA</h4>
+                      </>
+                      
+                    ) : (
                       <>
                         <h4 className="stats">{info.budget}</h4>
                       </>
-                    }
+                    )}
                   </p>
                   <p>
                     Revenue{" "}
-                    {
+                    {info.revenue == "" || info.revenue == null || info.revenue === 0 ? (
+                      <>
+                        <h4 className="stats">NA</h4>
+                      </>
+                    ) : (
                       <>
                         <h4 className="stats">{info.revenue}</h4>
                       </>
-                    }
+                    )}
                   </p>
                   <p>
                     Language{" "}
@@ -425,28 +434,34 @@ function Movieinfo() {
                   color: "#cfd6e1",
                 }}
               >
-                {review.map((e) => {
-                  var str = `${e.author_details.avatar_path}`;
-                  // setAvatar(`https://image.tmdb.org/t/p/w185${str}`);
-                  return (
-                    <>
-                      <Card className="revCard" sx={{ margin: "10px" }}>
-                        <CardHeader
-                          avatar={
-                            <Avatar
-                              src={`https://image.tmdb.org/t/p/w185${str}`}
-                            ></Avatar>
-                          }
-                          title={e.author_details.username}
-                          subheader={e.author_details.name}
-                        />
-                        <CardContent>
-                          <Typography>{e.content}</Typography>
-                        </CardContent>
-                      </Card>
-                    </>
-                  );
-                })}
+                {review == "" || review == null ? (
+                  <>
+                    <div className="error">Reviews not available</div>
+                  </>
+                ) : (
+                  review.map((e) => {
+                    var str = `${e.author_details.avatar_path}`;
+                    // setAvatar(`https://image.tmdb.org/t/p/w185${str}`);
+                    return (
+                      <>
+                        <Card className="revCard" sx={{ margin: "10px" }}>
+                          <CardHeader
+                            avatar={
+                              <Avatar
+                                src={`https://image.tmdb.org/t/p/w185${str}`}
+                              ></Avatar>
+                            }
+                            title={e.author_details.username}
+                            subheader={e.author_details.name}
+                          />
+                          <CardContent>
+                            <Typography>{e.content}</Typography>
+                          </CardContent>
+                        </Card>
+                      </>
+                    );
+                  })
+                )}
               </TabPanel>
             </SwipeableViews>
           </Box>
