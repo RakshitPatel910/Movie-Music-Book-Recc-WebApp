@@ -196,27 +196,15 @@ function Movieinfo() {
               <p class="text">{overview}</p>
             </div>
             <div class="movie_social">
-              <ul>
-                <li>
-                  <Chip
-                    label="Add to Watchlist"
-                    color="primary"
-                    sx={{ backgroundColor: "#0055b3" }}
-                    onClick={() => {
-                      addToWatchlist(movie_id);
-                    }}
-                  />
-                  {/* <i class="material-icons">
-                    <AddIcon sx={{ height: "100px" }} />
-                  </i> */}
-                </li>
-                {/* <li>
-                            <i class="material-icons"></i>
-                        </li> */}
-                {/* <li>
-                            <i class="material-icons">chat_bubble</i>
-                        </li> */}
-              </ul>
+              <Chip
+                className="social"
+                label="Add to Watchlist"
+                color="primary"
+                sx={{ backgroundColor: "#0055b3" }}
+                onClick={() => {
+                  addToWatchlist(movie_id);
+                }}
+              />
             </div>
           </div>
           <div
@@ -243,22 +231,26 @@ function Movieinfo() {
                 onChange={handleChange} // indicatorColor="secondary" textColor="inherit"
                 variant="fullWidth"
                 aria-label="full width tabs example"
+                sx={{
+                  "& button": { backgroundColor: "#001014" },
+                  "& button.Mui-selected": { opacity: 0.95, color: "#898983" },
+                }}
                 TabIndicatorProps={{
                   style: {
                     backgroundColor: "#4B4B4B",
                   },
                 }}
               >
-                <Tab label="Info" {...a11yProps(0)} sx={{ color: "white" }} />
+                <Tab label="Info" {...a11yProps(0)} sx={{ color: "#b7b6af" }} />
                 <Tab
                   label="Trailer"
                   {...a11yProps(1)}
-                  sx={{ color: "white" }}
+                  sx={{ color: "#b7b6af" }}
                 />
                 <Tab
                   label="Reviews"
                   {...a11yProps(2)}
-                  sx={{ color: "white" }}
+                  sx={{ color: "#b7b6af" }}
                 />
               </Tabs>
             </AppBar>

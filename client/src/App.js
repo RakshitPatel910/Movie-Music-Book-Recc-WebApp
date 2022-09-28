@@ -22,10 +22,10 @@ function App() {
         <Navbar />
         <Searchbar />
         {/* <Appbar/> */}
-        <Forgpass />
+        {/* <Forgpass /> */}
           <Routes>
-            {/* <Route path="/" exact element={<Auth />} />
-            <Route path="/home/*"  element={<Home />} /> */}
+            <Route path="/" exact element={<Auth />} />
+            <Route path="/home/*"  element={<Home />} />
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
           </Routes> 

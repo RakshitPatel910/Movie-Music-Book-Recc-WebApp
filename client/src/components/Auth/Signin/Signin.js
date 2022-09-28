@@ -50,7 +50,7 @@ function Signin({ isSignUp, setIsSignUp }) {
       navigate("/home");
     }
     else{
-      alert('User doesnt exist')
+      alert('Email or Password is incorrect')
     }
 
     

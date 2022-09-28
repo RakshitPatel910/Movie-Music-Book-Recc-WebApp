@@ -59,7 +59,7 @@ body {
 .movieinfo h1 {
     color: #fff;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 36px;
     padding-top: 16px;
     padding-left: 193px;
 }
@@ -107,6 +107,7 @@ body {
 }
 .text {
   color: #cfd6e1;
+  margin-top: 19px;
 }
 
 .movie_social {
@@ -114,6 +115,11 @@ body {
   padding-left: 62px;
   padding-bottom: 20px;
   padding-top: 20px;
+}
+
+.social{
+  display: flex;
+  bottom: 27px;
 }
 
 .movieinfo ul {
@@ -154,7 +160,7 @@ body {
   }
 
   .movie_desc {
-    width: 50%;
+    width: 57%;
     padding: 25px;
     /* height: 50%; */
     padding-top: 60px;
