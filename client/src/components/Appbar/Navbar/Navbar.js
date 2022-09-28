@@ -100,7 +100,7 @@ export default function PersistentDrawerRight() {
             onClick={handleDrawerOpen}
             style={{ ...(open && { display: "none" }) }}
           >
-            <Avatar>
+            <Avatar style={{ background: "#281E5D"}}>
               <FlashOnOutlinedIcon />
             </Avatar>
           </IconButton>
@@ -120,7 +120,8 @@ export default function PersistentDrawerRight() {
         open={open}
       >
         <DrawerHeader style={{ background: "#7697A0" }}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton 
+          onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (

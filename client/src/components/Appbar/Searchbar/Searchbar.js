@@ -32,6 +32,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 
 const drawerWidth = 240;
 const Item = styled(Paper)(({ theme }) => ({
@@ -70,19 +71,17 @@ export default function PersistentDrawerLeft() {
           <Item></Item>
         </Grid>
 
-        <Grid item xs={0.42}>
-          <Item>
+        
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="end"
-              style={{ mr: 2, ...(open && { display: "none" }) }}
+              style={{background: "#281E5D", mr: 2, ...(open && { display: "none" }) }}
             >
-              <MenuIcon />
+              <AlignHorizontalLeftIcon />
             </IconButton>
-          </Item>
-        </Grid>
+
         <Grid item xs={1.6}>
           <Item></Item>
         </Grid>
@@ -99,7 +98,7 @@ export default function PersistentDrawerLeft() {
                 placeholder="Search"
                 endAdornment={
                   <InputAdornment position="end">
-                    <Avatar>
+                    <Avatar sx={{background: "#5579C6",height: '35px', width: '35px' }}>
                       <SearchIcon />
                     </Avatar>
                   </InputAdornment>
