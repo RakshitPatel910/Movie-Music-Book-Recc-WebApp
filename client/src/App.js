@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 import Navbar from './components/Appbar/Navbar/Navbar.js';
 import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
@@ -17,6 +18,9 @@ import dotenv from 'dotenv'
 dotenv.config({ path: "../config.env" });  
 
 function App() {
+
+  const [userId, setUserId] = useState(0);
+
   return (
     <> 
       <BrowserRouter>
@@ -31,7 +35,8 @@ function App() {
         {/* <Signinappbar /> */}
           <Routes>
             <Route path="/" exact element={<Auth />} />
-            <Route path="/home/*"  element={<Home />} />
+            {/* <Route path="/home/*"  element={<Home />} /> */}
+            { userId ? <Route path="/home/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} />
             <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
           </Routes> 

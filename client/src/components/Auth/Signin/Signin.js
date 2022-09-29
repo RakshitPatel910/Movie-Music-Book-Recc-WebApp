@@ -8,6 +8,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Fab from "@mui/material/Fab";
 // import IconButton from "@mui/material/IconButton";
 import {useState} from 'react';
+import { useDispatch } from "react-redux";
 import {useNavigate} from 'react-router-dom'
 // import jwt_decode from 'jwt-decode'
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -21,16 +22,18 @@ import Container from '@mui/material/Container';
 // import customCss from './style.js'
 import './style.css'
 
+import { signin } from '../../../actions/auth.js';
+
 // import { makeStyles } from "@material-ui/core/styles";
 // import { useState } from "react"
 
+const initialState = { email: "", password:"" };
+
 function Signin({ isSignUp, setIsSignUp }) {
-  const [profile,setProfile] = useState({
-    email: "",
-    password:""
-  })
+  const [profile,setProfile] = useState(initialState);
   
   const navigate = useNavigate()
+  const dispatch = useDispatch();
   // const [user,setUser] = useState({});
   const [passwordShown,setPasswordShown] = useState(false); 
 
@@ -41,20 +44,19 @@ function Signin({ isSignUp, setIsSignUp }) {
   }
 
   async function submit(){
-    const data = await axios.post('http://localhost:3010/signin',{
-      email:profile.email,
-      password:profile.password
-    })
-    if(data.data.status == true){
-      console.log("status is true")
-      navigate("/home");
-    }
-    else{
-      alert('Email or Password is incorrect')
-    }
+    // const data = await axios.post('http://localhost:3010/signin',{
+    //   email:profile.email,
+    //   password:profile.password
+    // })
+    // if(data.data.status == true){
+    //   console.log("status is true")
+    //   navigate("/home");
+    // }
+    // else{
+    //   alert('Email or Password is incorrect')
+    // } 
 
-    
-    
+    dispatch(signin(profile, navigate));
   }
  
   // function handleCallbackResponse(res){

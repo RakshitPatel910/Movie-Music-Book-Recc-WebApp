@@ -24,10 +24,8 @@ export default function Home(){
                             }
                     </>} 
                 />
-                <Route path=":genre_name-:genreId" exact element={<SearchResults />} >
-                    
-                <Route path=":genre_name/:movie_id" exact element={<Movieinfo />} />
-                </Route>
+                <Route path=":genre_name-:genreId" exact element={<SearchResults />} />
+                <Route path=":genre_name-:genreId/:movie_id" exact element={<Movieinfo />} />
                 <Route path=":movie_id" exact element={<Movieinfo />} />
             </Routes>
         </>

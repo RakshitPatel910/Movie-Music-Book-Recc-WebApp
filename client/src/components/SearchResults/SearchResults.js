@@ -60,7 +60,7 @@ function SearchResults() {
                     </Grid>
                     {movieList.map((movie) => (
                       <Grid className={classes.items} item xs={4}>
-                            <SearchedMovieCard list={movie} key={movie.id} genre_name={genre_name} />
+                            <SearchedMovieCard list={movie} key={movie.id} genre_name={genre_name} genre_id={genreId} />
                         </Grid>
                     ))}
                 </Grid>              
