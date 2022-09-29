@@ -10,42 +10,69 @@ router.get('/getTotalHistory',async (req,res)=>{
     console.log(data)
 })
 
-router.post('/addNewUser',async (req,res)=>{
-    const {userId,movieId} = req.body
-    const data = await Insight.findOne({userId:userId})
-    console.log("outside function");
-    console.log(data)
-    if(data === null){
-        console.log("Inside function")
-        const history = [
+router.post("/addToHistory", async (req, res) => {
+  let count=0;
+  const { userId, movieId } = req.body;
+  const data = await Insight.findOne({ userId: userId });
+  console.log("outside function");
+  console.log(data);
+  if (data === null) {
+    console.log("Inside function"); 
+    const history = [
+      {
+        movieId: movieId,
+        histDate: [
           {
-            movieId: movieId,
-            histDate: [
-              {
-                date: new Date().toDateString(),
-              },
-            ],
+            date: new Date().toDateString(),
           },
-        ];
-        const user = new Insight({ userId,history});
-        await user.save().then(console.log("succesfully save")).catch(e=>{console.log(e)})
-        return res.json({message:"Added to history",status:true})
-    }
-    else{
-        data.history.map(async e=>{
-            if(e.movieId === movieId){
-                const newDate = {
-                    date: new Date().toDateString()
-                } 
-                e.histDate.push(newDate)
-                await Insight.findOneAndUpdate({userId:userId},data)
-                return res.json({message:"Added to history",status:true})
-            }
-            else{
-                
-            }
-        })
-    }
-})
+        ], 
+      },
+    ];
+    const user = new Insight({ userId, history });
+    await user
+      .save()
+      .then(console.log("succesfully save"))
+      .catch((e) => {
+        console.log(e);
+      });
+    return res.json({ message: "Added to history", status: true });
+  } else {
+    data.history.map(async (e) => {
+      if (e.movieId === movieId) {
+        const newDate = { 
+          date: new Date().toDateString(),
+        };
+        count = 1
+        e.histDate.push(newDate);
+        console.log("inside map func")
+        await Insight.findOneAndUpdate({ userId: userId }, data);
+        return res.json({ message: "Added to history", status: true });
+      }
+       else { 
+        count += 2
+      }
+    });
+  }
+  
+  if(count > 1 || count == 0){
+    const history = {
+    movieId: movieId,
+    histDate: [
+      {
+        date: new Date().toDateString(),
+      },
+    ],
+    };
+    data.history.push(history);
+    await Insight.findOneAndUpdate({ userId: userId }, data);
+    return res.json({
+      message: "Succesfully added to history",
+      status: true,
+    });
+  }
+
+
+  console.log(count)
+});
 
 module.exports = router
