@@ -35,6 +35,9 @@ router.post('/signin',async (req,res)=>{
                     status: true,
                 }); 
             }
+            else{
+              return res.json({message:"Password is incorrect",status:false})
+            }
         } 
     })
 

@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from './components/Appbar/Navbar/Navbar.js';
 import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
 import Forgpass from './components/Auth/Forgpass.js'
+import Signinappbar from './components/Auth/Signinappbar.js'
 
 import Appbar from './components/Appbar/Appbar.js';
 import Auth from './components/Auth/Auth';
@@ -23,6 +24,11 @@ function App() {
         <Searchbar /> */}
         <Appbar/>
         {/* <Forgpass /> */}
+        {/* <Navbar /> */}
+        {/* <Searchbar /> */}
+        {/* <Appbar/> */}
+        {/* <Forgpass /> */}
+        {/* <Signinappbar /> */}
           <Routes>
             <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} />

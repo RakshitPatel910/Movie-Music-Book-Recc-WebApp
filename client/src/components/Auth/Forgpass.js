@@ -26,7 +26,7 @@ export default function reset() {
       <Avatar sx={{bgcolor: 'orange',m : 1 }}>
             <ResetTvIcon />
           </Avatar>
-          <Typography variant="h3">
+          <Typography variant="h3" color="white" >
             Reset Password
           </Typography>
       <TextField
