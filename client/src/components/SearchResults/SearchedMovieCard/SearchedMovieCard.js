@@ -6,11 +6,11 @@ import StarIcon from '@mui/icons-material/Star';
 import { moviesGenre } from '../../../constants/genreId.js';
 import useStyles from "./styles.js";
 
-function SearchedMovieCard({ list, genre_name }) {
+function SearchedMovieCard({ list, genre_name, genre_id }) {
     const classes = useStyles();
 
     return (
-        <Link className={classes.container} to={`/home/${genre_name}/${list.id}`} state={{id:`${list.id}`}}>
+        <Link className={classes.container} to={`/home/${genre_name}-${genre_id}/${list.id}`} state={{id:`${list.id}`}}>
             <div className={classes.mediaContainer}>
                 <img className={classes.media} src={`https://image.tmdb.org/t/p/w185${list.poster_path}`} alt="../../constants/noImage.png" />
             </div>

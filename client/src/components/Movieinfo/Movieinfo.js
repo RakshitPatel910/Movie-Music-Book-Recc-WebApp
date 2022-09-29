@@ -63,8 +63,8 @@ function a11yProps(index) {
 }
 
 function Movieinfo() {
-  const location = useLocation();
-  const { id } = location.state;
+  // const location = useLocation();
+  // const { id } = location.state;
   const { movie_id } = useParams();
   const [value, setValue] = React.useState(0);
   const [image, setImage] = useState("");
