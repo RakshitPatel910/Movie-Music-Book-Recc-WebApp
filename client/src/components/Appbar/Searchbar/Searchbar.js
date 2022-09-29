@@ -32,7 +32,6 @@ import {
   InputAdornment,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 
 const drawerWidth = 240;
 const Item = styled(Paper)(({ theme }) => ({
@@ -64,31 +63,25 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" , marginTop :"30"}}>
 
-      <Grid container spacing={1} columns={10}>
-        <Grid item xs={0.25}>
-          <Item></Item>
-        </Grid>
 
-        
-            <IconButton
-              color="inherit"
+      <Grid container spacing={3} columns={16}  marginTop ={0}>
+      <Grid xs={0.6}></Grid>
+       <Grid xs={0.3}>
+    <IconButton
+    
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="end"
-              style={{background: "#281E5D", mr: 2, ...(open && { display: "none" }) }}
+              style={{mr: 2, ...(open && { display: "none" }) }}
             >
-              <AlignHorizontalLeftIcon />
+              <MenuIcon />
             </IconButton>
-
-        <Grid item xs={1.6}>
-          <Item></Item>
-        </Grid>
-
-        <Grid item xs={7.4}>
-          <Item>
-            <FormControl
+        </Grid>      
+        <Grid xs={3}></Grid>
+            <Grid xs={11}>
+    <Item><FormControl
               fullWidth
               id="fullWidth"
               variant="outlined"
@@ -104,10 +97,9 @@ export default function PersistentDrawerLeft() {
                   </InputAdornment>
                 }
               />
-            </FormControl>
-          </Item>
-        </Grid>
-      </Grid>
+            </FormControl></Item>
+  </Grid>
+</Grid>
 
       <Drawer
         style={{
