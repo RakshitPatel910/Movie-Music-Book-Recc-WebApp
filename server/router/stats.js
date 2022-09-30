@@ -1,8 +1,11 @@
 const express = require('express')
+const axios = require('axios') 
 const router  = express.Router()
 
 require("../db/conn");
 const Insight = require("../model/insightSchema");
+
+const key = process.env.key;
 
 router.get('/getTotalHistory',async (req,res)=>{
     const {userId} = req.body
@@ -74,5 +77,67 @@ router.post("/addToHistory", async (req, res) => {
 
   console.log(count)
 });
+
+router.get('/historyData',async (req,res)=>{
+  const {userId} = req.body
+  const data = [
+    {"id":28,"name":"Action", count: 0},
+    {"id":16,"name":"Animation", count: 0},
+    {"id":35,"name":"Comedy", count: 0},
+    {"id":80,"name":"Crime", count: 0},
+    {"id":99,"name":"Documentary", count: 0},
+    {"id":18,"name":"Drama", count: 0},
+    {"id":10751,"name":"Family", count: 0},
+    {"id":14,"name":"Fantasy", count: 0},
+    {"id":36,"name":"History", count: 0},
+    {"id":27,"name":"Horror", count: 0},
+    {"id":10402,"name":"Music", count: 0},
+    {"id":9648,"name":"Mystery", count: 0},
+    {"id":10749,"name":"Romance", count: 0},
+    {"id":878,"name":"Science Fiction", count: 0},
+    {"id":10770,"name":"TV Movie", count: 0},
+    {"id":53,"name":"Thriller", count: 0},
+    {"id":10752,"name":"War", count: 0},
+    {"id":37,"name":"Western", count: 0},
+    {"id":12,"name":"Adventure", count: 0},
+  ]
+
+  const user  = await Insight.findOne({userId:userId})
+  if(user === null){
+    return res.json({message:"User does not exit",status:false})
+  }
+  else{
+    const genre = [] 
+    
+    user.history.map(async (e)=>{
+      const id = e.movieId
+       await axios
+         .get(
+           `https://api.themoviedb.org/3/movie/550?api_key=${key}&language=en-US`
+         )
+         .then((e) => {
+           console.log(e.data.genres, "success");
+           e.data.genres.map(e=>{
+            data.map(data=>{
+              if(data.id == e.id){
+                const value = data.count
+                console.log(data.id ,"==",e.id)
+                data.count = value + 1 //start from here
+                console.log(data.count)
+              } 
+            })
+           })
+          //  genre.push(e.data);
+         })
+         .catch((err) => {
+           console.log(err, "error");
+         });
+      //  console.log(genre);
+    }) 
+    
+    return res.json({data:data})
+  }
+
+})
 
 module.exports = router
