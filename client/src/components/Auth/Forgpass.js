@@ -45,32 +45,21 @@ export default function reset() {
               name="phone"
               autoComplete="phone"
             />
-           
-            
-            <Box component="form"  sx={{ mt: 2 ,width:"55.5%" }} >
-            <Grid container spacing={2}>
-             <Grid item xs={11} sm={10}>
-             <TextField
-              sx={{ width: '70ch' }}
+            <Button
+            sx={{mt: 2 , width: '85ch' }}
+              type="submit"
+              variant="contained"
+              >
+               GET OTP
+              </Button>
+            <TextField
+            margin="normal"
+              sx={{ width: '85ch' }}
               id="otp"
               label="Enter OTP"
               name="otp"
             />
-
-              </Grid>
-              <Grid item xs={1} sm={2}>
-              <Button
-            sx={{ width: '15ch' }}
-              type="submit"
-              variant="contained"
-              >
-                Get OTP
-              </Button>
-    
-              </Grid>
-              </Grid>
-              </Box>
-
+           
               <TextField
               margin="normal"
               sx={{ width: '85ch' }}

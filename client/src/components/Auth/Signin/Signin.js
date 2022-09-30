@@ -107,7 +107,7 @@ function Signin({ isSignUp, setIsSignUp }) {
           <Avatar sx={{ m: 1, bgcolor: 'purple' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h3" variant="h3" color="white">
             Sign in
           </Typography>
           <Box component="form"  sx={{ mt: 1 ,width:"60%"}} >
