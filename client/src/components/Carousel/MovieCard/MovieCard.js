@@ -25,7 +25,7 @@ function MovieCard({ list }) {
     return (
         // <div className={classes.container}>
 
-        <Card className={classes.card} component={Link} to={`/home/${list.id}`} state={{id:`${list.id}`}}>
+        <Card className={classes.card} component={Link} to={`/${list.id}`} state={{id:`${list.id}`}}>
             <CardMedia alt='../../../constants/noImage.png' className={classes.media} image={`https://image.tmdb.org/t/p/w185${list.poster_path}`} title={list.original_title} />
             <div className={classes.overlay2}>
                 <Button 

@@ -10,7 +10,7 @@ function SearchedMovieCard({ list, genre_name, genre_id }) {
     const classes = useStyles();
 
     return (
-        <Link className={classes.container} to={`/home/${genre_name}-${genre_id}/${list.id}`} state={{id:`${list.id}`}}>
+        <Link className={classes.container} to={`/${genre_name}-${genre_id}/${list.id}`} state={{id:`${list.id}`}}>
             <div className={classes.mediaContainer}>
                 <img className={classes.media} src={`https://image.tmdb.org/t/p/w185${list.poster_path}`} alt="../../constants/noImage.png" />
             </div>

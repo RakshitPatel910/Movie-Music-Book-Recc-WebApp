@@ -33,6 +33,7 @@ router.post('/signin',async (req,res)=>{
                 return res.json({
                     message: "Successfully Logged in",
                     status: true,
+                    profile: e
                 }); 
             }
             else{

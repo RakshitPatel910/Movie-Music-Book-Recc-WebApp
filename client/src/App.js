@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 import Navbar from './components/Appbar/Navbar/Navbar.js';
@@ -19,7 +19,14 @@ dotenv.config({ path: "../config.env" });
 
 function App() {
 
-  const [userId, setUserId] = useState(0);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   setUser(JSON.parse(localStorage.getItem('profile')));
+  // }, [navigate])
+  
 
   return (
     <> 
@@ -34,9 +41,9 @@ function App() {
         {/* <Forgpass /> */}
         {/* <Signinappbar /> */}
           <Routes>
-            <Route path="/" exact element={<Auth />} />
+            {/* <Route path="/" exact element={<Auth />} /> */}
             {/* <Route path="/home/*"  element={<Home />} /> */}
-            { userId ? <Route path="/home/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }
+            { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} />
             <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
           </Routes> 

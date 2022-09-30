@@ -68,7 +68,7 @@ function Carousel({ genre, title }) {
                                     fontSize="small"
                             />
                             </Typography>
-                            <Button component={Link} to={`/home/${title}-${genre}`} className={classes.viewMore} variant="body" state={{ genreId:`${genre}` }} >
+                            <Button component={Link} to={`/${title}-${genre}`} className={classes.viewMore} variant="body" state={{ genreId:`${genre}` }} >
                                 view more
                             </Button>
                             {/* state={{id:`${list.id}`, title:`${title}`}} */}

@@ -6,7 +6,7 @@ export const signin = ( profile, navigate ) => async (dispatch) => {
         
         dispatch({ type: "AUTH", data });
         
-        navigate('/home')
+        navigate('/')
     } catch (error) {
         console.log(error);
     }
