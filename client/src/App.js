@@ -31,8 +31,8 @@ function App() {
   return (
     <> 
       <BrowserRouter>
-        <Navbar />
-        <Searchbar />
+        {/* <Navbar />
+        <Searchbar /> */}
         {/* <Navbar />
         <Searchbar /> */}
         <Appbar/>

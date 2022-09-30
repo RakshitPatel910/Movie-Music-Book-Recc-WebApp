@@ -11,3 +11,11 @@ export const signin = ( profile, navigate ) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const logout = () => async (dispatch) => {
+    try {
+        dispatch({ type: "LOGOUT" });
+    } catch (error) {
+        console.log(error);
+    }
+}
