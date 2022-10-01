@@ -90,7 +90,7 @@ function Movieinfo() {
       _id: "633159a3f4d16ffa0cd797bb",
       movieId: movie_id,
     });
-    console.log("movie id ",movie_id)
+    console.log("movie id ",movieId)
   };
 
   const handleChange = (event, newValue) => {
@@ -149,7 +149,7 @@ function Movieinfo() {
       if (isMounted) {
         console.log(result.data);
         // console.log(result.data.results[0].key);
-        if (result.data.results.length == 0) {
+        if (result.data.results.length === 0) {
           setVideo(null);
         } else {
           setVideo(result.data.results);

@@ -5,7 +5,56 @@ const router  = express.Router()
 require("../db/conn");
 const Insight = require("../model/insightSchema");
 
+let value = 0
+
 const key = process.env.key;
+
+const fetchMovie = (movieId) =>
+  axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=en-US`
+  );
+
+async function getMovie(movieId){
+    const movie  = await fetchMovie(550)
+    return movie
+}
+
+  async function createData(userData,user){
+
+    return new Promise((resolve,reject)=>{
+      user.history.map( async (e)=>{
+       const id = e.movieId
+       const movie = await getMovie(550) 
+       // console.log(movie)
+       movie.data.genres.map(e=>{
+         let gCount = 0
+         let i = 0
+         let index = 0
+         userData.map(dt=>{
+           if(dt.id === e.id){
+             index = i
+             gCount++
+             // console.log(dt.count)
+             // dt.count = dt.count + 1
+             // console.log(dt.count)
+           }
+           i++
+         })
+  
+         userData[index].count = userData[index].count +  gCount
+         console.log(userData[index].count)
+         // statData = userData
+         // console.log("inside func",statData)
+       })
+       
+      })
+
+      setTimeout(()=>{
+        resolve(userData)
+      },2000)
+    })
+
+}
 
 router.get('/getTotalHistory',async (req,res)=>{
     const {userId} = req.body
@@ -77,29 +126,30 @@ router.post("/addToHistory", async (req, res) => {
 
   console.log(count)
 });
-
-router.get('/historyData',async (req,res)=>{
+ 
+router.post('/historyData',async (req,res)=>{
   const {userId} = req.body
-  const data = [
-    {"id":28,"name":"Action", count: 0},
-    {"id":16,"name":"Animation", count: 0},
-    {"id":35,"name":"Comedy", count: 0},
-    {"id":80,"name":"Crime", count: 0},
-    {"id":99,"name":"Documentary", count: 0},
-    {"id":18,"name":"Drama", count: 0},
-    {"id":10751,"name":"Family", count: 0},
-    {"id":14,"name":"Fantasy", count: 0},
-    {"id":36,"name":"History", count: 0},
-    {"id":27,"name":"Horror", count: 0},
-    {"id":10402,"name":"Music", count: 0},
-    {"id":9648,"name":"Mystery", count: 0},
-    {"id":10749,"name":"Romance", count: 0},
-    {"id":878,"name":"Science Fiction", count: 0},
-    {"id":10770,"name":"TV Movie", count: 0},
-    {"id":53,"name":"Thriller", count: 0},
-    {"id":10752,"name":"War", count: 0},
-    {"id":37,"name":"Western", count: 0},
-    {"id":12,"name":"Adventure", count: 0},
+  var statData =[]
+  let userData = [
+    {"id":28,"name":"Action", "count": 0},
+    {"id":16,"name":"Animation", "count": 0},
+    {"id":35,"name":"Comedy", "count": 0},
+    {"id":80,"name":"Crime", "count": 0},
+    {"id":99,"name":"Documentary", "count": 0},
+    {"id":18,"name":"Drama", "count": value}, 
+    {"id":10751,"name":"Family", "count": 0},
+    {"id":14,"name":"Fantasy", "count": 0},
+    {"id":36,"name":"History", "count": 0},
+    {"id":27,"name":"Horror", "count": 0},
+    {"id":10402,"name":"Music", "count": 0},
+    {"id":9648,"name":"Mystery", "count": 0},
+    {"id":10749,"name":"Romance", "count": 0},
+    {"id":878,"name":"Science Fiction", "count": 0},
+    {"id":10770,"name":"TV Movie", "count": 0},
+    {"id":53,"name":"Thriller", "count": 0},
+    {"id":10752,"name":"War", "count": 0},
+    {"id":37,"name":"Western", "count": 0},
+    {"id":12,"name":"Adventure", "count": 0},
   ]
 
   const user  = await Insight.findOne({userId:userId})
@@ -109,35 +159,23 @@ router.get('/historyData',async (req,res)=>{
   else{
     const genre = [] 
     
-    user.history.map(async (e)=>{
-      const id = e.movieId
-       await axios
-         .get(
-           `https://api.themoviedb.org/3/movie/550?api_key=${key}&language=en-US`
-         )
-         .then((e) => {
-           console.log(e.data.genres, "success");
-           e.data.genres.map(e=>{
-            data.map(data=>{
-              if(data.id == e.id){
-                const value = data.count
-                console.log(data.id ,"==",e.id)
-                data.count = value + 1 //start from here
-                console.log(data.count)
-              } 
-            })
-           })
-          //  genre.push(e.data);
-         })
-         .catch((err) => {
-           console.log(err, "error");
-         });
-      //  console.log(genre);
-    }) 
-    
-    return res.json({data:data})
-  }
+    let data = []
+     await createData(userData,user).then(e=>{return res.json({stat:e})})
 
-})
+      // console.log("data",data)
+
+    }
+
+    
+
+    
+    // console.log("statData",statData) 
+    // await display(statData)
+    // setTimeout(()=>{res.json({stat:statData})},1000)
+    // console.log("outside func",statData , "\n")
+    // return res.json({data:userData})
+  
+  })
+
 
 module.exports = router
