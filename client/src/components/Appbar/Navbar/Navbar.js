@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button,Grid } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -9,7 +9,6 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-//import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -19,16 +18,14 @@ import ListItemText from "@mui/material/ListItemText";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import ContactlessIcon from "@mui/icons-material/Contactless";
-//import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import FlashOnOutlinedIcon from "@mui/icons-material/FlashOnOutlined";
 import { Link } from "react-router-dom";
-import AbcRoundedIcon from "@mui/icons-material/AbcRounded";
 import { borderRadius } from "@mui/system";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
 
-const drawerWidth = 240;
+const drawerWidth = 190;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -50,8 +47,7 @@ const AppBar = styled(MuiAppBar, {
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+  padding: theme.spacing(0,1),
   ...theme.mixins.toolbar,
   justifyContent: "flex-start",
 }));
@@ -85,12 +81,14 @@ export default function PersistentDrawerRight() {
         open={open}
       >
         <Toolbar>
-          <IconButton size="large" color="inherit" component={Link} to="/home">
-            <ContactlessIcon />
+
+          <IconButton color="inherit" component={Link} to="/home"  >
+            <ContactlessIcon  />
           </IconButton>
           <Typography
             variant="h4"
             style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
+            
           >
             Movicon
           </Typography>
