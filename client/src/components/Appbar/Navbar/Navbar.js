@@ -25,6 +25,8 @@ import FlashOnOutlinedIcon from "@mui/icons-material/FlashOnOutlined";
 import { Link } from "react-router-dom";
 import AbcRoundedIcon from "@mui/icons-material/AbcRounded";
 import { borderRadius } from "@mui/system";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import RememberMeIcon from '@mui/icons-material/RememberMe';
 
 const drawerWidth = 240;
 
@@ -140,20 +142,23 @@ export default function PersistentDrawerRight() {
         <Divider />
 
         <List>
-          {["MY ACCOUNT", "SIGN OUT", "APP INFO"].map((text, index) => (
-            <ListItem style={{ color: "black" }} key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? (
-                    <AssessmentRoundedIcon />
-                  ) : (
-                    <ExitToAppOutlinedIcon />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
+        <ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <RememberMeIcon />
+              </ListItemIcon>
+              <ListItemText style={{ color: "black" }} primary="My Profile" />
             </ListItem>
-          ))}
+          </ListItemButton>
+
+          <ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText style={{ color: "black" }} primary="Sign Out" />
+            </ListItem>
+          </ListItemButton>
         </List>
       </Drawer>
     </Box>

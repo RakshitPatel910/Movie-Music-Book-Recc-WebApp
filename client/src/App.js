@@ -3,8 +3,8 @@ import './App.css';
 // import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 // import { useSelector } from 'react-redux';
 
-// import Navbar from './components/Appbar/Navbar/Navbar.js';
-// import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
+import Navbar from './components/Appbar/Navbar/Navbar.js';
+import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
 // import Forgpass from './components/Auth/Forgpass.js'
 // import Signinappbar from './components/Appbar/Signinappbar.js'
 
@@ -33,8 +33,8 @@ function App() {
   return (
     <> 
       {/* <BrowserRouter> */}
-        {/* <Navbar />
-        <Searchbar /> */}
+        <Navbar />
+        <Searchbar />
         {/* <Navbar />
         <Searchbar /> */}
         {/* <Appbar/>  */}
