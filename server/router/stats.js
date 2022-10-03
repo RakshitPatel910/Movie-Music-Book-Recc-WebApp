@@ -15,7 +15,7 @@ const fetchMovie = (movieId) =>
   );
 
 async function getMovie(movieId){
-    const movie  = await fetchMovie(550)
+    const movie  = await fetchMovie(movieId)
     return movie
 }
 
@@ -24,7 +24,8 @@ async function getMovie(movieId){
     return new Promise((resolve,reject)=>{
       user.history.map( async (e)=>{
        const id = e.movieId
-       const movie = await getMovie(550) 
+      //  console.log(id)
+       const movie = await getMovie(id) 
        // console.log(movie)
        movie.data.genres.map(e=>{
          let gCount = 0
@@ -32,17 +33,18 @@ async function getMovie(movieId){
          let index = 0
          userData.map(dt=>{
            if(dt.id === e.id){
+            // console.log("data id",dt.id,"genre id",e.id)
              index = i
              gCount++
              // console.log(dt.count)
-             // dt.count = dt.count + 1
+             // dt.count = dt.count +  1
              // console.log(dt.count)
            }
            i++
          })
   
          userData[index].count = userData[index].count +  gCount
-         console.log(userData[index].count)
+        //  console.log(userData[index].count)
          // statData = userData
          // console.log("inside func",statData)
        })
@@ -127,7 +129,7 @@ router.post("/addToHistory", async (req, res) => {
   console.log(count)
 });
  
-router.post('/historyData',async (req,res)=>{
+router.post('/userStat',async (req,res)=>{
   const {userId} = req.body
   var statData =[]
   let userData = [
