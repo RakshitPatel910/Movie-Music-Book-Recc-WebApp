@@ -13,9 +13,9 @@ function Radar(){
 
     const getData = async ()=>{
         
-        const result  = await  axios.post('http://localhost:3010/historyData', {
-        userId: "534324243",
-      });
+        const result = await axios.post("http://localhost:3010/userStat", {
+          userId: "534324243",
+        });
       // console.log(result)
        setStatData(result.data.stat)
       
@@ -40,7 +40,7 @@ function Radar(){
             margin: "auto",
           }}
         >
-          {/* {console.log("inside component", statData)} */}
+          {console.log("inside component", statData)}
           <ResponsiveRadar
             data={statData}
             keys={["count"]}
