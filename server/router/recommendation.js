@@ -24,8 +24,13 @@ router.post('/updateWatchCount', async (req, res) => {
 
     let userData = new WatchCount.findOne({ userId: userId });
 
-    genre_ids.map((genre) => {
-        userData.stats.genre += 1;
+    genre_ids.map((g_id) => {
+        // userData.stats.g_id += 1;
+        let index = userData.stats.findIndex((g) => {g.genreId === g_id});
+
+        if( index !== -1 ) userData.stats[index].count += 1;
+        
+        if( index === -1 ) userData.stats.push({genreId: g_id, count: 1});
     })
     
     const updatedData = await WatchCount.findOneAndUpdate({userId: userId}, userData);
