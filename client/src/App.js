@@ -14,6 +14,7 @@ import Home from './components/Home/Home.js';
 import Movieinfo from './components/Movieinfo/Movieinfo.js';
 import SearchResults from './components/SearchResults/SearchResults.js';
 import Radar from './components/Chart/Radar'
+import Timeline from "./components/Chart/Timeline";
 import dotenv from 'dotenv'
 
 dotenv.config({ path: "../config.env" });  
@@ -34,8 +35,8 @@ function App() {
     <> 
       <BrowserRouter>
 
-        <Navbar />
-        <Searchbar />
+        {/* <Navbar />
+        <Searchbar /> */}
         {/* <Appbar/>  */}
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
@@ -53,8 +54,9 @@ function App() {
             <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
           </Routes> 
       </BrowserRouter>
-          <Radar/>
-    </>
+          {/* <Radar/> */}
+          <Timeline/>
+    </> 
   );
 } 
 
