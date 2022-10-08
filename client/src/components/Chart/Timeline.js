@@ -1,99 +1,85 @@
 import react from 'react'
+import {useState,useEffect} from 'react'
+import axios from 'axios'
 import './timelineStyle.css'
 
+const tl = [
+  {
+    date: "65Million B.C.",
+    description: "65Million B.C.",
+    property: "RAWWWWWWRRR 🐢🦂",
+  },
+  {
+    date: "48Million B.C.",
+    description: "Humans",
+    property: "Hehe",
+  },
+  {
+    date: "30Million B.C.",
+    description: "Dogs",
+    property: "Bhao bhao",
+  },
+];
+
 function Timeline(){
+
+    const [movieInfo,setMovieInfo] = useState([])
+
+    useEffect(()=>{
+      async function getMovieInfo(id){
+        const info = await axios.post('http://localhost:3010/userHistory', {
+          userId: `${id}`,
+        });
+
+        setMovieInfo(info.history)
+      }
+      getMovieInfo(23525344322423);
+
+      console.log(movieInfo)
+    },[]) 
+
     return (
       <>
-        <section id="timeline">
-          <div class="tl-item">
-            <div
-              class="tl-bg"
-              style={{backgroundImage: "url(https://placeimg.com/801/801/nature)"}}
-            ></div>
-
-            <div class="tl-year">
-              <p class="f2 heading--sanSerif">2011</p>
-            </div>
-
-            <div class="tl-content">
-              <h1>Lorem ipsum dolor sit</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit.
-              </p>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div
-              class="tl-bg"
-              style={{backgroundImage: "url(https://placeimg.com/802/802/nature)"}}
-            ></div>
-
-            <div class="tl-year">
-              <p class="f2 heading--sanSerif">2013</p>
-            </div>
-
-            <div class="tl-content">
-              <h1 class="f3 text--accent ttu">Vestibulum laoreet lorem</h1>
-              <p>
-                Suspendisse potenti. Sed sollicitudin eros lorem, eget accumsan
-                risus dictum id. Maecenas dignissim ipsum vel mi rutrum egestas.
-                Donec mauris nibh, facilisis ut hendrerit vel, fringilla sed
-                felis. Morbi sed nisl et arcu.
-              </p>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div
-              class="tl-bg"
-              style={{backgroundImage: "url(https://placeimg.com/803/803/nature)"}}
-            ></div>
-
-            <div class="tl-year">
-              <p class="f2 heading--sanSerif">2014</p>
-            </div>
-
-            <div class="tl-content">
-              <h1 class="f3 text--accent ttu">Phasellus mauris elit</h1>
-              <p>
-                Mauris cursus magna at libero lobortis tempor. Suspendisse
-                potenti. Aliquam interdum vulputate neque sit amet varius.
-                Maecenas ac pulvinar nisi. Fusce vitae nunc ultrices, tristique
-                dolor at, porttitor dolor. Etiam id cursus arcu, in dapibus
-                nibh. Pellentesque non porta leo. Nulla eros odio, egestas quis
-                efficitur vel, pretium sed.
-              </p>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div
-              class="tl-bg"
-              style={{backgroundImage: "url(https://placeimg.com/800/800/nature)"}}
-            ></div>
-
-            <div class="tl-year">
-              <p class="f2 heading--sanSerif">2016</p>
-            </div>
-
-            <div class="tl-content">
-              <h1 class="f3 text--accent ttu">Mauris vitae nunc elem</h1>
-              <p>
-                Suspendisse ac mi at dolor sodales faucibus. Nunc sagittis
-                ornare purus non euismod. Donec vestibulum efficitur tortor,
-                eget efficitur enim facilisis consequat. Vivamus laoreet laoreet
-                elit. Ut ut varius metus, bibendum imperdiet ex. Curabitur diam
-                quam, blandit at risus nec, pulvinar porttitor lorem.
-                Pellentesque dolor elit.
-              </p>
-            </div>
-          </div>
-        </section>
+        <div id="timeline-content">
+          <h1>Timeline</h1>
+          <ul class="timeline">
+            {movieInfo.map((e) => {
+              return (
+                <>
+                  <li class="event" data-date={"some date"}>
+                    <div class="arrow-right"></div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        marginLeft: "20px",
+                      }}
+                    >
+                      <h3>{e.name}</h3>
+                      <p>{e.releaseDate}</p>
+                    </div>
+                  </li>
+                </>
+              );
+            })}
+            {/* <li class="event" data-date="65Million B.C.">
+              <h3>65Million B.C.</h3>
+              <p>RAWWWWWWRRR 🐢🦂</p>
+            </li>
+            <li class="event" data-date="2005">
+              <h3>Creative Component Launched</h3>
+              <p>"We can be all things to all people!" 📣</p>    
+            </li>
+            <li class="event" id="date" data-date="2009">
+              <h3>Squareflair was Born</h3>
+              <p></p> <p>"We can be all things to Squarespace users!" 📣</p>    
+            </li>
+            <li class="event" data-date="2021">
+              <h3>Squareflair Today</h3> 
+              <p>We design and build from scratch!</p>
+            </li> */}
+          </ul>
+        </div>
       </>
     );
 }   
