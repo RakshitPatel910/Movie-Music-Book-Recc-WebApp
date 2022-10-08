@@ -1,4 +1,3 @@
-import { count } from "../model/insightSchema";
 
 function compare(a, b) {
     if( a.count > b.count ) return 1;
@@ -6,7 +5,7 @@ function compare(a, b) {
     return 0;    
 }
 
-export default function personalReccomendation (countArr) {
+module.exports = function personalReccomendation (countArr) {
     
     const countList = countArr.slice(0).sort( compare ).reverse();
 
@@ -18,3 +17,5 @@ export default function personalReccomendation (countArr) {
     
     return topThreeGenre;
 }
+
+// module.exports = personalReccomendation;

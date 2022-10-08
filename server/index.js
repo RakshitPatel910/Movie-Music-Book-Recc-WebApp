@@ -16,6 +16,7 @@ app.use(require('./router/auth')); // we link router file to rout easy
 app.use(require('./router/watchlist'))
 app.use(require('./router/user'))
 app.use(require('./router/stats'))
+app.use(require('./router/recommendation'))
 
 // app.all('*',function(req,res,next){
 //     res.setHeader(
