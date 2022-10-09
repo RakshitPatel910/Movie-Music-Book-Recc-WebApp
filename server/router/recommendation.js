@@ -4,6 +4,9 @@ const mongoose = require('mongoose')
 const router  = express.Router()
 
 require("../db/conn");
+
+const personalRecommendation = require('../algorithms/personalRecommendation');
+
 const WatchCount = require('../model/watchSchema.js');
 
 router.post('/createWatchCount', async (req, res) => {
@@ -15,6 +18,7 @@ router.post('/createWatchCount', async (req, res) => {
         if( isExisting ) return res.status(400).json({ message: "User already exists." });
 
         const result = await WatchCount.create({ userId: userId, stats: [] });
+
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' });
     }
@@ -25,9 +29,11 @@ router.get('/getPerRecc', async (req, res) => {
 
     const userData = await WatchCount.findOne({ userId: userId });
 
-    
+    const recommendedGenre =  personalRecommendation(userData.stats);
 
-    console.log(data);
+    res.status(200).json({ message: 'Calculated!!!' });
+
+    console.log(recommendedGenre);
 });
 
 
@@ -39,7 +45,7 @@ function isInWatchCount(genre_id, stats) {
 router.patch('/updateWatchCount', async (req, res) => {
     const { userId, genre_ids } = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send('No post with that id');
+    if(!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send('No user with that id');
 
     let userData = await WatchCount.findOne({ userId: userId });
 
