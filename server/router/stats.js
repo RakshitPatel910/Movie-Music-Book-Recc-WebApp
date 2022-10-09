@@ -62,6 +62,7 @@ router.get('/getTotalHistory',async (req,res)=>{
     const {userId} = req.body
     const data = await Insight.findOne({userId:userId})
     console.log(data)
+    return res.json({hsitory:data,status:true})
 })
 
 router.post("/addToHistory", async (req, res) => {
@@ -77,7 +78,7 @@ router.post("/addToHistory", async (req, res) => {
         movieId: movieId,
         histDate: [
           {
-            date: new Date().toDateString(),
+            date: new Date(),
           },
         ], 
       },
@@ -94,7 +95,7 @@ router.post("/addToHistory", async (req, res) => {
     data.history.map(async (e) => {
       if (e.movieId === movieId) {
         const newDate = { 
-          date: new Date().toDateString(),
+          date: new Date(),
         };
         count = 1
         e.histDate.push(newDate);
@@ -113,7 +114,7 @@ router.post("/addToHistory", async (req, res) => {
     movieId: movieId,
     histDate: [
       {
-        date: new Date().toDateString(),
+        date: new Date(),
       },
     ],
     };
@@ -163,21 +164,35 @@ router.post('/userStat',async (req,res)=>{
     
     let data = []
      await createData(userData,user).then(e=>{return res.json({stat:e})})
-
       // console.log("data",data)
-
     }
-
-    
-
-    
     // console.log("statData",statData) 
     // await display(statData)
     // setTimeout(()=>{res.json({stat:statData})},1000)
     // console.log("outside func",statData , "\n")
     // return res.json({data:userData})
-  
   })
 
+router.post('/userHistory',async (req,res)=>{
+  const {userId} = req.body
+  let history = []
+  const data  = await Insight.findOne({userId:userId})
+  data.history.map(async e=>{
+    // e.histDate.map(a=>{
+    //   history.push(a)
+    // })
+    const movieData = await getMovie(e.movieId)
+    let newMovie = {
+      name: movieData.data.title,
+      releaseDate: movieData.data.release_date,
+    };
+    history.push(newMovie)
+    console.log(movieData.data.title)
+  })
+   
+  
+  setTimeout(()=>{return res.json({history:history,status:1000})},1000)
+
+})
 
 module.exports = router
