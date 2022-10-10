@@ -25,18 +25,30 @@ function Timeline(){
 
     const [movieInfo,setMovieInfo] = useState([])
 
+    // setMovieInfo([null])
+    
     useEffect(()=>{
       async function getMovieInfo(id){
-        const info = await axios.post('http://localhost:3010/userHistory', {
-          userId: `${id}`,
-        });
+        await axios
+          .post("http://localhost:3010/userHistory", {
+            userId: JSON.stringify(id),
+          })
+          .then((e) => {
+            console.log("e", e.data.history);
+            setMovieInfo(e.data.history)
+          });
 
-        setMovieInfo(info.history)
+        // setMovieInfo(info.history1)
       }
+
       getMovieInfo(23525344322423);
 
-      console.log(movieInfo)
-    },[]) 
+      console.log("movieinfo ",movieInfo)
+    },[])
+
+ 
+    
+    
 
     return (
       <>

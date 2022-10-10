@@ -175,23 +175,30 @@ router.post('/userStat',async (req,res)=>{
 
 router.post('/userHistory',async (req,res)=>{
   const {userId} = req.body
-  let history = []
-  const data  = await Insight.findOne({userId:userId})
-  data.history.map(async e=>{
+  
+  const {history}  = await Insight.findOne({userId:userId})
+  console.log(history)
+  let history1 = await Promise.all(history.map(async e=>{
     // e.histDate.map(a=>{
     //   history.push(a)
     // })
+ 
     const movieData = await getMovie(e.movieId)
-    let newMovie = {
+    
+    return {
       name: movieData.data.title,
       releaseDate: movieData.data.release_date,
-    };
-    history.push(newMovie)
-    console.log(movieData.data.title)
-  })
+    }
+
+    // history.push(newMovie)
+    // console.log(movieData.data.title)
+  }))
    
-  
-  setTimeout(()=>{return res.json({history:history,status:1000})},1000)
+  console.log("history",history1)
+  // return console.log("return function")
+  return res.json({history:history1,status:true})
+
+  // setTimeout(()=>{return res.json({history:history,status:1000})},1000)
 
 })
 
