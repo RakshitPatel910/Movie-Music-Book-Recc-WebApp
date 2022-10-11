@@ -58,7 +58,7 @@ function Timeline(){
             {movieInfo.map((e) => {
               return (
                 <>
-                  <li class="event" data-date={"some date"}>
+                  <li class="event" data-date={e.date}>
                     <div class="arrow-right"></div>
                     <div
                       style={{
