@@ -61,7 +61,7 @@ router.post("/signup", async (req, res) => {
     .then(async (userExist) => {
       if (userExist) {
         // checking if user already exist
-        return res.json({ message: "Email already exist", status: false });
+        return res.json({ message: "Email already exist", status: false, profile: userExist });
       } else {
         const user = new User({ userName, email, password:newPassword }); //creating new document
 
@@ -71,7 +71,7 @@ router.post("/signup", async (req, res) => {
             //saving the document in db
             return res
               .status(201)
-              .json({ message: "signup successfully", status: true });
+              .json({ message: "signup successfully", status: true, profile: user });
           })
           .catch((err) =>
              res.status(500).json({ message: "Failed register", status: false })

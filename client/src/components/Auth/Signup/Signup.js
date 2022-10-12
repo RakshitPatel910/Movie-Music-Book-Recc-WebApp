@@ -14,11 +14,15 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import {useState} from 'react';
+import { useDispatch } from "react-redux";
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 // import  xmlhttprequest from 'xmlhttprequest'
 // import jwt_decode from 'jwt-decode'
 import "./style.css";
+
+import { signup } from '../../../actions/auth.js';
+
 const xhr = new XMLHttpRequest();
 
 
@@ -38,6 +42,7 @@ function Signup({ setIsSignUp }) {
 
   // const [confirmPassword,setConfirmPassword] = useState("");
   // var passwordChecking ;
+  const dispatch = useDispatch();
   const navigate = useNavigate()
   const [passwordShown,setPasswordShown] = useState(false);
   // const [user, setUSer] = useState({});
@@ -51,22 +56,31 @@ function Signup({ setIsSignUp }) {
 
   async function submit(){
     
-    if(profile.email == "" || profile.password == "" || profile.firstName == ""){
-      alert("Fill all credentials")
-    }
-    else{
-        const data  = await axios.post('http://localhost:3010/signup',{
-        userName:profile.firstName,
-        email:profile.email,
-        password:profile.password
-      })
+    // if(profile.email == "" || profile.password == "" || profile.firstName == ""){
+    //   alert("Fill all credentials")
+    // }
+    // else{
+    //     const data  = await axios.post('http://localhost:3010/signup',{
+    //     userName:profile.firstName,
+    //     email:profile.email,
+    //     password:profile.password
+    //   })
 
-      if(data.data.status == false){
-        alert("Email already exist")
-      }else{
-        setIsSignUp(0);
-      }
+    //   if(data.data.status == false){
+    //     alert("Email already exist")
+    //   }else{
+    //     setIsSignUp(0);
+    //   }
+    // }
+
+    if( profile.email == "" || profile.password == "" || profile.firstName == "" ){
+      alert("Fill all credentials");
     }
+    else {
+      // dispatch(signup(profile, navigate));
+      dispatch(signup({ userName: profile.firstName, email: profile.email, password: profile.password }, navigate, setIsSignUp));
+    }
+
   }
 
   // function checkPassword(){
