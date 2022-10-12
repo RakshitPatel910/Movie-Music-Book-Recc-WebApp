@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 
 import Navbar from './components/Appbar/Navbar/Navbar.js';
 import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
-import Forgpass from './components/Auth/Forgpass.js'
-import Signinappbar from './components/Appbar/Signinappbar.js'
+import Forgpass from './components/Auth/Forgpass.js';
+import Signinappbar from './components/Appbar/Signinappbar.js';
 
 import Appbar from './components/Appbar/Appbar.js';
 import Auth from './components/Auth/Auth';
