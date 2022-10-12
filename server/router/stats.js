@@ -1,5 +1,6 @@
 const express = require('express')
 const axios = require('axios') 
+const moment = require('moment')
 const router  = express.Router()
 
 require("../db/conn");
@@ -78,7 +79,7 @@ router.post("/addToHistory", async (req, res) => {
         movieId: movieId,
         histDate: [
           {
-            date: new Date(),
+            date: moment(new Date()),
           },
         ], 
       },
@@ -126,7 +127,6 @@ router.post("/addToHistory", async (req, res) => {
     });
   }
 
-
   console.log(count)
 });
  
@@ -154,7 +154,7 @@ router.post('/userStat',async (req,res)=>{
     {"id":37,"name":"Western", "count": 0},
     {"id":12,"name":"Adventure", "count": 0},
   ]
-
+ 
   const user  = await Insight.findOne({userId:userId})
   if(user === null){
     return res.json({message:"User does not exit",status:false})
@@ -173,26 +173,54 @@ router.post('/userStat',async (req,res)=>{
     // return res.json({data:userData})
   })
 
+
 router.post('/userHistory',async (req,res)=>{
   const {userId} = req.body
-  let history = []
-  const data  = await Insight.findOne({userId:userId})
-  data.history.map(async e=>{
+  const nowDate = moment(new Date())
+  
+  console.log(nowDate)
+  const {history}  = await Insight.findOne({userId:userId})
+  // console.log(history)
+  let history1 = await Promise.all(history.map(async e=>{
     // e.histDate.map(a=>{
     //   history.push(a)
     // })
+    let latestMovieDate = null;
+    let dateDiff = Infinity;
+    
+    console.log(dateDiff)
+
+    e.histDate.map(a=>{
+      var end = moment(a.date); // another date
+      var duration = moment.duration(nowDate.diff(end));
+      var days = duration.asHours();
+      console.log("Days ",days);
+      if(days >= 0 && days <=dateDiff){
+        dateDiff = days
+        latestMovieDate = moment(a.date)
+      }
+      // console.log("Days ",end.hour());
+    }) 
+    
+    console.log("latest movie Date",latestMovieDate)
+
     const movieData = await getMovie(e.movieId)
-    let newMovie = {
+
+    return {
       name: movieData.data.title,
       releaseDate: movieData.data.release_date,
+      date: latestMovieDate
     };
-    history.push(newMovie)
-    console.log(movieData.data.title)
-  })
-   
+  }))
   
-  setTimeout(()=>{return res.json({history:history,status:1000})},1000)
+  history1.sort(
+    (a, b) =>
+      new moment(a.date).format("YYYYMMDD") -
+      new moment(b.date).format("YYYYMMDD")
+  ); 
 
+  return res.json({history:history1,status:true})
+ 
 })
 
 module.exports = router

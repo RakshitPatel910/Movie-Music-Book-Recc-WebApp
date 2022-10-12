@@ -48,7 +48,7 @@ router.patch('/updateWatchCount', async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(userId)) return res.status(404).send('No user with that id');
 
     let userData = await WatchCount.findOne({ userId: userId });
-
+    
     await genre_ids.map(async (g_id) => {
         // userData.stats.g_id += 1;
         // let index = userData.stats.findIndex((g) => {g.genreId === g_id});
