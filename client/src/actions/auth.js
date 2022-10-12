@@ -31,9 +31,12 @@ export const signup = ( profile, navigate, setIsSignUp ) => async (dispatch) => 
 
 
 
-export const logout = () => async (dispatch) => {
+export const logout = ( navigate ) => async (dispatch) => {
     try {
         dispatch({ type: "LOGOUT" });
+
+        navigate('/');
+        window.location.reload();
     } catch (error) {
         console.log(error);
     }

@@ -1,4 +1,10 @@
 import * as React from "react";
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { logout } from '../../../actions/auth.js';
+
 import { Avatar, Button,Grid } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -55,6 +61,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function PersistentDrawerRight() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -62,6 +70,14 @@ export default function PersistentDrawerRight() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const logOut = () => {
+    try {
+      dispatch(logout(navigate));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -154,7 +170,7 @@ export default function PersistentDrawerRight() {
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText style={{ color: "black" }} primary="Sign Out" />
+              <ListItemText style={{ color: "black" }} primary="Sign Out" onClick={() => { logOut() }} />
             </ListItem>
           </ListItemButton>
         </List>
