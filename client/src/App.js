@@ -14,7 +14,7 @@ import Home from './components/Home/Home.js';
 import Movieinfo from './components/Movieinfo/Movieinfo.js';
 import SearchResults from './components/SearchResults/SearchResults.js';
 // import Radar from './components/Chart/Radar'
-// import Timeline from "./components/Chart/Timeline";
+import Timeline from "./components/Chart/Timeline";
 import dotenv from 'dotenv'
 
 dotenv.config({ path: "../config.env" });  
@@ -52,14 +52,15 @@ function App() {
             {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
 
-            { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }
+            {/* { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> } */}
 
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
           </Routes> 
       </BrowserRouter>
           {/* <Radar/> */}
-          {/* <Timeline/> */}
+          <Timeline/>
+          
     </>     
   );
 } 

@@ -97,6 +97,7 @@ h1 {
     position: relative;
     display: flex;
     flex-direction: column;
+    background-color: #3895d3;
   }
 
   .event:last-of-type { 
@@ -119,10 +120,11 @@ h1 {
       text-align: right;
       font-weight: 100;    
       font-size: 0.9em;
-      min-width: 120px;
+      min-width: 136px;
       font-family: 'Saira', sans-serif;
       margin-right: 350px;
       margin-bottom: -123px;
+      color: white;
     }
 
     .event:after {
@@ -146,4 +148,12 @@ h1 {
         transform: rotate(135deg);
         margin-left: -43px;
         margin-top: 102px;
+    }
+
+    .timelineCard{
+      display: "flex";
+      flex-direction: "column";
+      margin-left: "20px";
+      margin-top: "-11px";
+      
     }

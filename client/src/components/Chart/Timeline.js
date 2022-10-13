@@ -1,6 +1,7 @@
 import react from 'react'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
+import moment from 'moment'
 import './timelineStyle.css'
 
 const tl = [
@@ -58,13 +59,15 @@ function Timeline(){
             {movieInfo.map((e) => {
               return (
                 <>
-                  <li class="event" data-date={e.date}>
-                    <div class="arrow-right"></div>
+                  <li className="event" data-date={moment(e.date).format("D MMMM yyyy")}>
+                    <div className="arrow-right"></div>
                     <div
+                      className='timelineCard'
                       style={{
                         display: "flex",
                         flexDirection: "column",
                         marginLeft: "20px",
+                        marginTop: "-11px",
                       }}
                     >
                       <h3>{e.name}</h3>

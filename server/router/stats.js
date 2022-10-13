@@ -175,52 +175,59 @@ router.post('/userStat',async (req,res)=>{
 
 
 router.post('/userHistory',async (req,res)=>{
-  const {userId} = req.body
-  const nowDate = moment(new Date())
+  try {
+    const { userId } = req.body;
+    const nowDate = moment(new Date());
+
+    console.log(nowDate);
+    const { history } = await Insight.findOne({ userId: userId });
+    // console.log(history)
+    let history1 = await Promise.all(
+      history.map(async (e) => {
+        // e.histDate.map(a=>{
+        //   history.push(a)
+        // })
+        let latestMovieDate = null;
+        // let dateDiff = Infinity;
+        let dateDiff = 10000000;
+
+        console.log(dateDiff);
+
+        e.histDate.map((a) => {
+          var end = moment(a.date); // another date
+          var duration = moment.duration(nowDate.diff(end));
+          var days = duration.asHours();
+          console.log("Days ", days);
+          if (days >= 0 && days <= dateDiff) {
+            dateDiff = days;
+            latestMovieDate = moment(a.date);
+          }
+          // console.log("Days ",end.hour());
+        });
+
+        console.log("latest movie Date", latestMovieDate);
+
+        const movieData = await getMovie(e.movieId);
+
+        return {
+          name: movieData.data.title,
+          releaseDate: movieData.data.release_date,
+          date: latestMovieDate,
+        };
+      })
+    );
+
+    history1.sort(
+      (a, b) =>
+        new moment(a.date).format("YYYYMMDD") -
+        new moment(b.date).format("YYYYMMDD")
+    );
+
+    return res.json({ history: history1, status: true });
+  } catch (error) {
+    console.log("error ",error)
+  }
   
-  console.log(nowDate)
-  const {history}  = await Insight.findOne({userId:userId})
-  // console.log(history)
-  let history1 = await Promise.all(history.map(async e=>{
-    // e.histDate.map(a=>{
-    //   history.push(a)
-    // })
-    let latestMovieDate = null;
-    let dateDiff = Infinity;
-    
-    console.log(dateDiff)
-
-    e.histDate.map(a=>{
-      var end = moment(a.date); // another date
-      var duration = moment.duration(nowDate.diff(end));
-      var days = duration.asHours();
-      console.log("Days ",days);
-      if(days >= 0 && days <=dateDiff){
-        dateDiff = days
-        latestMovieDate = moment(a.date)
-      }
-      // console.log("Days ",end.hour());
-    }) 
-    
-    console.log("latest movie Date",latestMovieDate)
-
-    const movieData = await getMovie(e.movieId)
-
-    return {
-      name: movieData.data.title,
-      releaseDate: movieData.data.release_date,
-      date: latestMovieDate
-    };
-  }))
-  
-  history1.sort(
-    (a, b) =>
-      new moment(a.date).format("YYYYMMDD") -
-      new moment(b.date).format("YYYYMMDD")
-  ); 
-
-  return res.json({history:history1,status:true})
- 
 })
 
 module.exports = router
