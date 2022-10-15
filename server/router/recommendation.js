@@ -24,6 +24,7 @@ router.post('/createWatchCount', async (req, res) => {
     }
 })
 
+
 router.get('/getPerRecc', async (req, res) => {
     const { userId } = req.body;
 
@@ -66,7 +67,7 @@ router.patch('/updateWatchCount', async (req, res) => {
     // res.json({ message: 'Count updated successfully' });
     // console.log(updatedData);},1000)
 
-    
+
     const updatedData = await WatchCount.findOneAndUpdate({userId: userId}, userData);
     res.json({ message: 'Count updated successfully' });
 
