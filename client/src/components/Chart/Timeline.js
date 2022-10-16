@@ -54,14 +54,14 @@ function Timeline(){
     return (
       <>
         <div id="timeline-content">
-          <h1>Timeline</h1>
+          <h1 className="timlineHeading">Timeline</h1>
           <ul class="timeline">
             {movieInfo.map((e) => {
               return (
                 <>
                   <li className="event" data-date={moment(e.date).format("D MMMM yyyy")}>
                     <div className="arrow-right"></div>
-                    <div
+                    <div 
                       className='timelineCard'
                       style={{
                         display: "flex",
@@ -70,29 +70,18 @@ function Timeline(){
                         marginTop: "-11px",
                       }}
                     >
-                      <h3>{e.name}</h3>
-                      <p>{e.releaseDate}</p>
+                      <div className="timelineInfo">
+                        <div className="timelineName">
+                          <h3>{e.name}</h3> 
+                          <p className="paraghraph">{e.releaseDate}</p>
+                        </div>
+                        <img src={e.poster} alt={e.name} width="100" height="100" className="movieImg"></img>
+                      </div>
                     </div>
                   </li>
                 </>
               );
             })}
-            {/* <li class="event" data-date="65Million B.C.">
-              <h3>65Million B.C.</h3>
-              <p>RAWWWWWWRRR 🐢🦂</p>
-            </li>
-            <li class="event" data-date="2005">
-              <h3>Creative Component Launched</h3>
-              <p>"We can be all things to all people!" 📣</p>    
-            </li>
-            <li class="event" id="date" data-date="2009">
-              <h3>Squareflair was Born</h3>
-              <p></p> <p>"We can be all things to Squarespace users!" 📣</p>    
-            </li>
-            <li class="event" data-date="2021">
-              <h3>Squareflair Today</h3> 
-              <p>We design and build from scratch!</p>
-            </li> */}
           </ul>
         </div>
       </>

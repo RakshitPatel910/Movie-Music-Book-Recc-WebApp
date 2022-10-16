@@ -213,6 +213,8 @@ router.post('/userHistory',async (req,res)=>{
           name: movieData.data.title,
           releaseDate: movieData.data.release_date,
           date: latestMovieDate,
+          poster: `https://image.tmdb.org/t/p/w185${movieData.data.poster_path}`,
+          id: movieData.data.id,
         };
       })
     );
