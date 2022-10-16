@@ -32,8 +32,8 @@ router.post('/doesWatchListExist', async (req, res) => {
     try {
         const isExisting = await WatchCount.findOne({ email: email });
 
-        if( isExisting ) return res.status(400).json({ message: "User already exists.", doesExist: true });
-        else return res.status(400).json({ message: "User does not exist.", doesExist: false });
+        if( isExisting ) return res.status(200).json({ message: "User already exists.", doesExist: true });
+        else return res.status(200).json({ message: "User does not exist.", doesExist: false });
 
         // const result = await WatchCount.create({ email: email, stats: [] });
 

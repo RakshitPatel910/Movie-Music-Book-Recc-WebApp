@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router  = express.Router();
+const axios = require('axios')
 
 require('../db/conn')
 const User = require("../model/userSchema")
@@ -11,14 +12,20 @@ async function encryption(data){
     return bcrypt.hash(data, salt);
 } 
 
-
+async function watchCount(email){
+  const data  = await axios.post('http://localhost:3010/doesWatchListExist',{email:email})
+  console.log(data)
+  data.doesExist
+    ? ""
+    : await axios.post("http://localhost:3010/createWatchCount",{email:email}).then(e=>{console.log(e)}).catch(e=>{console.log(e)});
+}
 
 
 router.post('/signin',async (req,res)=>{
     
     const {email,password} = req.body
     
-    const data = await User.findOne({email:email}).then(e=>{
+    const data = await User.findOne({email:email}).then(async e=>{
         console.log(e)
         if(e == null){
             return res.json({ message: "User does not exist", status: false });
@@ -30,6 +37,7 @@ router.post('/signin',async (req,res)=>{
         else{
             if (bcrypt.compareSync(password, e.password)) {
                 console.log("user exists");
+                await watchCount(email)
                 return res.json({
                     message: "Successfully Logged in",
                     status: true,

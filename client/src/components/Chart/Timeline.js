@@ -1,7 +1,9 @@
 import react from 'react'
 import {useState,useEffect} from 'react'
+import {useSelector } from "react-redux";
 import axios from 'axios'
 import moment from 'moment'
+
 import './timelineStyle.css'
 
 const tl = [
@@ -24,11 +26,15 @@ const tl = [
 
 function Timeline(){
 
+    
+    // const id = useSelector(authdata);
     const [movieInfo,setMovieInfo] = useState([])
-
+   
     // setMovieInfo([null])
     
     useEffect(()=>{
+      var obj = JSON.parse(localStorage.getItem("profile"));
+      console.log(obj.profile._id)
       async function getMovieInfo(id){
         await axios
           .post("http://localhost:3010/userHistory", {
@@ -43,6 +49,7 @@ function Timeline(){
       }
 
       getMovieInfo(23525344322423);
+      // getMovieInfo(obj.profile._id);
 
       console.log("movieinfo ",movieInfo)
     },[])
