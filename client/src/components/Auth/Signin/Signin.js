@@ -8,7 +8,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Fab from "@mui/material/Fab";
 // import IconButton from "@mui/material/IconButton";
 import {useState} from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from 'react-router-dom'
 // import jwt_decode from 'jwt-decode'
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -23,6 +23,7 @@ import Container from '@mui/material/Container';
 import './style.css'
 
 import { signin } from '../../../actions/auth.js';
+import { doesWatchCountExist } from "../../../api/backend";
 
 // import { makeStyles } from "@material-ui/core/styles";
 // import { useState } from "react"
@@ -57,6 +58,8 @@ function Signin({ isSignUp, setIsSignUp }) {
     // } 
 
     dispatch(signin(profile, navigate));
+
+    // const {doesExist} = await doesWatchCountExist(JSON.parse(localStorage.getItem('profile')._id));
   }
  
   // function handleCallbackResponse(res){
