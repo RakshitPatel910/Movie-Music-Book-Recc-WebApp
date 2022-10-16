@@ -84,8 +84,8 @@ router.patch('/updateWatchCount', async (req, res) => {
     // res.json({ message: 'Count updated successfully' });
     // console.log(updatedData);},1000)
 
-    
-    const updatedData = await WatchCount.findOneAndUpdate({email: email}, userData);
+
+    const updatedData = await WatchCount.findOneAndUpdate({userId: userId}, userData);
     res.json({ message: 'Count updated successfully' });
 
     console.log(updatedData);
