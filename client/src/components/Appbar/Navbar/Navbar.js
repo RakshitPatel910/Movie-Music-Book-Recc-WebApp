@@ -98,7 +98,7 @@ export default function PersistentDrawerRight() {
       >
         <Toolbar>
 
-          <IconButton color="inherit" component={Link} to="/home"  >
+          <IconButton color="inherit" component={Link} to="/"  >
             <ContactlessIcon  />
           </IconButton>
           <Typography

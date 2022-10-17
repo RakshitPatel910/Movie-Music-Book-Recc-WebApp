@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const watchSchema = new mongoose.Schema({
-    userId: {
+    email: {
         type: String,
         required: true
     },

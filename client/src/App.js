@@ -14,7 +14,7 @@ import Home from './components/Home/Home.js';
 import Movieinfo from './components/Movieinfo/Movieinfo.js';
 import SearchResults from './components/SearchResults/SearchResults.js';
 // import Radar from './components/Chart/Radar'
-// import Timeline from "./components/Chart/Timeline";
+import Timeline from "./components/Chart/Timeline";
 import dotenv from 'dotenv'
 
 dotenv.config({ path: "../config.env" });  
@@ -32,8 +32,9 @@ function App() {
   
 
   return (
-    <> 
+    <>
       <BrowserRouter>
+<<<<<<< HEAD
 
         
         {/* <Appbar/>  */}
@@ -41,21 +42,31 @@ function App() {
         {/* <Signinappbar /> */}
         <Watchlist />
 
+=======
+        {/* <Navbar />
+        <Searchbar /> */}
+        <Appbar />
+        {/* <Forgpass />     */}
+        {/* <Signinappbar /> */}
+        {/* <Home /> */}
+        {/* <Timeline /> */}
+>>>>>>> cefef4a89d1554057d7239debcb158bb22376fc9
           <Routes>
             {/* <Route path="/" exact element={<Auth />} /> */}
 
             {/* <Route path="/home/*"  element={<Home />} />
             <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
 
-            {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
+          {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
 
-            {/* <Route path="/" exact element={<Auth />} />
+          {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
 
             {/* { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> } */}
 
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
+            {/* <Route path=":movie_id" exact element={<Movieinfo />} /> */}
           </Routes> 
       </BrowserRouter>
           {/* <Radar/> */}

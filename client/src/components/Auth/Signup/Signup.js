@@ -22,6 +22,7 @@ import axios from 'axios';
 import "./style.css";
 
 import { signup } from '../../../actions/auth.js';
+import { createWatchCount } from "../../../actions/watchCount.js";
 
 const xhr = new XMLHttpRequest();
 
@@ -79,6 +80,9 @@ function Signup({ setIsSignUp }) {
     else {
       // dispatch(signup(profile, navigate));
       dispatch(signup({ userName: profile.firstName, email: profile.email, password: profile.password }, navigate, setIsSignUp));
+      
+      
+
     }
 
   }
