@@ -12,9 +12,7 @@ export default function Watchlist ()
     return (
 
 <>
-    
-      <>
-                
+      <>              
        <Stack spacing={3} direction="row">
                       <Grid></Grid>
                       <Grid></Grid>

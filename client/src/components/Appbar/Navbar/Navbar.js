@@ -60,6 +60,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerRight() {
+  const name = JSON.parse(localStorage.getItem('profile'))
+  console.log("username",name.profile.userName)
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -152,7 +154,7 @@ export default function PersistentDrawerRight() {
         </Button>
 
         <Button color="inherit">
-          <Typography variant="h5">USERNAME</Typography>
+          <Typography variant="h5">{name.profile.userName}</Typography>
         </Button>
         <Divider />
 

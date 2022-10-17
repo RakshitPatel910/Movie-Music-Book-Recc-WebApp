@@ -41,34 +41,52 @@ function SearchResults() {
       <>
         {/* <div className="">Popular Now</div> */}
 
-        {!movieList.length ? <CircularProgress color="secondary" style={{margin: '3.3%'}} /> : (
-            <InfiniteScroll
-              dataLength={movieList.length} //This is important field to render the next data
-              next={getMoreMovies}
-              hasMore={true}
-              loader={<CircularProgress color="secondary" style={{margin: '3.3%'}} />}
-              scrollThreshold={0.99}
-              endMessage={
-                <p style={{ textAlign: 'center' }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
+        {!movieList.length ? (
+          <CircularProgress color="secondary" style={{ margin: "3.3%" }} />
+        ) : (
+          <InfiniteScroll
+            dataLength={movieList.length} //This is important field to render the next data
+            next={getMoreMovies}
+            hasMore={true}
+            loader={
+              <CircularProgress color="secondary" style={{ margin: "3.3%" }} />
+            }
+            scrollThreshold={0.99}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
+            <Grid
+              className={classes.container}
+              container
+              alignItems="stretch"
+              spacing={3}
             >
-                <Grid className={classes.container} container alignItems='stretch' spacing={3} >
-                    <Grid item xs={12}>
-                        <Typography variant='h3'>Popular Now</Typography>
-                    </Grid>
-                    {movieList.map((movie) => (
-                      <Grid className={classes.items} item xs={4}>
-                            <SearchedMovieCard list={movie} key={movie.id} genre_name={genre_name} genre_id={genreId} />
-                        </Grid>
-                    ))}
-                </Grid>              
-            </InfiniteScroll>
+              <Grid item xs={12}>
+                <Typography
+                  variant="h3"
+                  style={{ color: "rgba(255, 255, 255, 0.8)" }}
+                >
+                  {genre_name}
+                </Typography>
+              </Grid>
+              {movieList.map((movie) => (
+                <Grid className={classes.items} item xs={4}>
+                  <SearchedMovieCard
+                    list={movie}
+                    key={movie.id}
+                    genre_name={genre_name}
+                    genre_id={genreId}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </InfiniteScroll>
         )}
-
       </>
-    )
+    );
 }
 
 export default SearchResults
