@@ -34,23 +34,20 @@ function App() {
   return (
     <>
       <BrowserRouter>
-<<<<<<< HEAD
 
         
-        {/* <Appbar/>  */}
+        <Appbar/> 
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
         <Watchlist />
 
-=======
         {/* <Navbar />
         <Searchbar /> */}
-        <Appbar />
+        {/* <Appbar /> */}
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
         {/* <Home /> */}
         {/* <Timeline /> */}
->>>>>>> cefef4a89d1554057d7239debcb158bb22376fc9
           <Routes>
             {/* <Route path="/" exact element={<Auth />} /> */}
 

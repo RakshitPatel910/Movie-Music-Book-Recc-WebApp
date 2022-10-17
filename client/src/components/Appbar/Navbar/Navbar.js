@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { logout } from '../../../actions/auth.js';
 
-import { Avatar, Button,Grid } from "@mui/material";
+import { Avatar, Button} from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -30,6 +30,7 @@ import { Link } from "react-router-dom";
 import { borderRadius } from "@mui/system";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 
 const drawerWidth = 190;
 
@@ -162,6 +163,16 @@ export default function PersistentDrawerRight() {
                 <RememberMeIcon />
               </ListItemIcon>
               <ListItemText style={{ color: "black" }} primary="My Profile" />
+            </ListItem>
+          </ListItemButton>
+
+
+          <ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <WorkHistoryIcon />
+              </ListItemIcon>
+              <ListItemText style={{ color: "black" }} primary="History" />
             </ListItem>
           </ListItemButton>
 
