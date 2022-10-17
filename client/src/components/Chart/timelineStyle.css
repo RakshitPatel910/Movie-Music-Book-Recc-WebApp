@@ -73,6 +73,7 @@ a:hover {
   max-width: 30%; 
   margin-bottom: 50px;
   bottom: 22px;
+  margin-left: 30%;
 }
 
 
@@ -183,4 +184,6 @@ a:hover {
     .movieImg{
       right: 10px;
       margin-bottom: 10px;
+      border-radius: 5px;
+      margin-top: -26px;
     }

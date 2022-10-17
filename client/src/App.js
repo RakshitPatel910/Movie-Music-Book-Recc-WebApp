@@ -32,12 +32,11 @@ function App() {
   
 
   return (
-    <> 
+    <>
       <BrowserRouter>
-
         {/* <Navbar />
         <Searchbar /> */}
-        <Appbar/> 
+        <Appbar />
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
         {/* <Home /> */}
@@ -48,9 +47,9 @@ function App() {
             {/* <Route path="/home/*"  element={<Home />} />
             <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
 
-            {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
+          {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
 
-            {/* <Route path="/" exact element={<Auth />} />
+          {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
 
             { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }

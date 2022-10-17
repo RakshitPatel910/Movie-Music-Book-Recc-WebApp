@@ -17,12 +17,12 @@ export const signin = ( profile, navigate ) => async (dispatch) => {
         // console.log(data)
         // console.log(watchCountUserData)
 
-        // navigate('/home');
+        // navigate('/home'); 
 
         navigate('/');
         window.location.reload();
     } catch (error) {
-        console.log(error);
+        console.log(error); 
     }
 }
 
@@ -39,6 +39,7 @@ export const signup = ( profile, navigate, setIsSignUp ) => async (dispatch) => 
     } catch (error) {
         console.log(error);
     }
+    
 }
 
 
