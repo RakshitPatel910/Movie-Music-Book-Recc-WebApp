@@ -1,5 +1,6 @@
 import react from 'react'
 import {useState,useEffect} from 'react'
+import { Link } from 'react-router-dom';
 import {useSelector } from "react-redux";
 import axios from 'axios'
 import moment from 'moment'
@@ -68,7 +69,9 @@ function Timeline(){
                 <>
                   <li className="event" data-date={moment(e.date).format("D MMMM yyyy")}>
                     <div className="arrow-right"></div>
-                    <div 
+                    <Link
+                      // component={Link}
+                      to={`/timeline/${e.id}`}
                       className='timelineCard'
                       style={{
                         display: "flex",
@@ -84,7 +87,7 @@ function Timeline(){
                         </div>
                         <img src={e.poster} alt={e.name} width="100" height="100" className="movieImg"></img>
                       </div>
-                    </div>
+                    </Link>
                   </li>
                 </>
               );

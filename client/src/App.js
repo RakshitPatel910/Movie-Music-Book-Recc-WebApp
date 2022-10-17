@@ -40,7 +40,8 @@ function App() {
         <Appbar/> 
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
-
+        {/* <Home /> */}
+        {/* <Timeline /> */}
           <Routes>
             {/* <Route path="/" exact element={<Auth />} /> */}
 
@@ -52,14 +53,15 @@ function App() {
             {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
 
-            {/* { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> } */}
+            { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }
 
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
+            {/* <Route path=":movie_id" exact element={<Movieinfo />} /> */}
           </Routes> 
       </BrowserRouter>
           {/* <Radar/> */}
-          <Timeline/>
+          {/* <Timeline/> */}
           
     </>     
   );
