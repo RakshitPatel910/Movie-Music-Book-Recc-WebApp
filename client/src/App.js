@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
-import Navbar from './components/Appbar/Navbar/Navbar.js';
-import Searchbar from './components/Appbar/Searchbar/Searchbar.js';
+import Appbar from './components/Appbar/Appbar.js';
 import Forgpass from './components/Auth/Forgpass.js';
 import Signinappbar from './components/Appbar/Signinappbar.js';
+import Watchlist from './components/Watchlist/Watchlist.js';
 
-import Appbar from './components/Appbar/Appbar.js';
+
 import Auth from './components/Auth/Auth';
 import Home from './components/Home/Home.js';
 import Movieinfo from './components/Movieinfo/Movieinfo.js';
@@ -23,7 +23,7 @@ dotenv.config({ path: "../config.env" });
 function App() {
 
   // const navigate = useNavigate();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
 
   // useEffect(() => {
@@ -35,11 +35,11 @@ function App() {
     <> 
       <BrowserRouter>
 
-        {/* <Navbar />
-        <Searchbar /> */}
-        <Appbar/> 
+        
+        {/* <Appbar/>  */}
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
+        <Watchlist />
 
           <Routes>
             {/* <Route path="/" exact element={<Auth />} /> */}
@@ -52,7 +52,7 @@ function App() {
             {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
 
-            { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }
+            {/* { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> } */}
 
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
@@ -64,6 +64,7 @@ function App() {
     </>     
   );
 } 
+
 
 
 export default App;
