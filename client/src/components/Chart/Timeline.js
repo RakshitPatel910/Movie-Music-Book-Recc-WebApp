@@ -1,6 +1,7 @@
 import react from 'react'
 import {useState,useEffect} from 'react'
 import {useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import axios from 'axios'
 import moment from 'moment'
 
@@ -49,7 +50,7 @@ function Timeline(){
       }
 
       getMovieInfo(23525344322423);
-      // getMovieInfo(obj.profile._id);
+      // getMovieInfo(obj.profile._id);sk
 
       console.log("movieinfo ",movieInfo)
     },[])
@@ -69,6 +70,8 @@ function Timeline(){
                   <li className="event" data-date={moment(e.date).format("D MMMM yyyy")}>
                     <div className="arrow-right"></div>
                     <div 
+                      component={Link}
+                      to={`/${e.id}`}
                       className='timelineCard'
                       style={{
                         display: "flex",
@@ -82,7 +85,7 @@ function Timeline(){
                           <h3>{e.name}</h3> 
                           <p className="paraghraph">{e.releaseDate}</p>
                         </div>
-                        <img src={e.poster} alt={e.name} width="100" height="100" className="movieImg"></img>
+                        <img src={e.poster} alt={e.name} width="200" height="135" className="movieImg"></img>
                       </div>
                     </div>
                   </li>
