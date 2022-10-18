@@ -168,7 +168,24 @@ a:hover {
       margin-left: "20px";
       margin-top: "-11px";
       width: 300px;
-      
+      text-decoration: none;
+    }
+
+    /* Unvisited links */
+    .timelineCard:link {
+      color: black;
+    }
+/* Visited links */
+    .timelineCard:visited {
+      color: black;
+    }
+/* Hovered links */
+    .timelineCard:hover {
+      color: black;
+    }
+/* Active links */
+    .timelineCard:active {
+      color: black;
     }
 
     .timelineInfo{

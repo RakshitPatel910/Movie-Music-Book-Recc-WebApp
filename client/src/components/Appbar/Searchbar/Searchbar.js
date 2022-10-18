@@ -22,6 +22,8 @@ import AcUnitIcon from "@mui/icons-material/AcUnit";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
+import {moviesGenre} from '../../../constants/genreId'
+import { Link } from "react-router-dom";
 import {
   Button,
   Avatar,
@@ -63,25 +65,23 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <Box sx={{ display: "flex" , marginTop :"30"}}>
-
-
-      <Grid container spacing={3} columns={16}  marginTop ={0}>
-      <Grid xs={0.6}></Grid>
-       <Grid xs={0.3}>
-    <IconButton
-    
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="end"
-              style={{mr: 2, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-        </Grid>      
+    <Box sx={{ display: "flex", marginTop: "30" }}>
+      <Grid container spacing={3} columns={16} marginTop={0}>
+        <Grid xs={0.6}></Grid>
+        <Grid xs={0.3}>
+          <IconButton
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="end"
+            style={{ mr: 2, ...(open && { display: "none" }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Grid>
         <Grid xs={3}></Grid>
-            <Grid xs={11}>
-    <Item><FormControl
+        <Grid xs={11}>
+          <Item>
+            <FormControl
               fullWidth
               id="fullWidth"
               variant="outlined"
@@ -91,15 +91,22 @@ export default function PersistentDrawerLeft() {
                 placeholder="Search"
                 endAdornment={
                   <InputAdornment position="end">
-                    <Avatar sx={{background: "#5579C6",height: '35px', width: '35px' }}>
+                    <Avatar
+                      sx={{
+                        background: "#5579C6",
+                        height: "35px",
+                        width: "35px",
+                      }}
+                    >
                       <SearchIcon />
                     </Avatar>
                   </InputAdornment>
                 }
               />
-            </FormControl></Item>
-  </Grid>
-</Grid>
+            </FormControl>
+          </Item>
+        </Grid>
+      </Grid>
 
       <Drawer
         style={{
@@ -125,8 +132,19 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
 
         <Divider />
-        <List>
-          <ListItemButton>
+        <List style={{display:"flex",flexDirection:"column"}}>
+          {console.log(moviesGenre)}
+          {moviesGenre.map(e=>{
+            return (
+              <ListItemButton>
+                <ListItem component={Link} to={`/${e.name}-${e.id}`}>
+                <ListItemText style={{ color: "black" }} primary={e.name} />
+                </ListItem>
+              </ListItemButton>
+            )
+          })}
+
+          {/* <ListItemButton>
             <ListItem>
               <ListItemIcon>
                 <AnchorIcon />
@@ -169,7 +187,7 @@ export default function PersistentDrawerLeft() {
               </ListItemIcon>
               <ListItemText style={{ color: "black" }} primary="DRAMA" />
             </ListItem>
-          </ListItemButton>
+          </ListItemButton> */}
         </List>
       </Drawer>
     </Box>

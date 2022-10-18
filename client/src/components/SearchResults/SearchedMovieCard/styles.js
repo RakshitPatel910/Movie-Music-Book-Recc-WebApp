@@ -49,7 +49,8 @@ export default makeStyles({
     },
 
     title: {
-        fontSize: '1.5rem'
+        fontSize: '1.5rem',
+        textDecoration:'none'
     },
 
     genreList: {
@@ -67,14 +68,15 @@ export default makeStyles({
         '&:hover': {
             backgroundColor: 'white',
             color: 'black'
-        }
+        },
+        textDecoration:'none', 
     },
 
     ratingChip:{
         width: '5rem',
         fontSize: '1rem',
         color: 'white',
-        position: 'absolute',
+        position: 'absolute',  
         right:'-2%',
         // bottom: '-2%',
         top: '-2%',

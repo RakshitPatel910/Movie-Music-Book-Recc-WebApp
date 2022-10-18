@@ -12,10 +12,15 @@ export default function Watchlist ()
     return (
 
 <>
+<<<<<<< HEAD
     
       <>
                 
        <Stack spacing={2} direction="row" marginTop={2.5}>
+=======
+      <>              
+       <Stack spacing={3} direction="row">
+>>>>>>> 2b348212f8db525c06888f5babf775775a205236
                       <Grid></Grid>
                       <Grid></Grid>                        <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
