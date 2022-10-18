@@ -158,8 +158,8 @@ export default function PersistentDrawerRight() {
         </Button>
         <Divider />
 
-        <List>
-        <ListItemButton>
+        <List style={{display:"flex",flexDirection:"column"}}>
+          <ListItemButton>
             <ListItem>
               <ListItemIcon>
                 <RememberMeIcon />
