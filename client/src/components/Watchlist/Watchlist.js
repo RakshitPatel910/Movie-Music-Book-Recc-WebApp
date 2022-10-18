@@ -15,15 +15,13 @@ export default function Watchlist ()
     
       <>
                 
-       <Stack spacing={3} direction="row">
+       <Stack spacing={2} direction="row" marginTop={2.5}>
                       <Grid></Grid>
-                      <Grid></Grid>
-                        <Button variant="contained">HISTORY</Button>
-                        <PopupState variant="popover" popupId="demo-popup-menu">
+                      <Grid></Grid>                        <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
         <React.Fragment>
           <Button variant="contained" {...bindTrigger(popupState)}>
-            GENERE
+            FILLTER
           </Button>
           <Menu {...bindMenu(popupState)}>
             <MenuItem onClick={popupState.close}>ACTION</MenuItem>
@@ -50,9 +48,7 @@ export default function Watchlist ()
       
         <button class="card__btn" value="Watch trailer">Add to Cart</button>
 
-        <div class="card__rating">
-          8.2
-        </div>
+       
       </div>
     </main>
     
