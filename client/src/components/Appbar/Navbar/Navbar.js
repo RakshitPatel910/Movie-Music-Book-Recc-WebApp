@@ -31,6 +31,7 @@ import { borderRadius } from "@mui/system";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import '../Navbar/navbarStyle.css'
 
 const drawerWidth = 190;
 
@@ -149,8 +150,10 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </DrawerHeader>
 
-        <Button>
-          <Avatar></Avatar>
+        <Button >
+          <Avatar style={{backgroundColor:"red"}} >
+              <input type="file" accept="image/*" className="changeImg"/>
+          </Avatar>
         </Button>
 
         <Button color="inherit">
