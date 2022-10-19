@@ -150,11 +150,9 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </DrawerHeader>
 
-        <Button >
-          <Avatar style={{backgroundColor:"red"}} >
-              <input type="file" accept="image/*" className="changeImg"/>
-          </Avatar>
-        </Button>
+        <Avatar  className="userAvatar" sx={{"height":"70px","width":"70px"}} >
+            <input type="file" accept="image/*" className="changeImg"/>
+        </Avatar>
 
         <Button color="inherit">
           <Typography variant="h5">{name.profile.userName}</Typography>

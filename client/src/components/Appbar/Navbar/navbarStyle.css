@@ -1,5 +1,16 @@
-.changeImg{
+.userAvatar{
+    background-color: red;
+    margin: 10px auto;
     height: 200px;
-    /* display: none; */
-    background-color: transparent;
+    width: 200px;
+   
+}
+
+
+
+.changeImg{
+    height: 64px;
+    width: 62px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0);
 }
