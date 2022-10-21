@@ -86,14 +86,12 @@ export default function PersistentDrawerRight() {
 
   return (
     <Box
-      style={{ display: "flex" ,overflow :'hidden'}}
+      style={{ display: "flex", overflow: "hidden" }}
       marginBottom={3}
       marginRight={3}
       marginLeft={3}
       marginTop={2.5}
-
     >
-    
       <AppBar
         style={{ background: "#5579C6", borderRadius: "20px" }}
         position="xifed"
@@ -101,14 +99,12 @@ export default function PersistentDrawerRight() {
         open={open}
       >
         <Toolbar>
-
-          <IconButton color="inherit" component={Link} to="/"  >
-            <ContactlessIcon  />
+          <IconButton color="inherit" component={Link} to="/">
+            <ContactlessIcon />
           </IconButton>
           <Typography
             variant="h4"
             style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
-            
           >
             Movicon
           </Typography>
@@ -120,7 +116,7 @@ export default function PersistentDrawerRight() {
             onClick={handleDrawerOpen}
             style={{ ...(open && { display: "none" }) }}
           >
-            <Avatar style={{ background: "#281E5D"}}>
+            <Avatar style={{ background: "#281E5D" }}>
               <FlashOnOutlinedIcon />
             </Avatar>
           </IconButton>
@@ -140,8 +136,7 @@ export default function PersistentDrawerRight() {
         open={open}
       >
         <DrawerHeader style={{ background: "#7697A0" }}>
-          <IconButton 
-          onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
@@ -150,16 +145,24 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </DrawerHeader>
 
-        <Avatar  className="userAvatar" sx={{"height":"70px","width":"70px"}} >
-            <input type="file" accept="image/*" className="changeImg"/>
-        </Avatar>
+        <div className="avatar">
+          <Avatar
+            className="userAvatar"
+            sx={{
+              height: "70px",
+              width: "70px",
+              backgroundImage: "../Navbar/download.png",
+            }}
+            ></Avatar>
+          <input type="file" accept="image/*" label="hii" className="changeImg" />
+        </div>
 
         <Button color="inherit">
           <Typography variant="h5">{name.profile.userName}</Typography>
         </Button>
         <Divider />
 
-        <List style={{display:"flex",flexDirection:"column"}}>
+        <List style={{ display: "flex", flexDirection: "column" }}>
           <ListItemButton>
             <ListItem>
               <ListItemIcon>
@@ -168,7 +171,6 @@ export default function PersistentDrawerRight() {
               <ListItemText style={{ color: "black" }} primary="My Profile" />
             </ListItem>
           </ListItemButton>
-
 
           <ListItemButton>
             <ListItem>
@@ -184,7 +186,13 @@ export default function PersistentDrawerRight() {
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText style={{ color: "black" }} primary="Sign Out" onClick={() => { logOut() }} />
+              <ListItemText
+                style={{ color: "black" }}
+                primary="Sign Out"
+                onClick={() => {
+                  logOut();
+                }}
+              />
             </ListItem>
           </ListItemButton>
         </List>
