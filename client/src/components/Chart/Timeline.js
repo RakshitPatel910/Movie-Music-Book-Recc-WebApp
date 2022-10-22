@@ -67,11 +67,10 @@ function Timeline(){
             {movieInfo.map((e) => {
               return (
                 <>
-                  <li className="event" data-date={moment(e.date).format("D MMMM yyyy")}>
+                  <Link to={`/timeline/${e.id}`} className="event" data-date={moment(e.date).format("D MMMM yyyy")}>
                     <div className="arrow-right"></div>
-                    <Link
-                      // component={Link}
-                      to={`/timeline/${e.id}`}
+                    <div
+                      // to={`/timeline/${e.id}`}
                       className='timelineCard'
                       style={{
                         display: "flex",
@@ -87,8 +86,8 @@ function Timeline(){
                         </div>
                         <img src={e.poster} alt={e.name} width="200" height="135" className="movieImg"></img>
                       </div>
-                    </Link>
-                  </li>
+                    </div>
+                  </Link>
                 </>
               );
             })}

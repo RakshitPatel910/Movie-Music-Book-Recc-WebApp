@@ -6,4 +6,5 @@ export const signIn = (email, password) => API.post('/signin', { email: email, p
 export const signUp = (userName, email, password) => API.post('/signup', { userName: userName, email: email, password: password});
 
 export const createWatchCount = (email) => API.post('/createWatchCount', { email: email });
+export const getReccGenre = (email) => API.get('/getPerRecc', { email: email })
 export const doesWatchCountExist = (email) => API.post("/doesWatchListExist", { email: email });

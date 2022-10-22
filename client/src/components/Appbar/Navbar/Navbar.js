@@ -62,10 +62,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight() {
+export default function PersistentDrawerRight({ setIsLogged }) {
   const name = JSON.parse(localStorage.getItem('profile'))
-  console.log("username",name.profile.userName)
-
+  
+  // console.log("username",name.profile.userName)
   const theme = useTheme();
   const [image,setImage] = useState(null)
   const [open, setOpen] = React.useState(false);
@@ -84,11 +84,12 @@ export default function PersistentDrawerRight() {
   };
 
   const logOut = () => {
-    try {
-      dispatch(logout(navigate));
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+      console.log('trying to logout')
+      dispatch(logout(setIsLogged, navigate));
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -101,7 +102,7 @@ export default function PersistentDrawerRight() {
     >
       <AppBar
         style={{ background: "#5579C6", borderRadius: "20px" }}
-        position="xifed"
+        position="sticky"
         elevation={0}
         open={open}
       >
@@ -134,7 +135,7 @@ export default function PersistentDrawerRight() {
         style={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
+          "& .MuiDrawerPaper": {
             width: drawerWidth,
           },
         }}
@@ -186,7 +187,7 @@ export default function PersistentDrawerRight() {
         </div>
 
         <Button color="inherit">
-          <Typography variant="h5">{name.profile.userName}</Typography>
+          <Typography variant="h5">{name === null ? 'username' : name.profile.userName}</Typography>
         </Button>
         <Divider />
 

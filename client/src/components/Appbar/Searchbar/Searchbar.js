@@ -65,23 +65,25 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <Box sx={{ display: "flex", marginTop: "30" }}>
-      <Grid container spacing={3} columns={16} marginTop={0}>
-        <Grid xs={0.6}></Grid>
-        <Grid xs={0.3}>
-          <IconButton
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="end"
-            style={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Grid>
-        <Grid xs={3}></Grid>
-        <Grid xs={11}>
-          <Item>
-            <FormControl
+    <Box sx={{ display: "flex" , marginTop :"30"}}>
+
+
+      <Grid container spacing={3} columns={16}  marginTop ={0}>
+      <Grid item xs={0.6}></Grid>
+       <Grid item xs={0.3}>
+    <IconButton
+    
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="end"
+              style={{mr: 2, ...(open && { display: "none" }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+        </Grid>      
+        <Grid item xs={3}></Grid>
+            <Grid item xs={11}>
+    <Item><FormControl
               fullWidth
               id="fullWidth"
               variant="outlined"
@@ -112,7 +114,7 @@ export default function PersistentDrawerLeft() {
         style={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
+          "& .MuiDrawerPaper": {
             width: drawerWidth,
             boxSizing: "border-box",
           },
@@ -133,10 +135,10 @@ export default function PersistentDrawerLeft() {
 
         <Divider />
         <List style={{display:"flex",flexDirection:"column"}}>
-          {console.log(moviesGenre)}
+          {/* {console.log(moviesGenre)} */}
           {moviesGenre.map(e=>{
             return (
-              <ListItemButton>
+              <ListItemButton key={e.id}>
                 <ListItem component={Link} to={`/${e.name}-${e.id}`}>
                 <ListItemText style={{ color: "black" }} primary={e.name} />
                 </ListItem>
