@@ -138,7 +138,7 @@ export default function PersistentDrawerLeft() {
           {/* {console.log(moviesGenre)} */}
           {moviesGenre.map(e=>{
             return (
-              <ListItemButton>
+              <ListItemButton key={e.id}>
                 <ListItem component={Link} to={`/${e.name}-${e.id}`}>
                 <ListItemText style={{ color: "black" }} primary={e.name} />
                 </ListItem>
