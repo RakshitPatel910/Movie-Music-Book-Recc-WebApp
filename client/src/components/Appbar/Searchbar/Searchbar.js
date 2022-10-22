@@ -67,8 +67,8 @@ export default function PersistentDrawerLeft() {
 
 
       <Grid container spacing={3} columns={16}  marginTop ={0}>
-      <Grid xs={0.6}></Grid>
-       <Grid xs={0.3}>
+      <Grid item xs={0.6}></Grid>
+       <Grid item xs={0.3}>
     <IconButton
     
               aria-label="open drawer"
@@ -79,8 +79,8 @@ export default function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
         </Grid>      
-        <Grid xs={3}></Grid>
-            <Grid xs={11}>
+        <Grid item xs={3}></Grid>
+            <Grid item xs={11}>
     <Item><FormControl
               fullWidth
               id="fullWidth"
@@ -105,7 +105,7 @@ export default function PersistentDrawerLeft() {
         style={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
+          "& .MuiDrawerPaper": {
             width: drawerWidth,
             boxSizing: "border-box",
           },

@@ -30,7 +30,7 @@ import { doesWatchCountExist } from "../../../api/backend";
 
 const initialState = { email: "", password:"" };
 
-function Signin({ isSignUp, setIsSignUp }) {
+function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
   const [profile,setProfile] = useState(initialState);
   
   const navigate = useNavigate()
@@ -57,7 +57,7 @@ function Signin({ isSignUp, setIsSignUp }) {
     //   alert('Email or Password is incorrect')
     // } 
 
-    dispatch(signin(profile, navigate));
+    dispatch(signin(profile, setIsLogged, navigate));
 
     // const {doesExist} = await doesWatchCountExist(JSON.parse(localStorage.getItem('profile')._id));
   }

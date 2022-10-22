@@ -5,7 +5,7 @@ const authReducer = ( watchCount = [], action ) => {
             localStorage.setItem('watchCount', JSON.stringify( action?.payload ));
             return [ ...watchCount, action.payload ];
             // return [ ...watchCount, action?.payload ];
-        case "LOGOUT":
+        case "GET_PER_RECC":
             localStorage.clear();
             return { ...watchCount, watchCount: null };
         default:

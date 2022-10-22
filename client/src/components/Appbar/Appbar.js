@@ -3,10 +3,10 @@ import React from 'react'
 import Navbar from './Navbar/Navbar.js';
 import Searchbar from "./Searchbar/Searchbar.js";
 
-const Appbar = () => {
+const Appbar = ({ setIsLogged }) => {
   return (
     <>
-        <Navbar/>
+        <Navbar setIsLogged={setIsLogged} />
         <Searchbar/>
     </>
   )

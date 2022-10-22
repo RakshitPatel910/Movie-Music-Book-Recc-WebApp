@@ -14,7 +14,7 @@ function MovieCard({ list }) {
         const movieId = await axios.post(
           "http://localhost:3010/addToWatchlist",
           {
-            _id: "633159a3f4d16ffa0cd797bb",
+            _id: JSON.parse(localStorage.getItem('profile')._id),
             movieId: movie_id,
           }
         );
