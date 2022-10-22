@@ -18,5 +18,19 @@ router.post('/userData',async (req,res)=>{
     }
 })
 
+router.post('/changeProfilePhoto',async(req,res)=>{
+    const {_id,profilePhoto} = req.body
+    const user = await User.findById(_id)
+    if(user === null){
+        return res.json({message:"USer doesnt exist",status:false})
+    }
+    else{
+        user.profilePhoto = profilePhoto
+        await User.findByIdAndUpdate({_id},user)
+        return res.json({message:"Profile photo changed succesfully",status:true})
+    }
+
+})
+
 module.exports = router;
 

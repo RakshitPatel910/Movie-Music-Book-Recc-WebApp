@@ -1,11 +1,13 @@
 import * as React from "react";
-
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { logout } from '../../../actions/auth.js';
 
-import { Avatar, Button} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Avatar, Button, imageListClasses} from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -63,7 +65,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function PersistentDrawerRight() {
   const name = JSON.parse(localStorage.getItem('profile'))
   console.log("username",name.profile.userName)
+
   const theme = useTheme();
+  const [image,setImage] = useState(null)
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -71,6 +75,9 @@ export default function PersistentDrawerRight() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
+  
+
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -145,16 +152,37 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </DrawerHeader>
 
-        <div className="avatar">
-          <Avatar
-            className="userAvatar"
-            sx={{
-              height: "70px",
-              width: "70px",
-              backgroundImage: "../Navbar/download.png",
+        <div className="profile-pic">
+          <label className="-label" for="file">
+            <span className="glyphicon glyphicon-camera"></span>
+            <span >
+              <EditIcon sx={{margin:"auto"}}/>
+            </span>
+          </label>
+          <input
+            id="file"
+            type="file"
+            accept="*/image"
+            onChange={(event) => {
+              console.log(URL.createObjectURL(event.target.files[0]));
+              setImage(URL.createObjectURL(event.target.files[0]));
             }}
-            ></Avatar>
-          <input type="file" accept="image/*" label="hii" className="changeImg" />
+          />
+          {console.log(image)}
+          {image === null ? (
+            (console.log("image is null"),
+            (
+              // <AccountCircleIcon/>
+              <img
+                src="../Navbar/download.png"
+                alt="profile"
+                id="output"
+                width="200"
+              />
+            ))
+          ) : (
+            <img src={image} alt="profile" id="output" width="200" />
+          )}
         </div>
 
         <Button color="inherit">
