@@ -33,7 +33,7 @@ export const signup = ( profile, navigate, setIsSignUp ) => async (dispatch) => 
     try {
         const { data } = await api.signUp( profile.userName, profile.email, profile.password );
         
-        // dispatch({ type: "AUTH", data });
+        dispatch({ type: "AUTH", data });
         
         // navigate('/home');
         setIsSignUp(0);

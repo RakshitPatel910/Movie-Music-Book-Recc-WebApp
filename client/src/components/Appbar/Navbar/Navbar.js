@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { logout } from '../../../actions/auth.js';
 
-import { Avatar, Button,Grid } from "@mui/material";
+import { Avatar, Button} from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -30,6 +30,8 @@ import { Link } from "react-router-dom";
 import { borderRadius } from "@mui/system";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import '../Navbar/navbarStyle.css'
 
 const drawerWidth = 190;
 
@@ -59,6 +61,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerRight({ setIsLogged }) {
+  const name = JSON.parse(localStorage.getItem('profile'))
+  // console.log("username",name.profile.userName)
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -83,14 +87,12 @@ export default function PersistentDrawerRight({ setIsLogged }) {
 
   return (
     <Box
-      style={{ display: "flex" ,overflow :'hidden'}}
+      style={{ display: "flex", overflow: "hidden" }}
       marginBottom={3}
       marginRight={3}
       marginLeft={3}
       marginTop={2.5}
-
     >
-    
       <AppBar
         style={{ background: "#5579C6", borderRadius: "20px" }}
         position="sticky"
@@ -98,14 +100,12 @@ export default function PersistentDrawerRight({ setIsLogged }) {
         open={open}
       >
         <Toolbar>
-
-          <IconButton color="inherit" component={Link} to="/"  >
-            <ContactlessIcon  />
+          <IconButton color="inherit" component={Link} to="/">
+            <ContactlessIcon />
           </IconButton>
           <Typography
             variant="h4"
             style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
-            
           >
             Movicon
           </Typography>
@@ -117,7 +117,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             onClick={handleDrawerOpen}
             style={{ ...(open && { display: "none" }) }}
           >
-            <Avatar style={{ background: "#281E5D"}}>
+            <Avatar style={{ background: "#281E5D" }}>
               <FlashOnOutlinedIcon />
             </Avatar>
           </IconButton>
@@ -137,8 +137,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
         open={open}
       >
         <DrawerHeader style={{ background: "#7697A0" }}>
-          <IconButton 
-          onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
@@ -147,17 +146,25 @@ export default function PersistentDrawerRight({ setIsLogged }) {
           </IconButton>
         </DrawerHeader>
 
-        <Button>
-          <Avatar></Avatar>
-        </Button>
+        <div className="avatar">
+          <Avatar
+            className="userAvatar"
+            sx={{
+              height: "70px",
+              width: "70px",
+              backgroundImage: "../Navbar/download.png",
+            }}
+            ></Avatar>
+          <input type="file" accept="image/*" label="hii" className="changeImg" />
+        </div>
 
         <Button color="inherit">
-          <Typography variant="h5">USERNAME</Typography>
+          <Typography variant="h5">{name === null ? 'username' : name.profile.userName}</Typography>
         </Button>
         <Divider />
 
-        <List>
-        <ListItemButton>
+        <List style={{ display: "flex", flexDirection: "column" }}>
+          <ListItemButton>
             <ListItem>
               <ListItemIcon>
                 <RememberMeIcon />
@@ -166,12 +173,27 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             </ListItem>
           </ListItemButton>
 
-          <ListItemButton onClick={() => logOut() }>
+          <ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <WorkHistoryIcon />
+              </ListItemIcon>
+              <ListItemText style={{ color: "black" }} primary="History" />
+            </ListItem>
+          </ListItemButton>
+
+          <ListItemButton>
             <ListItem>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText style={{ color: "black" }} primary="Sign Out"  />
+              <ListItemText
+                style={{ color: "black" }}
+                primary="Sign Out"
+                onClick={() => {
+                  logOut();
+                }}
+              />
             </ListItem>
           </ListItemButton>
         </List>

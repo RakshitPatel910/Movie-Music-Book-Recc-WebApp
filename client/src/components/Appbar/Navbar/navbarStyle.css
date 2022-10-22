@@ -1,0 +1,23 @@
+.avatar{
+    display: flex;
+    flex-direction: row;
+}
+
+.userAvatar{
+    margin: 10px auto;
+    height: 200px;
+    width: 200px;
+    background-image: '../Navbar/download.png';
+}
+
+
+
+.changeImg{
+    height: 24px;
+    width: 22px;
+    margin: 0 auto;
+    border-radius: 20px;
+    /* background: rgba(0, 0, 0, 0); */
+    /* opacity:0.0; */
+    /* filter: alpha(opacity=0) */
+}
