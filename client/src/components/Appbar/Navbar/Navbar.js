@@ -3,12 +3,12 @@ import { useState,useEffect,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
-
 import { logout } from '../../../actions/auth.js';
+import { Avatar, Button} from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Avatar, Button, imageListClasses} from "@mui/material";
+import {  imageListClasses} from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
