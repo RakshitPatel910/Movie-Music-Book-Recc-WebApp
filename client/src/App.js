@@ -7,6 +7,8 @@ import Appbar from './components/Appbar/Appbar.js';
 import Forgpass from './components/Auth/Forgpass.js';
 import Signinappbar from './components/Appbar/Signinappbar.js';
 // import Watchlist from './components/Watchlist/Watchlist.js';
+import Profilepage from './components/Profilepage/Profilepage.js';
+
 
 
 import Auth from './components/Auth/Auth';
@@ -23,7 +25,7 @@ dotenv.config({ path: "../config.env" });
 function App() {
 
   // const navigate = useNavigate();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
 
   // useEffect(() => {
@@ -36,10 +38,11 @@ function App() {
       <BrowserRouter>
 
         
-        <Appbar/> 
+        {/* <Appbar/>  */}
         {/* <Forgpass />     */}
-        {/* <Signinappbar /> */}
+        <Signinappbar />
         {/* <Watchlist /> */}
+        <Profilepage />
 
         {/* <Navbar />
         <Searchbar /> */}
@@ -48,6 +51,8 @@ function App() {
         {/* <Signinappbar /> */}
         {/* <Home /> */}
         {/* <Timeline /> */}
+
+
           <Routes>
             {/* <Route path="/" exact element={<Auth />} /> */}
 
@@ -59,7 +64,7 @@ function App() {
           {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
 
-            { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> }
+            {/* { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> } */}
 
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}

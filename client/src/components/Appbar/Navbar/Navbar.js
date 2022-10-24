@@ -1,10 +1,7 @@
 import * as React from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
 import { logout } from '../../../actions/auth.js';
-
 import { Avatar, Button} from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
