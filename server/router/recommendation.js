@@ -52,6 +52,8 @@ router.get('/getPerRecc', async (req, res) => {
     res.status(200).json({ message: 'Calculated!!!' });
 
     console.log(recommendedGenre);
+
+    return res.json({ message: "calculations done.", reccGenres: recommendedGenre });
 });
 
 

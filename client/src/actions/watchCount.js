@@ -1,10 +1,10 @@
 import * as api from '../api/backend.js';
 
-export const createWatchCount = ( userId ) => async ( dispatch ) => {
+export const getPerReccomendation = ( email ) => async ( dispatch ) => {
     try {
-        const { watchCountData } = await api.createWatchCount( userId );
+        const { watchCountData } = await api.createWatchCount( email );
 
-        dispatch({type: "CREATE", payload: watchCountData })
+        dispatch({type: "GET_PER_RECC", payload: watchCountData })
     } catch (error) {
         console.log(error)
     }

@@ -1,8 +1,19 @@
 import * as React from "react";
+<<<<<<< HEAD
+=======
+import { useState } from "react";
+>>>>>>> e523b1b72dccdb95e97a9fcb60b66aea39c61d49
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from '../../../actions/auth.js';
+<<<<<<< HEAD
 import { Avatar, Button} from "@mui/material";
+=======
+
+import EditIcon from "@mui/icons-material/Edit";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Avatar, Button, imageListClasses} from "@mui/material";
+>>>>>>> e523b1b72dccdb95e97a9fcb60b66aea39c61d49
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -28,6 +39,7 @@ import { borderRadius } from "@mui/system";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import '../Navbar/navbarStyle.css'
 
 const drawerWidth = 190;
 
@@ -56,10 +68,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight() {
+export default function PersistentDrawerRight({ setIsLogged }) {
   const name = JSON.parse(localStorage.getItem('profile'))
-  console.log("username",name.profile.userName)
+  
+  // console.log("username",name.profile.userName)
   const theme = useTheme();
+  const [image,setImage] = useState(null)
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -68,43 +82,43 @@ export default function PersistentDrawerRight() {
     setOpen(true);
   };
 
+  
+
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
   const logOut = () => {
-    try {
-      dispatch(logout(navigate));
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+      console.log('trying to logout')
+      dispatch(logout(setIsLogged, navigate));
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
     <Box
-      style={{ display: "flex" ,overflow :'hidden'}}
+      style={{ display: "flex", overflow: "hidden" }}
       marginBottom={3}
       marginRight={3}
       marginLeft={3}
       marginTop={2.5}
-
     >
-    
       <AppBar
         style={{ background: "#5579C6", borderRadius: "20px" }}
-        position="xifed"
+        position="sticky"
         elevation={0}
         open={open}
       >
         <Toolbar>
-
-          <IconButton color="inherit" component={Link} to="/"  >
-            <ContactlessIcon  />
+          <IconButton color="inherit" component={Link} to="/">
+            <ContactlessIcon />
           </IconButton>
           <Typography
             variant="h4"
             style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
-            
           >
             Movicon
           </Typography>
@@ -116,7 +130,7 @@ export default function PersistentDrawerRight() {
             onClick={handleDrawerOpen}
             style={{ ...(open && { display: "none" }) }}
           >
-            <Avatar style={{ background: "#281E5D"}}>
+            <Avatar style={{ background: "#281E5D" }}>
               <FlashOnOutlinedIcon />
             </Avatar>
           </IconButton>
@@ -127,7 +141,7 @@ export default function PersistentDrawerRight() {
         style={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
+          "& .MuiDrawerPaper": {
             width: drawerWidth,
           },
         }}
@@ -136,8 +150,7 @@ export default function PersistentDrawerRight() {
         open={open}
       >
         <DrawerHeader style={{ background: "#7697A0" }}>
-          <IconButton 
-          onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
@@ -146,17 +159,46 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </DrawerHeader>
 
-        <Button>
-          <Avatar></Avatar>
-        </Button>
+        <div className="profile-pic">
+          <label className="-label" for="file">
+            <span className="glyphicon glyphicon-camera"></span>
+            <span >
+              <EditIcon sx={{margin:"auto"}}/>
+            </span>
+          </label>
+          <input
+            id="file"
+            type="file"
+            accept="*/image"
+            onChange={(event) => {
+              console.log(URL.createObjectURL(event.target.files[0]));
+              setImage(URL.createObjectURL(event.target.files[0]));
+            }}
+          />
+          {console.log(image)}
+          {image === null ? (
+            (console.log("image is null"),
+            (
+              // <AccountCircleIcon/>
+              <img
+                src="../Navbar/download.png"
+                alt="profile"
+                id="output"
+                width="200"
+              />
+            ))
+          ) : (
+            <img src={image} alt="profile" id="output" width="200" />
+          )}
+        </div>
 
         <Button color="inherit">
-          <Typography variant="h5">{name.profile.userName}</Typography>
+          <Typography variant="h5">{name === null ? 'username' : name.profile.userName}</Typography>
         </Button>
         <Divider />
 
-        <List>
-        <ListItemButton>
+        <List style={{ display: "flex", flexDirection: "column" }}>
+          <ListItemButton>
             <ListItem>
               <ListItemIcon>
                 <RememberMeIcon />
@@ -164,7 +206,6 @@ export default function PersistentDrawerRight() {
               <ListItemText style={{ color: "black" }} primary="My Profile" />
             </ListItem>
           </ListItemButton>
-
 
           <ListItemButton>
             <ListItem>
@@ -180,7 +221,13 @@ export default function PersistentDrawerRight() {
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText style={{ color: "black" }} primary="Sign Out" onClick={() => { logOut() }} />
+              <ListItemText
+                style={{ color: "black" }}
+                primary="Sign Out"
+                onClick={() => {
+                  logOut();
+                }}
+              />
             </ListItem>
           </ListItemButton>
         </List>

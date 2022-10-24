@@ -25,17 +25,25 @@ dotenv.config({ path: "../config.env" });
 function App() {
 
   // const navigate = useNavigate();
+<<<<<<< HEAD
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+=======
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const [isLogged, setIsLogged] = useState(user===null ? false:true);
+>>>>>>> e523b1b72dccdb95e97a9fcb60b66aea39c61d49
 
 
-  // useEffect(() => {
-  //   setUser(JSON.parse(localStorage.getItem('profile')));
-  // }, [navigate])
+  useEffect(() => {
+    console.log(isLogged);
+    setUser(JSON.parse(localStorage.getItem('profile')));
+    console.log(user);
+  }, [isLogged])
   
 
   return (
     <>
       <BrowserRouter>
+<<<<<<< HEAD
 
         
         {/* <Appbar/>  */}
@@ -44,9 +52,11 @@ function App() {
         {/* <Watchlist /> */}
         <Profilepage />
 
+=======
+>>>>>>> e523b1b72dccdb95e97a9fcb60b66aea39c61d49
         {/* <Navbar />
         <Searchbar /> */}
-        {/* <Appbar /> */}
+        <Appbar setIsLogged={setIsLogged} />
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
         {/* <Home /> */}
@@ -64,7 +74,11 @@ function App() {
           {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
 
+<<<<<<< HEAD
             {/* { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth />} /> } */}
+=======
+            { user ? <Route path="/*"  element={<Home />} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} /> }
+>>>>>>> e523b1b72dccdb95e97a9fcb60b66aea39c61d49
 
             {/* <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
             {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}

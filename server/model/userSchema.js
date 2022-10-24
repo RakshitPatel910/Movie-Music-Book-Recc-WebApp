@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema({
       date: Date,
     },
   ],
+  profilePhoto:String
 }); 
 
 const  User = mongoose.model('User',userSchema)
