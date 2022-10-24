@@ -44,11 +44,11 @@ router.post('/doesWatchListExist', async (req, res) => {
 
 router.get('/getPerRecc', async (req, res) => {
     const { email } = req.body;
-
+    console.log(email)
     const userData = await WatchCount.findOne({ email: email });
-
+    console.log(userData)
     const recommendedGenre =  personalRecommendation(userData.stats);
-
+    
     res.status(200).json({ message: 'Calculated!!!' });
 
     console.log(recommendedGenre);

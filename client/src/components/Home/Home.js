@@ -24,13 +24,14 @@ export default function Home(){
 
     useEffect( () => {
         const getReccGenreCall = async () => {
+            
             const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
             setReccGenres(data);
     
             console.log(reccGenres);
         }
 
-         getReccGenreCall();
+        //  getReccGenreCall();
 
         // console.log(localStorage.getItem('profile').email)
         // console.log('inside useEffect')

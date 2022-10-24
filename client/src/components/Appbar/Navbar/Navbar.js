@@ -1,7 +1,8 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import axios from 'axios';
 
 import { logout } from '../../../actions/auth.js';
 
@@ -68,15 +69,65 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   // console.log("username",name.profile.userName)
   const theme = useTheme();
   const [image,setImage] = useState(null)
+  const [user,setUser] = useState()
+  let id = useRef(null)
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  let base64String = "";
+
+  useEffect(()=>{
+   
+    const user = JSON.parse(localStorage.getItem("profile"));
+    console.log(user.profile.id); 
+    const Id = (user.profile.id).trim()
+    id.current = Id
+    console.log("id",id,"type",typeof(id))
+
+    async function getUserData(){
+      const data = await axios.post('http://localhost:3010/userData',{_id:Id})  
+      console.log(data.data.data.profilePhoto)  
+      setImage(data.data.data.profilePhoto)
+    } 
+ 
+    getUserData() 
+
+  },[])
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
-  
+  const handleFile = async (event) => {
+    var newImage = event.target.files[0];
+    // console.log(newImage)
+    var reader = new FileReader()
+    reader.onload = function (){
+      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+      setImage(base64String);
+      console.log("image",image)
+      // console.log(base64String);
+    }
+    reader.readAsDataURL(newImage);
+    // const formData = new FormData();
+    // formData.append("fileupload", event.target.files[0]);
+    const userId = (id.current).trim()
+    console.log(userId)
+    console.log(id.current)
+    const data = await axios
+      .post("http://localhost:3010/changeProfilePhoto", {
+        _id: userId,
+        profilePhoto: newImage,
+      })
+      .then((e) => {
+        console.log("successfully change photo");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    console.log(data)
+  };
 
 
   const handleDrawerClose = () => {
@@ -164,10 +215,11 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             id="file"
             type="file"
             accept="*/image"
-            onChange={(event) => {
-              console.log(URL.createObjectURL(event.target.files[0]));
-              setImage(URL.createObjectURL(event.target.files[0]));
-            }}
+            onChange={handleFile}
+            // onChange={(event) => {
+            //   console.log(URL.createObjectURL(event.target.files[0]));
+            //   setImage(URL.createObjectURL(event.target.files[0]));
+            // }}
           />
           {console.log(image)}
           {image === null ? (
@@ -182,7 +234,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
               />
             ))
           ) : (
-            <img src={image} alt="profile" id="output" width="200" />
+            <img src={`data:image/png;base64,${image}`} alt="profile" id="output" width="200" />
           )}
         </div>
 

@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     console.log(isLogged);
     setUser(JSON.parse(localStorage.getItem('profile')));
-    console.log(user);
+    // console.log(user);
   }, [isLogged])
   
 
