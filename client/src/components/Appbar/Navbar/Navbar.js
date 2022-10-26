@@ -68,17 +68,19 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   
   // console.log("username",name.profile.userName)
   const theme = useTheme();
-  const [image,setImage] = useState(null)
+  // const [image,setImage] = useState(null)
   const [user,setUser] = useState()
   let id = useRef(null)
+  const image  = useRef(null)
   const [open, setOpen] = React.useState(false);
+  const [toggle,setToggle] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   let base64String = "";
 
   useEffect(()=>{
-   
+    
     const user = JSON.parse(localStorage.getItem("profile"));
     console.log(user.profile.id); 
     const Id = (user.profile.id).trim()
@@ -87,13 +89,37 @@ export default function PersistentDrawerRight({ setIsLogged }) {
 
     async function getUserData(){
       const data = await axios.post('http://localhost:3010/userData',{_id:Id})  
-      console.log(data.data.data.profilePhoto)  
-      setImage(data.data.data.profilePhoto)
-    } 
- 
+      // console.log(data.data.data.profilePhoto)  
+      const oldImage = data.data.data.profilePhoto
+      // setImage(data.data.data.profilePhoto)
+      image.current = oldImage
+      
+    }
+    
     getUserData() 
 
   },[])
+
+  useEffect(()=>{
+    const changeImage = async ()=>{
+      console.log("image",image.current)
+      console.log("id",id.current)
+    //   await axios
+    //   .post("http://localhost:3010/changeProfilePhoto", {
+    //     _id: id.current,
+    //     profilePhoto: image.current,
+    //   })
+    //   .then((e) => {
+    //     console.log("successfully change photo");
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+    }
+
+    changeImage()
+
+  },[toggle])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,28 +131,16 @@ export default function PersistentDrawerRight({ setIsLogged }) {
     var reader = new FileReader()
     reader.onload = function (){
       base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-      setImage(base64String);
-      console.log("image",image)
       // console.log(base64String);
     }
     reader.readAsDataURL(newImage);
-    // const formData = new FormData();
-    // formData.append("fileupload", event.target.files[0]);
+    // setImage(base64String);
+    image.current = base64String
+    console.log(base64String)
     const userId = (id.current).trim()
-    console.log(userId)
-    console.log(id.current)
-    const data = await axios
-      .post("http://localhost:3010/changeProfilePhoto", {
-        _id: userId,
-        profilePhoto: newImage,
-      })
-      .then((e) => {
-        console.log("successfully change photo");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    console.log(data)
+    
+    setToggle(!toggle)
+   
   };
 
 
@@ -221,8 +235,8 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             //   setImage(URL.createObjectURL(event.target.files[0]));
             // }}
           />
-          {console.log(image)}
-          {image === null ? (
+          {console.log(image.current)}
+          {image.current === null ? (
             (console.log("image is null"),
             (
               // <AccountCircleIcon/>
@@ -234,7 +248,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
               />
             ))
           ) : (
-            <img src={`data:image/png;base64,${image}`} alt="profile" id="output" width="200" />
+            <img src={`data:image/png;base64,${image.current}`} alt="profile" id="output" width="200" />
           )}
         </div>
 
