@@ -21,41 +21,45 @@ async function getMovie(movieId){
 }
 
   async function createData(userData,user){
-
     return new Promise((resolve,reject)=>{
-      user.history.map( async (e)=>{
-       const id = e.movieId
-      //  console.log(id)
-       const movie = await getMovie(id) 
-       // console.log(movie)
-       movie.data.genres.map(e=>{
-         let gCount = 0
-         let i = 0
-         let index = 0
-         userData.map(dt=>{
-           if(dt.id === e.id){
-            // console.log("data id",dt.id,"genre id",e.id)
-             index = i
-             gCount++
-             // console.log(dt.count)
-             // dt.count = dt.count +  1
-             // console.log(dt.count)
-           }
-           i++
-         })
-  
-         userData[index].count = userData[index].count +  gCount
-        //  console.log(userData[index].count)
-         // statData = userData
-         // console.log("inside func",statData)
-       })
-       
-      })
+      try {
+        user.history.map(async (e) => {
+          const id = e.movieId;
+          //  console.log(id)
+          const movie = await getMovie(id);
+          // console.log(movie)
+          movie.data.genres.map((e) => {
+            let gCount = 0;
+            let i = 0;
+            let index = 0;
+            userData.map((dt) => {
+              if (dt.id === e.id) {
+                // console.log("data id",dt.id,"genre id",e.id)
+                index = i;
+                gCount++;
+                // console.log(dt.count)
+                // dt.count = dt.count +  1
+                // console.log(dt.count)
+              }
+              i++;
+            });
 
-      setTimeout(()=>{
-        resolve(userData)
-      },2000)
+            userData[index].count = userData[index].count + gCount;
+            //  console.log(userData[index].count)
+            // statData = userData
+            // console.log("inside func",statData)
+          });
+        });
+
+        setTimeout(() => {
+          resolve(userData);
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      }
+      
     })
+    
 
 }
 
@@ -132,6 +136,7 @@ router.post("/addToHistory", async (req, res) => {
  
 router.post('/userStat',async (req,res)=>{
   const {userId} = req.body
+  console.log("id",req.body.userId)
   var statData =[]
   let userData = [
     {"id":28,"name":"Action", "count": 0},
@@ -156,6 +161,7 @@ router.post('/userStat',async (req,res)=>{
   ]
  
   const user  = await Insight.findOne({userId:userId})
+  console.log("user",user)
   if(user === null){
     return res.json({message:"User does not exit",status:false})
   }

@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const router = express.Router()
 
 require("../db/conn");
@@ -6,7 +7,7 @@ const User = require("../model/userSchema");
 
 router.post('/userData',async (req,res)=>{
     const {_id} = req.body
-    const user = await User.findById(_id)
+    const user = await User.findById({ _id: mongoose.Types.ObjectId(_id) });
     if(user === null){
         return res.json({message:"User Doesnt exists",status:false})
     }
@@ -16,6 +17,21 @@ router.post('/userData',async (req,res)=>{
     else{   
         return res.json({data:user,status:true})
     }
+})
+
+router.post('/changeProfilePhoto',async(req,res)=>{
+    const {_id,profilePhoto} = req.body
+    console.log(req.body._id," ",req.body.profilePhoto)
+    const user = await User.findById({ _id: mongoose.Types.ObjectId(_id) });
+    if(user === null){
+        return res.json({message:"USer doesnt exist",status:false})
+    }
+    else{
+        user.profilePhoto = profilePhoto
+        await User.findByIdAndUpdate({_id},user)
+        return res.json({message:"Profile photo changed succesfully",status:true})
+    }
+
 })
 
 module.exports = router;

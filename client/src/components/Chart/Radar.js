@@ -1,29 +1,43 @@
 import React from "react";
 import axios from 'axios';
-import {useState,useEffect} from 'react'
+import {useState,useEffect,useRef} from 'react'
 import { ResponsiveRadar } from "@nivo/radar";
 
-
 function Radar(){
-    
+
+    const id = useRef(null)
+
+    useEffect(()=>{
+      
+    },[])
+
     const waitBeforeShow = 5050
 
     const [statData,setStatData] = useState()
     const [isShown, setIsShown] = useState(false);
 
-    const getData = async ()=>{
-        
-        const result = await axios.post("http://localhost:3010/userStat", {
-          userId: "534324243",
-        });
-      // console.log(result)
-       setStatData(result.data.stat)
-      
-    }
-
-    getData()
+    
 
     useEffect(() => {
+      const changeId = async () => {
+        const Id = JSON.parse(localStorage.getItem("profile")).profile.id;
+        console.log(Id);
+        id.current = Id;
+        console.log("id", id);
+      };
+      changeId();
+      console.log("outside func", id.current);
+
+      const getData = async () => {
+        const result = await axios.post("http://localhost:3010/userStat", {
+          userId: id.current,
+        });
+        // console.log(result)
+        console.log("api called");
+        setStatData(result.data.stat);
+      };
+      getData();
+
       const timer = setTimeout(() => {
         setIsShown(true);
       }, waitBeforeShow);
