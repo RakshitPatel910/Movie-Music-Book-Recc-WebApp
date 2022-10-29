@@ -57,6 +57,7 @@ function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
     //   alert('Email or Password is incorrect')
     // } 
 
+      console.log("clicked")
     dispatch(signin(profile, setIsLogged, navigate));
 
     // const {doesExist} = await doesWatchCountExist(JSON.parse(localStorage.getItem('profile')._id));
