@@ -1,11 +1,24 @@
-import * as api from "../api/tmdb.js";
+import * as api from "../api/backend.js";
+// import * as api from "../api/tmdb.js";
 
-export const getMovies = (page, id, name) => async(dispatch) => {
+// export const getMovies = (page, id, name) => async(dispatch) => {
+//     try {
+//         await api.fetchMovies( id);
+
+//         dispatch({type: "GENRE_CHANGE", payload: {name: name, id: id}})
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
+
+export const getReccGenreCall = ( email ) => async (dispatch) => {
     try {
-        await api.fetchMovies( id);
+        const { data } = await api.getReccGenre(email);
 
-        dispatch({type: "GENRE_CHANGE", payload: {name: name, id: id}})
+        console.log(data.reccGenres);
+
+        dispatch({ type: "RECC_GENRE_ARRAY", payload: data.reccGenres });
     } catch (error) {
-        console.log(error.message);
+        console.log(error)
     }
 }

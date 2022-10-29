@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 import Carousel from "../Carousel/Carousel.js";
 import Movieinfo from '../Movieinfo/Movieinfo.js';
@@ -8,34 +9,64 @@ import SearchResults from '../SearchResults/SearchResults.js';
 import Timeline from "../Chart/Timeline.js";
 
 import { getReccGenre } from "../../api/backend.js";
+import { getReccGenreCall } from "../../actions/genreSelector.js"
 
 import { moviesGenre } from '../../constants/genreId.js';
 
 export default function Home(){
+
+    const dispatch = useDispatch();
 
     const [reccGenres, setReccGenres] = useState([]);
     const [reccMovies, setReccMovies] = useState([]);
 
     const genreList = moviesGenre.sort( () => 0.5 -Math.random() ).slice(0, 2);
 
-    const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=`);
+    const fetchMovies = (page, genres) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genres}`);
 
+    // const getReccGenreCall = async () => {
+    //     // // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
+
+    //     // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
+
+    //     // // console.log(JSON.stringify(JSON.parse(localStorage.getItem('profile')).profile.email))
+    //     // // console.log(data.data.reccGenres)
+    //     // setTimeout(() => {
+    //     //     setReccGenres(data.data.reccGenres);
+    //     //     console.log(reccGenres);
+    //     //     createReccMovieList();
+    //     // }, 2000);   
+
+    //     // // getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email).then( async (re) => {
+    //     // //     setReccGenres(re.data.reccGenres);
+    //     // //     console.log(reccGenres);
+    //     // //     createReccMovieList();
+    //     // // }).catch(console.log("something went wrong"))
+
+    // }
     
-
+    // const createReccMovieList = async () => {
+    //     const m1 = await fetchMovies(1,`${reccGenres[0]},${reccGenres[1]},${reccGenres[2]}`);
+    //     console.log(m1);
+    //     const m2 = await fetchMovies(1,`${reccGenres[0]},${reccGenres[1]}`);
+    //     console.log(m2);
+    //     const m3 = await fetchMovies(1,`${reccGenres[0]},${reccGenres[2]}`);
+    //     console.log(m3);
+    //     const m4 = await fetchMovies(1,`${reccGenres[1]},${reccGenres[2]}`);
+    //     console.log(m4);
+    // }
+    
     useEffect( () => {
-        const getReccGenreCall = async () => {
-            const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
-            setReccGenres(data);
-    
-            console.log(reccGenres);
-        }
-
-         getReccGenreCall();
+        const email = JSON.parse(localStorage.getItem('profile')).profile.email
+        dispatch(getReccGenreCall(email));
+        // getReccGenreCall();
 
         // console.log(localStorage.getItem('profile').email)
         // console.log('inside useEffect')
     }, [])
     
+    const a = useSelector((state) => state.genreSelector);
+    console.log(a)
 
     return(
         <>

@@ -182,7 +182,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             </ListItem>
           </ListItemButton>
 
-          <ListItemButton>
+          <ListItemButton onClick={() => { logOut() }}>
             <ListItem>
               <ListItemIcon>
                 <ExitToAppIcon />
@@ -190,9 +190,6 @@ export default function PersistentDrawerRight({ setIsLogged }) {
               <ListItemText
                 style={{ color: "black" }}
                 primary="Sign Out"
-                onClick={() => {
-                  logOut();
-                }}
               />
             </ListItem>
           </ListItemButton>

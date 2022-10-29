@@ -42,18 +42,31 @@ router.post('/doesWatchListExist', async (req, res) => {
     }
 });
 
-router.get('/getPerRecc', async (req, res) => {
+router.post('/getPerRecc', async (req, res) => {
     const { email } = req.body;
 
     const userData = await WatchCount.findOne({ email: email });
+    try {
+        const length = userData.stats.length;
+    
+        if( length !== 0 ){
+            const recommendedGenre =   personalRecommendation(userData.stats);
+    
+            // res.status(200).json({ message: 'Calculated!!!', data:userData });
+    
+    
+            console.log(recommendedGenre);
+            
+            return res.json({ message: "calculations done.", reccGenres: recommendedGenre, status: true });
+        }
+        else {
+            return res.json({ message: 'no data for processing', status: false });
+        }
+    } catch (error) {
+        // console.log(error);
+        return res.json({message: "something went wrong", error: userData});
+    }
 
-    const recommendedGenre =  personalRecommendation(userData.stats);
-
-    res.status(200).json({ message: 'Calculated!!!' });
-
-    console.log(recommendedGenre);
-
-    return res.json({ message: "calculations done.", reccGenres: recommendedGenre });
 });
 
 
@@ -65,32 +78,36 @@ function isInWatchCount(genre_id, stats) {
 router.patch('/updateWatchCount', async (req, res) => {
     const { email, genre_ids } = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(email)) return res.status(404).send('No user with that id');
+    // if(!mongoose.Types.ObjectId.isValid(email)) return res.status(404).send('No user with that id');
+    try {
+        let userData = await WatchCount.findOne({ email: email });
+        console.log(userData)
+        await genre_ids.map(async (g_id) => {
+            // userData.stats.g_id += 1;
+            // let index = userData.stats.findIndex((g) => {g.genreId === g_id});
 
-    let userData = await WatchCount.findOne({ email: email });
+            let index = await isInWatchCount(g_id, userData.stats);
+            // console.log(index)
+
+            if( index !== -1 ) userData.stats[index].count += 1;
+            
+            if( index === -1 ) userData.stats.push({genreId: g_id, count: 1});
+            console.log(g_id)
+        })
     
-    await genre_ids.map(async (g_id) => {
-        // userData.stats.g_id += 1;
-        // let index = userData.stats.findIndex((g) => {g.genreId === g_id});
+        // setTimeout(async ()=>{const updatedData = await WatchCount.findOneAndUpdate({email: email}, userData);
+        // res.json({ message: 'Count updated successfully' });
+        // console.log(updatedData);},1000)
 
-        let index = await isInWatchCount(g_id, userData.stats);
-        // console.log(index)
 
-        if( index !== -1 ) userData.stats[index].count += 1;
-        
-        if( index === -1 ) userData.stats.push({genreId: g_id, count: 1});
-        console.log(g_id)
-    })
+        const updatedData = await WatchCount.findOneAndUpdate({email: email}, userData);
+        res.json({ message: 'Count updated successfully' });
+
+        console.log(updatedData);
+    } catch (error) {
+        console.log(error)
+    }
     
-    // setTimeout(async ()=>{const updatedData = await WatchCount.findOneAndUpdate({email: email}, userData);
-    // res.json({ message: 'Count updated successfully' });
-    // console.log(updatedData);},1000)
-
-
-    const updatedData = await WatchCount.findOneAndUpdate({userId: userId}, userData);
-    res.json({ message: 'Count updated successfully' });
-
-    console.log(updatedData);
 });
 
 module.exports = router;  

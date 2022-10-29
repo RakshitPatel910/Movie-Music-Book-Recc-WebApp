@@ -1,8 +1,8 @@
 
-export default (genreList = { name: null, id: null }, action) => {
+export default (genreList = [], action) => {
     switch (action.type) {
-        case "GENRE_CHANGE":
-            return { ...genreList, name: action.payload.name, id: action.payload.id };
+        case "RECC_GENRE_ARRAY":
+            return action.payload;
     
         default:
             return genreList;

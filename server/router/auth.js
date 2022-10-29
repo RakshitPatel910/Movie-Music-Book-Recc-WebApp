@@ -13,11 +13,17 @@ async function encryption(data){
 } 
 
 async function watchCount(email){
-  const data  = await axios.post('http://localhost:3010/doesWatchListExist',{email:email})
-  console.log(data)
-  data.doesExist
-    ? ""
-    : await axios.post("http://localhost:3010/createWatchCount",{email:email}).then(e=>{console.log(e)}).catch(e=>{console.log(e)});
+  
+  try {
+    const data  = await axios.post('http://localhost:3010/doesWatchListExist',{email:email})
+    console.log(data)
+    data.doesExist
+      ? ""
+      : await axios.post("http://localhost:3010/createWatchCount",{email:email}).then(e=>{console.log(e)}).catch(e=>{console.log(e)});
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 
