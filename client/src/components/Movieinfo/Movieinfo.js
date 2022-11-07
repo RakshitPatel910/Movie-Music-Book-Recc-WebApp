@@ -87,9 +87,8 @@ function Movieinfo() {
 
   const addToWatchlist = async (movie_id) => {
     console.log(id)
-    const movieId = await axios.post("http://localhost:3010/addToWatchlist", 
-    {
-      _id: id,
+    const movieId = await axios.post("http://localhost:3010/addToWatchlist", {
+      _id: JSON.parse(localStorage.getItem("profile")).profile.id,
       movieId: movie_id,
     });
     console.log("movie id ",movieId)
@@ -123,7 +122,7 @@ function Movieinfo() {
      const user = JSON.parse(localStorage.getItem("profile"));
      console.log(user.profile.id);
      const Id = user.profile.id.trim();
-     setId(Id)
+     setId(JSON.parse(localStorage.getItem("profile")).profile.id);
     async function getMovie() {
 
 
