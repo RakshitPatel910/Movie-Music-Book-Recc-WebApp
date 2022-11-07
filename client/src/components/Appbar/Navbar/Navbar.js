@@ -80,21 +80,21 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   const dispatch = useDispatch();
 
   // let base64String = "";
-
+  
   useEffect(()=>{
     
     const user = JSON.parse(localStorage.getItem("profile"));
     console.log(user.profile.id); 
     const Id = (user.profile.id).trim()
     id.current = Id
-    console.log("id",id,"type",typeof(id))
+    // console.log("id",id,"type",typeof(id))
 
     async function getUserData(){
       const data = await axios.post('http://localhost:3010/userData',{_id:Id})  
       // console.log(data.data.data.profilePhoto)  
-      console.log(data);
+      // console.log(data);
       var oldImage = await data.data.data.profilePhoto
-      console.log("oldImage",oldImage)
+      // console.log("oldImage",oldImage)
       setImage({image: data.data.data.profilePhoto})
       // setImage(oldImage)
     }
@@ -240,7 +240,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             //   setImage(URL.createObjectURL(event.target.files[0]));
             // }}
           /> */}
-          {console.log(image)}
+          {/* {console.log(image)} */}
 
           {image === null ? (
             (console.log("image is null"),
