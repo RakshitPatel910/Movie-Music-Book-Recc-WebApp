@@ -32,57 +32,73 @@ router.get('/getGenre',async (req,res)=>{
 })
 
 router.post('/addToWatchlist',async (req,res)=>{
-    const {_id,movieId} = req.body
-    // const id = mongoose.Types.ObjectId(_id)
-    const movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=en-US`
-    )
+    try {
+        const { _id, movieId } = req.body;
+        // const id = mongoose.Types.ObjectId(_id)
+        console.log(req.body._id);
+        const movie = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=en-US`
+        );
 
-    
-    // console.log(movie.data)
-    const date = new Date().toDateString()
-    console.log(date)
-    const data = movie.data.genres
-    let genre = []
-    data.map(e=>{
-        genre.push({
-            "genreId": `${e.id}`
-        })
-    })
-    console.log(genre)
-    const user = await User.findById(_id)
-    let count = 0;
-    user.watchlist.map(e=>{
-        if(e.movieId == movieId){
-            count++;
-        } 
-    })
-    if(count > 0){
-        return res
-        .status(404)
-        .json({ message: "Movie is already added to Watchlist", status: false });
-    }
-    else{
-        await axios.post("http://localhost:3010//addToHistory", {
-          userId: _id,
-          movieId: movieId,
+        // console.log(movie.data)
+        const date = new Date().toDateString();
+        console.log(date);
+        const data = movie.data.genres;
+        let genre = [];
+        data.map((e) => {
+          genre.push({
+            genreId: `${e.id}`,
+          });
         });
-        const newMovie = {
-          movieId: `${movieId}`,
-          genre: [],
-          date: date.toLocaleString(),
-        };
-        genre.map(e=>{
-            newMovie.genre.push(e)
-        })
-        user.watchlist.push(newMovie)
-        console.log(user)
-        const updatedUser = await User.findByIdAndUpdate(_id,user)
-        return res.json({message:"Movie added to Watchlist",status:true})
+        console.log(genre);
+        const user = await User.findById(_id);
+        let count = 0;
+        user.watchlist.map((e) => {
+          if (e.movieId == movieId) {
+            count++;
+          }
+        });
+        if (count > 0) {
+          return res
+            .status(404)
+            .json({
+              message: "Movie is already added to Watchlist",
+              status: false,
+            });
+        } else {
+          await axios.post("http://localhost:3010//addToHistory", {
+            userId: _id,
+            movieId: movieId,
+          });
+          const newMovie = {
+            movieId: `${movieId}`,
+            genre: [],
+            date: date.toLocaleString(),
+          };
+          genre.map((e) => {
+            newMovie.genre.push(e);
+          });
+          user.watchlist.push(newMovie);
+          console.log(user);
+          const updatedUser = await User.findByIdAndUpdate(_id, user)
+            .then((e) => {
+              return res.json({
+                message: "Movie added to Watchlist",
+                status: true,
+              });
+            })
+            .catch((e) => {
+              return res.json({ message: "Server error", status: false });
+            });
+        }
+    } catch (error) {
+        console.log(error)
     }
+    
 })
  
-router.post('/deleteFromWatchlist',async (req,res)=>{
+router.post('/deleteFromWatchlist',async (req,res)=>{ 
+    
     const {_id,movieId} = req.body
     const user = await User.findById(_id)
     for(let i=0;i<user.watchlist.length;i++){

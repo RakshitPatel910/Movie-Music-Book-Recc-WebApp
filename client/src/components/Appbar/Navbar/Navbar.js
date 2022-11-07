@@ -80,7 +80,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   const dispatch = useDispatch();
 
   // let base64String = "";
-  
+
   useEffect(()=>{
     
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -224,7 +224,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
         </DrawerHeader>
 
         <div className="profile-pic">
-          <label className="-label" for="file">
+          <label className="-label" >
             <span className="glyphicon glyphicon-camera"></span>
             <span>
               <EditIcon sx={{ margin: "auto" }} />

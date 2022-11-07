@@ -11,10 +11,11 @@ function MovieCard({ list }) {
     const classes = useStyles();
     
     const addToWatchlist = async (movie_id) => {
+        // console.log("json",JSON.parse(localStorage.getItem("profile")).profile.id);
         const movieId = await axios.post(
           "http://localhost:3010/addToWatchlist",
           {
-            _id: JSON.parse(localStorage.getItem('profile')._id),
+            _id: JSON.parse(localStorage.getItem("profile")).profile.id,
             movieId: movie_id,
           }
         );
