@@ -35,7 +35,7 @@
     height: 70px;
     width: 70px;
   }
-  
+/*   
 .profile-pic:hover .-label{
     display: flex;
     justify-content: center;
@@ -47,7 +47,7 @@
     border-radius: 100px;
     margin-bottom: 0;
   }
-  
+   */
 .profile-pic span {
     display: inline-flex;
     padding: .2em;

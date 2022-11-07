@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import './App.css';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-// import Appbar from './components/Appbar/Appbar.js';
+import Appbar from './components/Appbar/Appbar.js';
 import Forgpass from './components/Auth/Forgpass.js';
 import Signinappbar from './components/Appbar/Signinappbar.js';
 import Watchlist from './components/Watchlist/Watchlist.js';
@@ -43,8 +43,8 @@ function App() {
         <Searchbar /> */}
 
 
-        {/* <Appbar setIsLogged={setIsLogged} /> */}
-        
+        <Appbar setIsLogged={setIsLogged} />
+         
         
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
@@ -60,7 +60,7 @@ function App() {
           {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
 
 
-            {/* {user ? <Route path="/" element={<Home/>} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} />} */}
+            {user ? <Route path="/" element={<Home/>} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} />}
 
 
           {/* <Route path="/" exact element={<Auth />} />

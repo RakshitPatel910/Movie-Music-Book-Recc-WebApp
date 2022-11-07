@@ -230,23 +230,23 @@ export default function PersistentDrawerRight({ setIsLogged }) {
               <EditIcon sx={{margin:"auto"}}/>
             </span>
           </label>
-          <input
+          {/* <input
             id="file"
             type="file"
-            accept="*/image"
+            
             onChange={handleFile}
             // onChange={(event) => {
             //   console.log(URL.createObjectURL(event.target.files[0]));
             //   setImage(URL.createObjectURL(event.target.files[0]));
             // }}
-          />
+          /> */}
           {console.log(image)}
           {image === null ? (
             (console.log("image is null"),
             (
               // <AccountCircleIcon/>
               <img
-                src="../Navbar/download.png"
+                src={"../Navbar/download.png"}
                 alt="profile"
                 id="output"
                 width="200"
