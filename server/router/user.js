@@ -34,5 +34,21 @@ router.post('/changeProfilePhoto',async(req,res)=>{
 
 })
 
+router.post('changeProfile',async(req,res)=>{
+    const {id,name,email,profilePhoto} = req.body
+    const user = await User.findById({_id:mongoose.Types.ObjectId(id)})
+    if(user === null || user === ""){
+        return res.json({message:"User doesnt exist",status:false})
+    }
+    else{
+        user.name = name
+        user.email = email
+        user.profilePhoto = profilePhoto
+        await User.findByIdAndUpdate(
+            {id},user
+        ).then(e=>{return res.json({message:"Successfully changed profile",status:true})}).catch(e=>{return res.json({message:"Server error",status:false})})
+    }
+})
+
 module.exports = router;
 

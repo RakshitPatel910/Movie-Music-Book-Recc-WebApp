@@ -35,6 +35,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import '../Navbar/navbarStyle.css'
+import avatar from './download.png'
 
 const drawerWidth = 190;
 
@@ -66,20 +67,19 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function PersistentDrawerRight({ setIsLogged }) {
   const name = JSON.parse(localStorage.getItem('profile'))
   
-  // console.log("username",name.profile.userName)
   const theme = useTheme();
-  // const [image,setImage] = useState(null)
-  const [user,setUser] = useState()
+ 
+  // const [user,setUser] = useState()
   let id = useRef(null)
   const [image,setImage]  = useState({
     image:""
   })
   const [open, setOpen] = React.useState(false);
-  const [toggle,setToggle] = useState(false)
+  // const [toggle,setToggle] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let base64String = "";
+  // let base64String = "";
 
   useEffect(()=>{
     
@@ -104,21 +104,21 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   },[])
 
 
-    const changeImage = async ()=>{
-      // console.log("image",image)
-      console.log("id",id.current)
-      await axios
-      .post("http://localhost:3010/changeProfilePhoto", {
-        _id: id.current,
-        profilePhoto: base64String,
-      })
-      .then((e) => {
-        console.log("successfully change photo");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    }
+    // const changeImage = async ()=>{
+    //   // console.log("image",image)
+    //   console.log("id",id.current)
+    //   await axios
+    //   .post("http://localhost:3010/changeProfilePhoto", {
+    //     _id: id.current,
+    //     profilePhoto: base64String,
+    //   })
+    //   .then((e) => {
+    //     console.log("successfully change photo");
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+    // }
 
     
 
@@ -127,26 +127,26 @@ export default function PersistentDrawerRight({ setIsLogged }) {
     setOpen(true);
   };
 
-  const handleFile = async (event) => {
-    var newImage = event.target.files[0];
-    // console.log(newImage)
-    var reader = new FileReader()
-    reader.onload = function (){
-      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-      console.log(base64String);
-    }
-    reader.readAsDataURL(newImage);
-    // setImage(base64String);
+  // const handleFile = async (event) => {
+  //   var newImage = event.target.files[0];
+  //   // console.log(newImage)
+  //   var reader = new FileReader()
+  //   reader.onload = function (){
+  //     base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+  //     console.log(base64String);
+  //   }
+  //   reader.readAsDataURL(newImage);
+  //   // setImage(base64String);
    
-    setImage({image:base64String})
-    console.log(base64String)
-    console.log("image",image)
-    const userId = (id.current).trim()
-    changeImage();
+  //   setImage({image:base64String})
+  //   console.log(base64String)
+  //   console.log("image",image)
+  //   const userId = (id.current).trim()
+  //   changeImage();
 
-    setToggle(!toggle)
+  //   setToggle(!toggle)
    
-  };
+  // };
 
 
   const handleDrawerClose = () => {
@@ -226,8 +226,8 @@ export default function PersistentDrawerRight({ setIsLogged }) {
         <div className="profile-pic">
           <label className="-label" for="file">
             <span className="glyphicon glyphicon-camera"></span>
-            <span >
-              <EditIcon sx={{margin:"auto"}}/>
+            <span>
+              <EditIcon sx={{ margin: "auto" }} />
             </span>
           </label>
           {/* <input
@@ -241,24 +241,26 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             // }}
           /> */}
           {console.log(image)}
+
           {image === null ? (
             (console.log("image is null"),
             (
-              // <AccountCircleIcon/>
-              <img
-                src={"../Navbar/download.png"}
-                alt="profile"
-                id="output"
-                width="200"
-              />
+              <img src={avatar} alt="profile" id="output" width="200" />
             ))
           ) : (
-            <img src={`data:image/png;base64,${image}`} alt="profile" id="output" width="200" />
+            <img
+              src={`data:image/png;base64,${image.image}`}
+              alt="profile"
+              id="output"
+              width="200"
+            />
           )}
         </div>
 
         <Button color="inherit">
-          <Typography variant="h5">{name === null ? 'username' : name.profile.userName}</Typography>
+          <Typography variant="h5">
+            {name === null ? "username" : name.profile.userName}
+          </Typography>
         </Button>
         <Divider />
 
@@ -281,15 +283,16 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             </ListItem>
           </ListItemButton>
 
-          <ListItemButton onClick={() => { logOut() }}>
+          <ListItemButton
+            onClick={() => {
+              logOut();
+            }}
+          >
             <ListItem>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText
-                style={{ color: "black" }}
-                primary="Sign Out"
-              />
+              <ListItemText style={{ color: "black" }} primary="Sign Out" />
             </ListItem>
           </ListItemButton>
         </List>
@@ -297,3 +300,4 @@ export default function PersistentDrawerRight({ setIsLogged }) {
     </Box>
   );
 }
+
