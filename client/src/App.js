@@ -10,7 +10,6 @@ import Signinappbar from './components/Appbar/Signinappbar.js';
 import Profilepage from './components/Profilepage/Profilepage.js';
 
 
-
 import Auth from './components/Auth/Auth';
 import Home from './components/Home/Home.js';
 import Movieinfo from './components/Movieinfo/Movieinfo.js';
