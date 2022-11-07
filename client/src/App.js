@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 // import Appbar from './components/Appbar/Appbar.js';
 import Forgpass from './components/Auth/Forgpass.js';
 import Signinappbar from './components/Appbar/Signinappbar.js';
-// import Watchlist from './components/Watchlist/Watchlist.js';
+import Watchlist from './components/Watchlist/Watchlist.js';
 import Profilepage from './components/Profilepage/Profilepage.js';
 import Auth from './components/Auth/Auth';
 import Home from './components/Home/Home.js';
@@ -60,7 +60,7 @@ function App() {
           {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
 
 
-            {user ? <Route path="/" element={<Home/>} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} />}
+            {/* {user ? <Route path="/" element={<Home/>} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} />} */}
 
 
           {/* <Route path="/" exact element={<Auth />} />
