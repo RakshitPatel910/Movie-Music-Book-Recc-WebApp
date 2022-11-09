@@ -1,19 +1,14 @@
 import * as React from "react";
-<<<<<<< HEAD
-=======
-import { useState } from "react";
->>>>>>> e523b1b72dccdb95e97a9fcb60b66aea39c61d49
+import { useState,useEffect,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import axios from 'axios';
 import { logout } from '../../../actions/auth.js';
-<<<<<<< HEAD
 import { Avatar, Button} from "@mui/material";
-=======
 
 import EditIcon from "@mui/icons-material/Edit";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Avatar, Button, imageListClasses} from "@mui/material";
->>>>>>> e523b1b72dccdb95e97a9fcb60b66aea39c61d49
+import {  imageListClasses} from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -73,16 +68,85 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   
   // console.log("username",name.profile.userName)
   const theme = useTheme();
-  const [image,setImage] = useState(null)
+  // const [image,setImage] = useState(null)
+  const [user,setUser] = useState()
+  let id = useRef(null)
+  const [image,setImage]  = useState({
+    image:""
+  })
   const [open, setOpen] = React.useState(false);
+  const [toggle,setToggle] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  let base64String = "";
+
+  useEffect(()=>{
+    
+    const user = JSON.parse(localStorage.getItem("profile"));
+    console.log(user.profile.id); 
+    const Id = (user.profile.id).trim()
+    id.current = Id
+    console.log("id",id,"type",typeof(id))
+
+    async function getUserData(){
+      const data = await axios.post('http://localhost:3010/userData',{_id:Id})  
+      // console.log(data.data.data.profilePhoto)  
+      console.log(data);
+      var oldImage = await data.data.data.profilePhoto
+      console.log("oldImage",oldImage)
+      setImage({image: data.data.data.profilePhoto})
+      // setImage(oldImage)
+    }
+    
+    getUserData() 
+    
+  },[])
+
+
+    const changeImage = async ()=>{
+      // console.log("image",image)
+      console.log("id",id.current)
+      await axios
+      .post("http://localhost:3010/changeProfilePhoto", {
+        _id: id.current,
+        profilePhoto: base64String,
+      })
+      .then((e) => {
+        console.log("successfully change photo");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    }
+
+    
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
-  
+  const handleFile = async (event) => {
+    var newImage = event.target.files[0];
+    // console.log(newImage)
+    var reader = new FileReader()
+    reader.onload = function (){
+      base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+      console.log(base64String);
+    }
+    reader.readAsDataURL(newImage);
+    // setImage(base64String);
+   
+    setImage({image:base64String})
+    console.log(base64String)
+    console.log("image",image)
+    const userId = (id.current).trim()
+    changeImage();
+
+    setToggle(!toggle)
+   
+  };
 
 
   const handleDrawerClose = () => {
@@ -166,29 +230,30 @@ export default function PersistentDrawerRight({ setIsLogged }) {
               <EditIcon sx={{margin:"auto"}}/>
             </span>
           </label>
-          <input
+          {/* <input
             id="file"
             type="file"
-            accept="*/image"
-            onChange={(event) => {
-              console.log(URL.createObjectURL(event.target.files[0]));
-              setImage(URL.createObjectURL(event.target.files[0]));
-            }}
-          />
+            
+            onChange={handleFile}
+            // onChange={(event) => {
+            //   console.log(URL.createObjectURL(event.target.files[0]));
+            //   setImage(URL.createObjectURL(event.target.files[0]));
+            // }}
+          /> */}
           {console.log(image)}
           {image === null ? (
             (console.log("image is null"),
             (
               // <AccountCircleIcon/>
               <img
-                src="../Navbar/download.png"
+                src={"../Navbar/download.png"}
                 alt="profile"
                 id="output"
                 width="200"
               />
             ))
           ) : (
-            <img src={image} alt="profile" id="output" width="200" />
+            <img src={`data:image/png;base64,${image}`} alt="profile" id="output" width="200" />
           )}
         </div>
 
@@ -212,11 +277,11 @@ export default function PersistentDrawerRight({ setIsLogged }) {
               <ListItemIcon>
                 <WorkHistoryIcon />
               </ListItemIcon>
-              <ListItemText style={{ color: "black" }} primary="History" />
+              <ListItemText style={{ color: "black" }} primary="Watchlist" />
             </ListItem>
           </ListItemButton>
 
-          <ListItemButton>
+          <ListItemButton onClick={() => { logOut() }}>
             <ListItem>
               <ListItemIcon>
                 <ExitToAppIcon />
@@ -224,9 +289,6 @@ export default function PersistentDrawerRight({ setIsLogged }) {
               <ListItemText
                 style={{ color: "black" }}
                 primary="Sign Out"
-                onClick={() => {
-                  logOut();
-                }}
               />
             </ListItem>
           </ListItemButton>

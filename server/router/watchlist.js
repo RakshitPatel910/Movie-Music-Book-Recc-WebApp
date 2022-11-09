@@ -37,6 +37,8 @@ router.post('/addToWatchlist',async (req,res)=>{
     const movie = await axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=en-US`
     )
+
+    
     // console.log(movie.data)
     const date = new Date().toDateString()
     console.log(date)
@@ -61,6 +63,10 @@ router.post('/addToWatchlist',async (req,res)=>{
         .json({ message: "Movie is already added to Watchlist", status: false });
     }
     else{
+        await axios.post("http://localhost:3010//addToHistory", {
+          userId: _id,
+          movieId: movieId,
+        });
         const newMovie = {
           movieId: `${movieId}`,
           genre: [],
