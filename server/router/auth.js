@@ -44,6 +44,7 @@ router.post('/signin',async (req,res)=>{
             if (bcrypt.compareSync(password, e.password)) {
                 console.log("user exists");
                 await watchCount(email)
+                e.password = ""
                 return res.json({
                     message: "Successfully Logged in",
                     status: true,
