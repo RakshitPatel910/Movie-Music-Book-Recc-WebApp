@@ -28,23 +28,23 @@ export default function Home(){
     //     // // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
 
     //     // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
-
-    // useEffect( () => {
-    //     // const getReccGenreCall = async () => {
-    //     //     const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
-    //     //     setReccGenres(data);
+    // }
+    useEffect( () => {
+        // const getReccGenreCall = async () => {
+        //     const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
+        //     setReccGenres(data);
     
-    //     //     console.log(reccGenres);
-    //     // }
+        //     console.log(reccGenres);
+        // }
 
-    //      getReccGenreCall();
+        getReccGenreCall();
 
-    //     // console.log(localStorage.getItem('profile').email)
-    //     // console.log('inside useEffect')
-    // }, [])
+        // console.log(localStorage.getItem('profile').email)
+        // console.log('inside useEffect')
+    }, [])
     
-    // const a = useSelector((state) => state.genreSelector);
-    // console.log(a)
+    const a = useSelector((state) => state.genreSelector);
+    console.log(a)
 
     return(
         <>
@@ -62,8 +62,8 @@ export default function Home(){
                 <Route path=":genre_name-:genreId" exact element={<SearchResults />} />
                 <Route path=":genre_name-:genreId/:movie_id" exact element={<Movieinfo />} />
                 <Route path=":movie_id" exact element={<Movieinfo />} />
-                <Route path="timeline" exact element={<Timeline />} />
-                <Route path="timeline/:movie_id" exact element={<Movieinfo />} />
+                {/* <Route path="timeline" exact element={<Timeline />} />
+                <Route path="timeline/:movie_id" exact element={<Movieinfo />} /> */}
             </Routes>
         </>
     )

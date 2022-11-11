@@ -92,9 +92,9 @@ export default function PersistentDrawerRight({ setIsLogged }) {
     async function getUserData(){
       const data = await axios.post('http://localhost:3010/userData',{_id:Id})  
       // console.log(data.data.data.profilePhoto)  
-      console.log(data);
+      // console.log(data);
       var oldImage = await data.data.data.profilePhoto
-      console.log("oldImage",oldImage)
+      // console.log("oldImage",oldImage)
       setImage({image: data.data.data.profilePhoto})
       // setImage(oldImage)
     }
@@ -224,12 +224,12 @@ export default function PersistentDrawerRight({ setIsLogged }) {
         </DrawerHeader>
 
         <div className="profile-pic">
-          <label className="-label" for="file">
+          {/* <label className="-label" for="file"> */}
             <span className="glyphicon glyphicon-camera"></span>
-            <span>
+            {/* <span> */}
               <EditIcon sx={{ margin: "auto" }} />
-            </span>
-          </label>
+            {/* </span> */}
+          {/* </label> */}
           {/* <input
             id="file"
             type="file"
