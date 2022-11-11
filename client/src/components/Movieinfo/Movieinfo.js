@@ -79,15 +79,16 @@ function Movieinfo() {
   const [lang, setLang] = useState([]);
   const [company, setCompany] = useState([]);
   const [country, setCountry] = useState([]);
+  const [id,setId] = useState()
   // const [avatar,setAvatar] = useState("");
 
 
   const theme = useTheme();
 
   const addToWatchlist = async (movie_id) => {
-    const movieId = await axios.post("http://localhost:3010/addToWatchlist", 
-    {
-      _id: "633159a3f4d16ffa0cd797bb",
+    console.log(id)
+    const movieId = await axios.post("http://localhost:3010/addToWatchlist", {
+      _id: JSON.parse(localStorage.getItem("profile")).profile.id,
       movieId: movie_id,
     });
     console.log("movie id ",movieId)
@@ -118,8 +119,13 @@ function Movieinfo() {
 
   useEffect(() => {
     let isMounted = true;
-
+     const user = JSON.parse(localStorage.getItem("profile"));
+     console.log(user.profile.id);
+     const Id = user.profile.id.trim();
+     setId(JSON.parse(localStorage.getItem("profile")).profile.id);
     async function getMovie() {
+
+
       const result = await fetchMovie();
       if (isMounted) {
         const path = result.data.poster_path;
@@ -163,6 +169,8 @@ function Movieinfo() {
     return () => {
       isMounted = false;
     };
+
+
   }, []);
 
   return (

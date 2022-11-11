@@ -87,14 +87,14 @@ export default function PersistentDrawerRight({ setIsLogged }) {
     console.log(user.profile.id); 
     const Id = (user.profile.id).trim()
     id.current = Id
-    console.log("id",id,"type",typeof(id))
+    // console.log("id",id,"type",typeof(id))
 
     async function getUserData(){
       const data = await axios.post('http://localhost:3010/userData',{_id:Id})  
       // console.log(data.data.data.profilePhoto)  
-      // console.log(data);
+      // // console.log(data);
       var oldImage = await data.data.data.profilePhoto
-      // console.log("oldImage",oldImage)
+      // // console.log("oldImage",oldImage)
       setImage({image: data.data.data.profilePhoto})
       // setImage(oldImage)
     }
@@ -224,7 +224,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
         </DrawerHeader>
 
         <div className="profile-pic">
-          {/* <label className="-label" for="file"> */}
+          {/* <label className="-label" > */}
             <span className="glyphicon glyphicon-camera"></span>
             {/* <span> */}
               <EditIcon sx={{ margin: "auto" }} />
@@ -240,7 +240,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             //   setImage(URL.createObjectURL(event.target.files[0]));
             // }}
           /> */}
-          {console.log(image)}
+          {/* {console.log(image)} */}
 
           {image === null ? (
             (console.log("image is null"),
