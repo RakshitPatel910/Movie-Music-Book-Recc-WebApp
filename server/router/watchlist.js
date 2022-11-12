@@ -7,15 +7,17 @@ const User = require("../model/userSchema");
 
 const key = process.env.key
 
-router.get('/getWatchlist',async (req,res)=>{
+router.post('/getWatchlist',async (req,res)=>{
     const {_id} = req.body
-    const user = await User.findById(_id)
+    // console.log(req.body._id)
+    const user = await User.findById({ _id: mongoose.Types.ObjectId(_id) });
+    // console.log(user)
     const watchlist = user.watchlist
     if(user){
         res.json({watchlist:watchlist,status:true})
     }
     else{
-        res.status(404).json({message:"User not found",status:false})
+        res.json({message:"User not found",status:false})
     }
 })
 
