@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+
+import { getReccGenre } from "../../api/backend.js";
+import { getReccGenreCall } from "../../actions/genreSelector.js"
+
 import MovieCard from './MovieCard/MovieCard';
 import { Grid, CircularProgress, Typography, Button } from '@material-ui/core';
 // import { motion } from 'framer-motion'; 
@@ -11,9 +16,12 @@ import { moviesGenre } from '../../constants/genreId.js';
 
 import useStyles from "./styles.js";
 
-function Carousel({ genre, title }) {
+function Carousel({ genre, title, reccMovieList }) {
+
+    const dispatch = useDispatch();
 
     const [movieList, setMovieList] = useState([]);
+    const [reccList, setReccList] = useState([]);
     const [translatePage, setTranslatePage] = useState(0);
     const [cardsOnPage, setCardsOnPage] = useState(10);
     const classes = useStyles();
@@ -23,9 +31,22 @@ function Carousel({ genre, title }) {
     const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genre}`);
 
     const getMovies = async () => {
-        const movies1 = await fetchMovies(1);
-        const movies2 = await fetchMovies(2);
-        setMovieList(movies1.data.results.concat(movies2.data.results));
+        console.log(reccMovieList)
+        if ( reccMovieList === false ) {
+            const movies1 = await fetchMovies(1);
+            const movies2 = await fetchMovies(2);
+            setMovieList(movies1.data.results.concat(movies2.data.results));
+        }
+        else {
+            const list = dispatch(getReccGenreCall(JSON.parse(localStorage.getItem('profile')).profile.email)).then( res => {
+                setMovieList(res);
+                // setTimeout(() => {
+                //     console.log()
+                // }, 2000);
+            });
+
+        }
+        console.log(movieList)
     }
 
     useEffect( () => { 

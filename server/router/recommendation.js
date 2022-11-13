@@ -42,6 +42,71 @@ router.post('/doesWatchListExist', async (req, res) => {
     }
 });
 
+
+
+const fetchMovies = (page, genres) => axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genres}`);
+
+const filterReccMovies = async ( mList ) => {
+
+    const ids = mList.map( o => o.id );
+
+    const filteredList = await mList.filter( ( {id}, index ) => !ids.includes(id, index+1) );
+// console.log(filteredList)
+    return filteredList;
+}
+
+const compare = (a, b) => {
+    if( a.vote_average < b.vote_average ) return 1;
+    if( a.vote_average > b.vote_average ) return -1;
+    return 0;
+}
+
+const sortReccMovies = async ( mList ) => {
+    const sortedList = mList.sort( compare );
+
+    return sortedList;
+}
+
+const fetchReccMovies = async ( reccGenres ) => {
+
+    let list = [];
+
+    const m1 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[1]},${reccGenres[2]}`);
+    list = list.concat(m1.data.results);
+    
+    const m2 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[1]}`);
+    list = list.concat(m2.data.results);
+    
+    const m3 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[2]}`);
+    list = list.concat(m3.data.results);
+
+    const m4 = await fetchMovies(1, `${reccGenres[1]},${reccGenres[2]}`);
+    list = list.concat(m4.data.results);
+
+    const m5 = await fetchMovies(1, `${reccGenres[0]}`);
+    list = list.concat(m5.data.results);
+
+    const m6 = await fetchMovies(1, `${reccGenres[1]}`);
+    list = list.concat(m6.data.results);
+
+    const m7 = await fetchMovies(1, `${reccGenres[2]}`);
+    list = list.concat(m7.data.results);
+
+    // console.log(list);
+    
+    list = await filterReccMovies(list);
+
+    list = await sortReccMovies(list);
+    // console.log(list)
+    // setTimeout(() => {
+    //     setReccMovies(list);
+    //     // console.log(reccMovies)
+    // }, 1000);
+    return list;
+}
+
+
+
 router.post('/getPerRecc', async (req, res) => {
     const { email } = req.body;
 
@@ -50,14 +115,15 @@ router.post('/getPerRecc', async (req, res) => {
         const length = userData.stats.length;
     
         if( length !== 0 ){
-            const recommendedGenre =   personalRecommendation(userData.stats);
+            const recommendedGenre = personalRecommendation(userData.stats);
     
             // res.status(200).json({ message: 'Calculated!!!', data:userData });
-    
+            const recommendedMovies = await fetchReccMovies(recommendedGenre);
     
             console.log(recommendedGenre);
+            // console.log(recommendedMovies);
             
-            return res.json({ message: "calculations done.", reccGenres: recommendedGenre, status: true });
+            return res.json({ message: "calculations done.", reccGenres: recommendedGenre, reccMovies: recommendedMovies, status: true });
         }
         else {
             return res.json({ message: 'no data for processing', status: false });

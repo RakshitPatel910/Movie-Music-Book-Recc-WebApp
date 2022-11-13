@@ -121,7 +121,8 @@ function Movieinfo() {
     let isMounted = true;
      const user = JSON.parse(localStorage.getItem("profile"));
      console.log(user.profile.id);
-     const Id = user.profile.id.trim();
+    //  const Id = user.profile.id.trim();
+     const Id = user.profile.id;
      setId(JSON.parse(localStorage.getItem("profile")).profile.id);
     async function getMovie() {
 
@@ -194,16 +195,16 @@ function Movieinfo() {
                 {releaseDate.slice(0, 4)}
                 <span className="minutes">{runTime} min</span>
               </h4>
-              <p class="type">
+              <p className="type">
                 {genre.map((e) => (
                   <>{`${e.name} `}</>
                 ))}
               </p>
             </div>
-            <div class="movie_desc">
-              <p class="text">{overview}</p>
+            <div className="movie_desc">
+              <p className="text">{overview}</p>
             </div>
-            <div class="movie_social">
+            <div className="movie_social">
               <Chip
                 className="social"
                 label="Add to Watchlist"
@@ -216,7 +217,7 @@ function Movieinfo() {
             </div>
           </div>
           <div
-            class="blur_back bright_back"
+            className="blur_back bright_back"
             style={{
               backgroundImage: `url(${image})`,
               backgroundSize: "cover",

@@ -1,11 +1,11 @@
 
-export default (genreList = [], action) => {
+export default (reccList = { genreList: [], movieList: [] }, action) => {
     switch (action.type) {
-        case "RECC_GENRE_ARRAY":
-            return action.payload;
-    
+        case "RECC_OBJECT":
+            return { ...reccList, genreList: action.payload.reccGenres , movieList: action.payload.reccMovies };
+
         default:
-            return genreList;
+            return reccList;
     }
 }
 

@@ -43,7 +43,7 @@ function App() {
         <Searchbar /> */}
 
 
-        <Appbar setIsLogged={setIsLogged} />
+        {/* <Appbar setIsLogged={setIsLogged} /> */}
         
         
         {/* <Forgpass />     */}

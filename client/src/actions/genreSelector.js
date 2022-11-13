@@ -15,9 +15,13 @@ export const getReccGenreCall = ( email ) => async (dispatch) => {
     try {
         const { data } = await api.getReccGenre(email);
 
-        console.log(data.reccGenres);
+        // console.log(data.reccGenres);
 
-        dispatch({ type: "RECC_GENRE_ARRAY", payload: data.reccGenres });
+        // setReccGenres(data.reccGenres);
+
+        dispatch({ type: "RECC_OBJECT", payload: data });
+
+        return data.reccMovies;
     } catch (error) {
         console.log(error)
     }
