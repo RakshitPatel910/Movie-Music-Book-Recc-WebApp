@@ -2,8 +2,14 @@
     background-color: #f9f9fa
 } */
 
+.page-content{
+    align-items: center;
+}
+
 .padding {
-    padding: 3rem !important
+    padding: 3rem !important;
+    width: 60%;
+    margin: auto;
 }
 
 .user-card-full {
@@ -31,8 +37,8 @@
 }
 
 .bg-c-lite-green {
-        background: -webkit-gradient(linear, left top, right top, from(#8c960a), to(#0fb2b8));
-    background: linear-gradient(to right, #78c46e, #6d6cc9);
+        background: -webkit-gradient(linear, left top, right top, from(#797EF6), to(#1AA7EC));
+    background: linear-gradient(to right, #4ADEDE, #1E2F97);
 }
 
 .user-profile {
@@ -53,7 +59,7 @@
 
 
  
-h6 {
+.card-block h6 {
     font-size: 14px;
 }
 
@@ -62,7 +68,7 @@ h6 {
 }
 
 @media only screen and (min-width: 1400px){
-p {
+.col-sm-6 p{
     font-size: 14px;
 }
 }
