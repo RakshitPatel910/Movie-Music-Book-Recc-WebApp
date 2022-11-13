@@ -89,7 +89,8 @@ function Carousel({ genre, title, reccMovieList }) {
                                     fontSize="small"
                             />
                             </Typography>
-                            <Button component={Link} to={`/${title}-${genre}`} className={classes.viewMore} variant="contained" state={{ genreId:`${genre}` }} >
+                            <Button component={Link} to={ reccMovieList === false ? `/${title}-${genre}` : '/user/recommendation' } className={classes.viewMore} variant="contained" state={{ genreId:`${genre}` }} >
+                            {/* <Button component={Link} to={`/${title}-${genre}`} className={classes.viewMore} variant="contained" state={{ genreId:`${genre}` }} > */}
                                 view more
                             </Button>
                             {/* state={{id:`${list.id}`, title:`${title}`}} */}

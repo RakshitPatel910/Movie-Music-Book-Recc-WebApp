@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../Carousel/Carousel.js";
 import Movieinfo from '../Movieinfo/Movieinfo.js';
 import SearchResults from '../SearchResults/SearchResults.js';
+import RecommendationResults from '../SearchResults/RecommendationResults.js';
 import Timeline from "../Chart/Timeline.js";
 
 import { getReccGenre } from "../../api/backend.js";
@@ -128,6 +129,7 @@ export default function Home(){
                 <Route path=":genre_name-:genreId" exact element={<SearchResults />} />
                 <Route path=":genre_name-:genreId/:movie_id" exact element={<Movieinfo />} />
                 <Route path=":movie_id" exact element={<Movieinfo />} />
+                <Route path="user/recommendation" exact element={<RecommendationResults />} />
                 {/* <Route path="timeline" exact element={<Timeline />} />
                 <Route path="timeline/:movie_id" exact element={<Movieinfo />} /> */}
             </Routes>
