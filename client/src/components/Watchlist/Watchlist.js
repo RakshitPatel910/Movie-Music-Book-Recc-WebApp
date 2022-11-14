@@ -28,8 +28,7 @@ export default function Watchlist() {
             _id: id
           })
           .then((e) => {
-            setList(e.data.watchlist);
-            setToggle(!toggle);
+            console.log(e.data.data)
             // console.log(e.data.watchlist);
           })
           .catch((e) => {

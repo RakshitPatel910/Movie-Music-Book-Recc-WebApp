@@ -7,18 +7,55 @@ const User = require("../model/userSchema");
 
 const key = process.env.key
 
+
+
+async function getData(watchlist){
+    return new Promise((resolve,reject)=>{
+        let userWatchlist = []
+         watchlist.map(async (e) => {
+          await axios
+            .get(
+              `https://api.themoviedb.org/3/movie/${e.movieId}?api_key=${key}&language=en-US`
+            )
+            .then((e) => {
+              //    console.log(e.data);
+              userWatchlist.push(e.data);
+    
+              // m.push(e.data);
+              //    setMovie([...movie, e.data]); 
+    
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        });
+        console.log(userWatchlist)
+        resolve(userWatchlist)
+    })
+    // return userWatchlist
+}
+
 router.post('/getWatchlist',async (req,res)=>{
     const {_id} = req.body
     // console.log(req.body._id)
     const user = await User.findById({ _id: mongoose.Types.ObjectId(_id) });
     // console.log(user)
     const watchlist = user.watchlist
-    if(user){
-        res.json({watchlist:watchlist,status:true})
-    }
-    else{
-        res.json({message:"User not found",status:false})
-    }
+    let toggle = watchlist.length
+    let i = 0 
+    // console.log(watchlist) 
+    
+    const newArr = await getData(watchlist).then(e=>{console.log(e)})
+    console.log("userWatchlist", newArr);
+
+
+    
+    // if(user){
+    //     res.json({watchlist:watchlist,status:true})
+    // } 
+    // else{
+    //     res.json({message:"User not found",status:false})
+    // }
 })
 
 router.get('/getGenre',async (req,res)=>{
