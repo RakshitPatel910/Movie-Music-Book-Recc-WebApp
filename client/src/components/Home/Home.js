@@ -7,6 +7,7 @@ import Carousel from "../Carousel/Carousel.js";
 import Movieinfo from '../Movieinfo/Movieinfo.js';
 import SearchResults from '../SearchResults/SearchResults.js';
 import RecommendationResults from '../SearchResults/RecommendationResults.js';
+import SearchBarSearchedResults from '../SearchResults/SearchBarSearchedResults.js';
 import Timeline from "../Chart/Timeline.js";
 
 import { getReccGenre } from "../../api/backend.js";
@@ -23,72 +24,72 @@ export default function Home(){
     var list = []
     const genreList = moviesGenre.sort( () => 0.5 -Math.random() ).slice(0, 2);
 
-    const fetchMovies = (page, genres) => axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genres}`);
+//     const fetchMovies = (page, genres) => axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genres}`);
 
-    // const getReccGenreCall = async () => {
-    //     // // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
+//     // const getReccGenreCall = async () => {
+//     //     // // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
 
-    //     // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
-    // }
+//     //     // const data = await getReccGenre(JSON.parse(localStorage.getItem('profile')).profile.email);
+//     // }
 
-    const filterReccMovies = async ( mList ) => {
+//     const filterReccMovies = async ( mList ) => {
 
-        const ids = mList.map( o => o.id );
+//         const ids = mList.map( o => o.id );
 
-        const filteredList = await mList.filter( ( {id}, index ) => !ids.includes(id, index+1) );
-// console.log(filteredList)
-        return filteredList;
-    }
+//         const filteredList = await mList.filter( ( {id}, index ) => !ids.includes(id, index+1) );
+// // console.log(filteredList)
+//         return filteredList;
+//     }
 
-    const compare = (a, b) => {
-        if( a.vote_average < b.vote_average ) return 1;
-        if( a.vote_average > b.vote_average ) return -1;
-        return 0;
-    }
+//     const compare = (a, b) => {
+//         if( a.vote_average < b.vote_average ) return 1;
+//         if( a.vote_average > b.vote_average ) return -1;
+//         return 0;
+//     }
 
-    const sortReccMovies = async ( mList ) => {
-        const sortedList = mList.sort( compare );
+//     const sortReccMovies = async ( mList ) => {
+//         const sortedList = mList.sort( compare );
 
-        return sortedList;
-    }
+//         return sortedList;
+//     }
 
-    const fetchReccMovies = async () => {
+//     const fetchReccMovies = async () => {
 
-        list = [];
+//         list = [];
 
-        const m1 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[1]},${reccGenres[2]}`);
-        list = list.concat(m1.data.results);
+//         const m1 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[1]},${reccGenres[2]}`);
+//         list = list.concat(m1.data.results);
         
-        const m2 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[1]}`);
-        list = list.concat(m2.data.results);
+//         const m2 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[1]}`);
+//         list = list.concat(m2.data.results);
         
-        const m3 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[2]}`);
-        list = list.concat(m3.data.results);
+//         const m3 = await fetchMovies(1, `${reccGenres[0]},${reccGenres[2]}`);
+//         list = list.concat(m3.data.results);
 
-        const m4 = await fetchMovies(1, `${reccGenres[1]},${reccGenres[2]}`);
-        list = list.concat(m4.data.results);
+//         const m4 = await fetchMovies(1, `${reccGenres[1]},${reccGenres[2]}`);
+//         list = list.concat(m4.data.results);
 
-        const m5 = await fetchMovies(1, `${reccGenres[0]}`);
-        list = list.concat(m5.data.results);
+//         const m5 = await fetchMovies(1, `${reccGenres[0]}`);
+//         list = list.concat(m5.data.results);
 
-        const m6 = await fetchMovies(1, `${reccGenres[1]}`);
-        list = list.concat(m6.data.results);
+//         const m6 = await fetchMovies(1, `${reccGenres[1]}`);
+//         list = list.concat(m6.data.results);
 
-        const m7 = await fetchMovies(1, `${reccGenres[2]}`);
-        list = list.concat(m7.data.results);
+//         const m7 = await fetchMovies(1, `${reccGenres[2]}`);
+//         list = list.concat(m7.data.results);
 
-        // console.log(list);
+//         // console.log(list);
         
-        list = await filterReccMovies(list);
+//         list = await filterReccMovies(list);
 
-        list = await sortReccMovies(list);
-        // console.log(list)
-        setTimeout(() => {
-            setReccMovies(list);
-            // console.log(reccMovies)
-        }, 1000);
+//         list = await sortReccMovies(list);
+//         // console.log(list)
+//         setTimeout(() => {
+//             setReccMovies(list);
+//             // console.log(reccMovies)
+//         }, 1000);
 
-    }
+//     }
    
     useEffect( () => {
         // const getReccGenreCall = async () => {
@@ -101,7 +102,7 @@ export default function Home(){
         // getReccGenreCall();
         dispatch(getReccGenreCall(JSON.parse(localStorage.getItem('profile')).profile.email, setReccGenres))
 
-        fetchReccMovies();
+        // fetchReccMovies();
 
         // console.log(localStorage.getItem('profile').email)
         // console.log('inside useEffect')
@@ -117,7 +118,7 @@ export default function Home(){
             <Routes>
                 <Route path="" exact element={
                     <>
-                        <Carousel title={'Recc For You'} reccMovieList={true}/>
+                        <Carousel title={'Recommended'} reccMovieList={true}/>
                         <Carousel title={'Popular Now'} reccMovieList={false} />
                         {
                             genreList.map((genreObj) => (
@@ -130,8 +131,9 @@ export default function Home(){
                 <Route path=":genre_name-:genreId/:movie_id" exact element={<Movieinfo />} />
                 <Route path=":movie_id" exact element={<Movieinfo />} />
                 <Route path="user/recommendation" exact element={<RecommendationResults />} />
-                {/* <Route path="timeline" exact element={<Timeline />} />
-                <Route path="timeline/:movie_id" exact element={<Movieinfo />} /> */}
+                <Route path="user/search-results/:search_text" exact element={<SearchBarSearchedResults  />} />
+                <Route path="timeline" exact element={<Timeline />} />
+                <Route path="timeline/:movie_id" exact element={<Movieinfo />} />
             </Routes>
         </>
     )

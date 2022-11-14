@@ -92,6 +92,9 @@ router.post('/addToWatchlist',async (req,res)=>{
         console.log(genre);
         const user = await User.findById(_id);
         let count = 0;
+
+        console.log(user)
+
         user.watchlist.map((e) => {
           if (e.movieId == movieId) {
             count++;
