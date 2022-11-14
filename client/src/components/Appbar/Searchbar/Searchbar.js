@@ -1,4 +1,6 @@
-import * as React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
 import TextField from "@mui/material/TextField";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -56,6 +58,8 @@ export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const [searchText, setSearchText] = useState("")
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -64,26 +68,34 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+
+  const searchMovies = async (searchQuery) => await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&query=${searchQuery}&page=1&include_adult=false`);
+
+  const searchMoviesClicked = async () => {
+
+    
+  }
+
   return (
-    <Box sx={{ display: "flex" , marginTop :"30"}}>
+    <Box sx={{ display: "flex", flexDirection: "row" , marginTop :"30"}}>
 
 
       <Grid container spacing={3} columns={16}  marginTop ={0}>
       <Grid item xs={0.6}></Grid>
        <Grid item xs={0.3}>
-    <IconButton
-    
+            <IconButton
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="end"
-              style={{mr: 2, ...(open && { display: "none" }) }}
+              style={{mr: 2, ...(open && { display: "none" }), color: "white" }}
             >
               <MenuIcon />
             </IconButton>
         </Grid>      
         <Grid item xs={3}></Grid>
             <Grid item xs={11}>
-    <Item><FormControl
+          <Item>
+            <FormControl
               fullWidth
               id="fullWidth"
               variant="outlined"
@@ -92,7 +104,7 @@ export default function PersistentDrawerLeft() {
               <OutlinedInput
                 placeholder="Search"
                 endAdornment={
-                  <InputAdornment position="end">
+                  <InputAdornment component={Link} to={`/user/search-results/${searchText}`} position="end" style={{ cursor: "pointer" }} onClick={ () => console.log(searchText) }>
                     <Avatar
                       sx={{
                         background: "#5579C6",
@@ -104,6 +116,7 @@ export default function PersistentDrawerLeft() {
                     </Avatar>
                   </InputAdornment>
                 }
+                onChange={ (e) => {setSearchText( e.target.value.replace(" ", "%20") )} }
               />
             </FormControl>
           </Item>

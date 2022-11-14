@@ -84,8 +84,9 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   useEffect(()=>{
     
     const user = JSON.parse(localStorage.getItem("profile"));
-    console.log(user.profile.id); 
-    const Id = (user.profile.id).trim()
+    console.log(user.profile._id); 
+    // const Id = (user.profile.id).trim()
+    const Id = (user.profile._id)
     id.current = Id
     // console.log("id",id,"type",typeof(id))
 
@@ -165,7 +166,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
   return (
     <Box
       style={{ display: "flex", overflow: "hidden" }}
-      marginBottom={3}
+      marginBottom={0}
       marginRight={3}
       marginLeft={3}
       marginTop={2.5}
@@ -274,7 +275,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             </ListItem>
           </ListItemButton>
 
-          <ListItemButton>
+          <ListItemButton component={Link} to={`/timeline`}>
             <ListItem>
               <ListItemIcon>
                 <WorkHistoryIcon />
