@@ -40,6 +40,7 @@ router.post('/getWatchlist',async (req,res)=>{
     // console.log(req.body._id)
     const user = await User.findById({ _id: mongoose.Types.ObjectId(_id) });
     // console.log(user)
+    // console.log(user)
     const watchlist = user.watchlist
     let toggle = watchlist.length
     let i = 0 

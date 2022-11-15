@@ -33,10 +33,11 @@ router.post('/changeProfilePhoto',async(req,res)=>{
     }
 
 })
-
-router.post('changeProfile',async(req,res)=>{
-    const {id,name,email,profilePhoto} = req.body
-    const user = await User.findById({_id:mongoose.Types.ObjectId(id)})
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+router.post('/changeProfile',async(req,res)=>{
+    const {_id,name,email,profilePhoto,phone,DOB,userName} = req.body
+    console.log(_id, name, email, profilePhoto, phone, DOB, userName);
+    const user = await User.findById({_id:mongoose.Types.ObjectId(_id)})
     if(user === null || user === ""){
         return res.json({message:"User doesnt exist",status:false})
     }
@@ -44,8 +45,12 @@ router.post('changeProfile',async(req,res)=>{
         user.name = name
         user.email = email
         user.profilePhoto = profilePhoto
+        user.DOB = DOB
+        user.phone = phone
+        user.userName = userName
+
         await User.findByIdAndUpdate(
-            {id},user
+            {_id},user
         ).then(e=>{return res.json({message:"Successfully changed profile",status:true})}).catch(e=>{return res.json({message:"Server error",status:false})})
     }
 })

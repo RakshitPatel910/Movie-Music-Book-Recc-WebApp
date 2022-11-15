@@ -12,12 +12,12 @@ body {
   font-family: 'Roboto', Arial, Verdana, sans-serif; */
   /* background: #eee; */
 }
-ul {
+.card__footer > ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
-.card {
+.watchcard {
   position: relative;
   margin-top: 2rem;
   margin-right: auto;
@@ -32,7 +32,7 @@ ul {
   border-radius: 0.25rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
-.card:after {
+.watchcard:after {
   content: "";
   position: absolute;
   top: 0;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 // import './App.css';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-
 import Appbar from './components/Appbar/Appbar.js';
 import Forgpass from './components/Auth/Forgpass.js';
 import Signinappbar from './components/Appbar/Signinappbar.js';
@@ -34,11 +33,11 @@ function App() {
     <>
       <BrowserRouter>
         
-        <Appbar/> 
+        {/* <Appbar/>  */}
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
-        <Watchlist />
-        {/* <Profilepage /> */}
+        {/* <Watchlist /> */}
+        <Profilepage />
 
         {/* <Navbar />
         <Searchbar /> */}
