@@ -34,7 +34,7 @@ function App() {
     <>
       <BrowserRouter>
         
-        <Appbar/> 
+        {/* <Appbar/>  */}
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
         {/* <Watchlist /> */}
