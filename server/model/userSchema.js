@@ -6,7 +6,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  
+
+  name: {
+    type: String,
+    default: null,
+  },
+
+  DOB: {
+    type: Date,
+    default: null,
+  },
+
   email: {
     type: String,
     required: true,
@@ -15,6 +25,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: Number,
     required: false,
+    default: null,
   },
   password: {
     type: String,
@@ -33,10 +44,10 @@ const userSchema = new mongoose.Schema({
       date: Date,
     },
   ],
-  profilePhoto:{
-    type:String,
-    default:null
-  }
+  profilePhoto: {
+    type: String,
+    default: null,
+  },
 }); 
 
 const  User = mongoose.model('User',userSchema)

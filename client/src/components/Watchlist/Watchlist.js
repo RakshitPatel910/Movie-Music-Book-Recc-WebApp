@@ -17,8 +17,8 @@ export default function Watchlist() {
   useEffect(()=>{
     async function getWatchlist(){
       // const user = JSON.parse(localStorage.getItem("profile"));
-      console.log(JSON.parse(localStorage.getItem("profile")).profile.id);
-      const id = JSON.parse(localStorage.getItem("profile")).profile.id;
+      console.log(JSON.parse(localStorage.getItem("profile")).profile._id);
+      const id = JSON.parse(localStorage.getItem("profile")).profile._id;
       
       // const Id = user.profile.id.trim();
       // console.log(Id)
@@ -28,8 +28,7 @@ export default function Watchlist() {
             _id: id
           })
           .then((e) => {
-            setList(e.data.watchlist);
-            setToggle(!toggle);
+            console.log(e.data.data)
             // console.log(e.data.watchlist);
           })
           .catch((e) => {
@@ -98,7 +97,7 @@ function fetchMovie() {
         movie.map(e=>{
             return (
               <>
-                <div className="card">
+                <div className="watchcard">
                   <div className="card__inner">
                     <header className="card__header"></header>
 

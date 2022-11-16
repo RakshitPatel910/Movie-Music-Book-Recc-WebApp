@@ -54,7 +54,14 @@
     height: 2em;
   }
 
+#output{
+  margin-top: 40px;
+  margin-bottom: -5px;
+}
 
+.userName{
+  margin: 10px 0px;
+}
 /* 
 body {
   height: 100vh;

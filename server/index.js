@@ -2,6 +2,7 @@ const dotenv = require('dotenv')
 const { application } = require('express');
 const cors = require('cors')
 const express = require('express');
+var bodyParser = require("body-parser");
 const app = express()
 
 dotenv.config({path:'./config.env'}) 
@@ -17,6 +18,15 @@ app.use(require('./router/watchlist'))
 app.use(require('./router/user'))
 app.use(require('./router/stats'))
 app.use(require('./router/recommendation'))
+
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 
 // app.all('*',function(req,res,next){
 //     res.setHeader(

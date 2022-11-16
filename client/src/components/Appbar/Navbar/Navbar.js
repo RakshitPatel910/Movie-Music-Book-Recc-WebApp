@@ -93,7 +93,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
     async function getUserData(){
       const data = await axios.post('http://localhost:3010/userData',{_id:Id})  
       // console.log(data.data.data.profilePhoto)  
-      // // console.log(data);
+      console.log(data);
       var oldImage = await data.data.data.profilePhoto
       // // console.log("oldImage",oldImage)
       setImage({image: data.data.data.profilePhoto})
@@ -226,10 +226,10 @@ export default function PersistentDrawerRight({ setIsLogged }) {
 
         <div className="profile-pic">
           {/* <label className="-label" > */}
-            <span className="glyphicon glyphicon-camera"></span>
-            {/* <span> */}
-              <EditIcon sx={{ margin: "auto" }} />
-            {/* </span> */}
+          <span className="glyphicon glyphicon-camera"></span>
+          {/* <span> */}
+          <EditIcon sx={{ margin: "auto" }} />
+          {/* </span> */}
           {/* </label> */}
           {/* <input
             id="file"
@@ -245,9 +245,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
 
           {image === null ? (
             (console.log("image is null"),
-            (
-              <img src={avatar} alt="profile" id="output" width="200" />
-            ))
+            (<img src={avatar} alt="profile" id="output" width="200" />))
           ) : (
             <img
               src={`data:image/png;base64,${image.image}`}
@@ -258,8 +256,8 @@ export default function PersistentDrawerRight({ setIsLogged }) {
           )}
         </div>
 
-        <Button color="inherit">
-          <Typography variant="h5">
+        <Button className="userName" color="inherit" sx={{ marginTop: 5 }}>
+          <Typography variant="h5" className="proNam">
             {name === null ? "username" : name.profile.userName}
           </Typography>
         </Button>
