@@ -36,14 +36,14 @@ function App() {
         {/* <Appbar/>  */}
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
-        {/* <Watchlist /> */}
+        <Watchlist />
         {/* <Profilepage /> */}
 
         {/* <Navbar />
         <Searchbar /> */}
 
 
-        <Appbar setIsLogged={setIsLogged} />
+        {/* <Appbar setIsLogged={setIsLogged} /> */}
         
         
         {/* <Forgpass />     */}
@@ -60,7 +60,7 @@ function App() {
           {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
 
 
-            {user ? <Route path="/*" element={<Home/>} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} />}
+            {/* {user ? <Route path="/*" element={<Home/>} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} />} */}
 
 
           {/* <Route path="/" exact element={<Auth />} />
