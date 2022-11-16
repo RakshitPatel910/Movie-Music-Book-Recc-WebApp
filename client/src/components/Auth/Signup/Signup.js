@@ -140,7 +140,7 @@ function Signup({ setIsSignUp }) {
             {/* m is margin equal on all side */}
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" sx={{ color: 'white' }} >
             Sign up
           </Typography>
           <Box
@@ -163,6 +163,10 @@ function Signup({ setIsSignUp }) {
                   onChange={(e) => {
                     setProfile({ ...profile, firstName: e.target.value });
                   }}
+                  sx={{ backgroundColor: 'rgb(62, 62, 62)', borderRadius: '5px', input: { color: 'white' } }}
+              InputLabelProps={{
+                style: { color: '#fff' },
+              }}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -178,6 +182,10 @@ function Signup({ setIsSignUp }) {
                   onChange={(e) => {
                     setProfile({ ...profile, middleName: e.target.value });
                   }}
+                  sx={{ backgroundColor: 'rgb(62, 62, 62)', borderRadius: '5px', input: { color: 'white' } }}
+              InputLabelProps={{
+                style: { color: '#fff' },
+              }}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -192,6 +200,10 @@ function Signup({ setIsSignUp }) {
                   onChange={(e) => {
                     setProfile({ ...profile, lastName: e.target.value });
                   }}
+                  sx={{ backgroundColor: 'rgb(62, 62, 62)', borderRadius: '5px', input: { color: 'white' } }}
+              InputLabelProps={{
+                style: { color: '#fff' },
+              }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -206,6 +218,10 @@ function Signup({ setIsSignUp }) {
                   onChange={(e) => {
                     setProfile({ ...profile, email: e.target.value });
                   }}
+                  sx={{ backgroundColor: 'rgb(62, 62, 62)', borderRadius: '5px', input: { color: 'white' } }}
+              InputLabelProps={{
+                style: { color: '#fff' },
+              }}
                 />
               </Grid>
               <Grid item xs={11} sm={11}>
@@ -221,6 +237,10 @@ function Signup({ setIsSignUp }) {
                   onChange={(e) => {
                     setProfile({ ...profile, password: e.target.value });
                   }}
+                  sx={{ backgroundColor: 'rgb(62, 62, 62)', borderRadius: '5px', input: { color: 'white' } }}
+              InputLabelProps={{
+                style: { color: '#fff' },
+              }}
                 />
               </Grid>
               <Grid item xs={1} sm={1}>
@@ -264,7 +284,7 @@ function Signup({ setIsSignUp }) {
                   }
                 />
               </Grid>
-              <Grid item xs={2} sm={2}>
+              <Grid item xs={2} sm={2} sx={{ color:'white' }}>
                 {passwordLength <= 2
                   ? "very weak"
                   : passwordLength > 2 && passwordLength <= 4

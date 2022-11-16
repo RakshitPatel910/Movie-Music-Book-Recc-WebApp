@@ -114,7 +114,7 @@ function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
           <Typography component="h3" variant="h3" color="white">
             Sign in
           </Typography>
-          <Box component="form"  sx={{ mt: 1 ,width:"60%"}} >
+          <Box component="form"  sx={{ mt: 1 ,width:"60%", color: 'white'}} >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12}>
               <TextField
@@ -128,6 +128,10 @@ function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
               autoFocus
               value={profile.email} 
               onChange={(e)=>{setProfile({...profile,email:e.target.value})}}
+              sx={{ backgroundColor: 'rgb(62, 62, 62)', borderRadius: '5px', input: { color: 'white' } }}
+              InputLabelProps={{
+                style: { color: '#fff' },
+              }}
             />
               </Grid>
               <Grid item xs={11} sm={11}>
@@ -142,6 +146,10 @@ function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
                   value={profile.password}
                   onChange={(e) => {
                     setProfile({ ...profile, password: e.target.value });
+                  }}
+                  sx={{ backgroundColor: 'rgb(62, 62, 62)', borderRadius: '5px', input: { color: 'white' } }}
+                  InputLabelProps={{
+                    style: { color: '#fff' },
                   }}
                 />
               </Grid>
