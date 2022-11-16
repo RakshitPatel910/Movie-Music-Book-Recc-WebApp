@@ -45,7 +45,6 @@ function App() {
 
         {/* <Appbar setIsLogged={setIsLogged} /> */}
         
-        
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
         {/* <Home /> */}

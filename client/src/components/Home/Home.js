@@ -9,6 +9,7 @@ import SearchResults from '../SearchResults/SearchResults.js';
 import RecommendationResults from '../SearchResults/RecommendationResults.js';
 import SearchBarSearchedResults from '../SearchResults/SearchBarSearchedResults.js';
 import Timeline from "../Chart/Timeline.js";
+import Profilepage from "../Profilepage/Profilepage.js";
 
 import { getReccGenre } from "../../api/backend.js";
 import { getReccGenreCall } from "../../actions/genreSelector.js"
@@ -118,7 +119,7 @@ export default function Home(){
             <Routes>
                 <Route path="" exact element={
                     <>
-                        {/* <Carousel title={'Recommended'} reccMovieList={true}/> */}
+                        <Carousel title={'Recommended'} reccMovieList={true}/>
                         <Carousel title={'Popular Now'} reccMovieList={false} />
                         {
                             genreList.map((genreObj) => (
@@ -134,6 +135,7 @@ export default function Home(){
                 <Route path="user/search-results/:search_text" exact element={<SearchBarSearchedResults  />} />
                 <Route path="timeline" exact element={<Timeline />} />
                 <Route path="timeline/:movie_id" exact element={<Movieinfo />} />
+                <Route path="user/profile" exact element={<Profilepage />} />
             </Routes>
         </>
     )

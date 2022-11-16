@@ -264,12 +264,21 @@ export default function PersistentDrawerRight({ setIsLogged }) {
         <Divider />
 
         <List style={{ display: "flex", flexDirection: "column" }}>
-          <ListItemButton>
+          <ListItemButton component={Link} to={`/user/profile`} >
             <ListItem>
               <ListItemIcon>
                 <RememberMeIcon />
               </ListItemIcon>
               <ListItemText style={{ color: "black" }} primary="My Profile" />
+            </ListItem>
+          </ListItemButton>
+
+          <ListItemButton component={Link} to={`/timeline`}>
+            <ListItem>
+              <ListItemIcon>
+                <WorkHistoryIcon />
+              </ListItemIcon>
+              <ListItemText style={{ color: "black" }} primary="Timeline" />
             </ListItem>
           </ListItemButton>
 

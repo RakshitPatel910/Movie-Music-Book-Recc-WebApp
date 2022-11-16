@@ -20,6 +20,14 @@ function MovieCard({ list }) {
           }
         );
 
+        const watchCountData = await axios.patch(
+          "http://localhost:3010/updateWatchCount",
+          {
+            email: JSON.parse(localStorage.getItem("profile")).profile.email,
+            genre_ids: list.genre_ids,
+          }
+        );
+        console.log(watchCountData)
         console.log(list.original_title)
     }
 

@@ -23,7 +23,9 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     '&:hover $viewMore': {
       transform: 'translateX(230px)',
-      opacity: 1
+      opacity: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+
     }
   },
 
