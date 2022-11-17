@@ -22,6 +22,7 @@ export default function Home(){
 
     const [reccGenres, setReccGenres] = useState([]);
     const [reccMovies, setReccMovies] = useState([]);
+    const [showRecc, setShowRecc] = useState(true)
     var list = []
     const genreList = moviesGenre.sort( () => 0.5 -Math.random() ).slice(0, 2);
 
@@ -119,7 +120,11 @@ export default function Home(){
             <Routes>
                 <Route path="" exact element={
                     <>
-                        {/* <Carousel title={'Recommended'} reccMovieList={true}/> */}
+                        {
+                            showRecc === true ? 
+                            <Carousel title={'Recommended'} reccMovieList={true} setShowRecc={setShowRecc}/> :
+                            ""
+                        }
                         <Carousel title={'Popular Now'} reccMovieList={false} />
                         {
                             genreList.map((genreObj) => (
