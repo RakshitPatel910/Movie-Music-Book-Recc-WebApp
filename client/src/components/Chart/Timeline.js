@@ -35,6 +35,7 @@ function Timeline(){
     
     useEffect(()=>{
       var obj = JSON.parse(localStorage.getItem("profile"));
+      const id = JSON.parse(localStorage.getItem("profile")).profile._id;
       console.log(obj.profile._id)
       async function getMovieInfo(id){
         await axios
@@ -49,7 +50,7 @@ function Timeline(){
         // setMovieInfo(info.history1)
       }
 
-      getMovieInfo(23525344322423);
+      getMovieInfo(id);
       // getMovieInfo(obj.profile._id);sk
 
       console.log("movieinfo ",movieInfo)

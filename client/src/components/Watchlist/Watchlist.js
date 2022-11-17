@@ -2,7 +2,9 @@ import * as React from "react";
 import {useState,useEffect} from "react"
 import { Stack, Button, Grid, Menu, MenuItem, Avatar } from "@mui/material";
 import { Box } from "@mui/system";
+import {  Typography, CircularProgress } from "@material-ui/core";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import DeleteIcon from "@mui/icons-material/Delete";
 import axios from 'axios'
 import "./Watchlist.css";
 
@@ -14,6 +16,20 @@ export default function Watchlist() {
   const [movie,setMovie] = useState([])
   const [toggle,setToggle] = useState(false)
 
+  const person = async () =>
+    await axios
+      .post("http://localhost:3010/getWatchlist", {
+        _id: JSON.parse(localStorage.getItem("profile")).profile._id,
+      })
+      .then((e) => {
+        console.log(e.data.watchlist);
+        // console.log(e.data.watchlist);
+        setMovie(e.data.watchlist);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
   useEffect(()=>{
     async function getWatchlist(){
       // const user = JSON.parse(localStorage.getItem("profile"));
@@ -22,18 +38,7 @@ export default function Watchlist() {
       
       // const Id = user.profile.id.trim();
       // console.log(Id)
-      const person = async () =>
-        await axios
-          .post("http://localhost:3010/getWatchlist", {
-            _id: id
-          })
-          .then((e) => {
-            console.log(e.data.data)
-            // console.log(e.data.watchlist);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+      
         person()
         
         
@@ -45,25 +50,32 @@ export default function Watchlist() {
     
   },[])
 
-async function getMovie(movieId) {
-  await axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
-    )
-    .then((e) => {
-      // m.push(e.data);
-      setMovie([...movie, e.data]);
-    });
-  // console.log(m);
-}
+  async function delWatchlist(movieId) {
+    await axios
+      .post("http://localhost:3010/deleteFromWatchlist", {
+        _id: JSON.parse(localStorage.getItem("profile")).profile._id,
+        movieId: movieId,
+      })
+      .then((e) => {
+        newWatchlist(movieId);
+      });
+  }
 
-function fetchMovie() {
-  list.map((e) => {
-    getMovie(e.movieId);
-    return e.movieId;
-  });
-  console.log(data, "data");
-}
+  function newWatchlist(movieId){
+    let newArr = movie
+    let i = 0
+    console.log("before",newArr)
+    newArr.map(e=>{
+      if(e.movieId === movieId){
+        newArr.splice(i,i+1)
+        return newArr
+      }
+      i++
+    }) 
+    console.log("afterward",newArr)
+    person()
+    setMovie(newArr)
+  }
 
 // useEffect(()=>{
 //   fetchMovie();
@@ -90,43 +102,35 @@ function fetchMovie() {
           )}
         </PopupState>
       </Stack>
-       
-      {console.log(movie)}
-      {fetchMovie()}
-      {
-        movie.map(e=>{
-            return (
-              <>
-                <div className="watchcard">
-                  <div className="card__inner">
-                    <header className="card__header"></header>
+      {console.log("movie", movie)}
+      <Grid container item spacing={0}>
+        {movie.map((e) => (
+            <>
+              <Grid  item xs={3}>
 
-                    <main className="card__body">
-                      <div className="card__info">
-                        <h1 className="card__title">{e.title}</h1>
-
-                        <p className="card__slug">
-                          Political interference in the Avengers' activities
-                          causes a rift between former allies Captain America
-                          and Iron Man.
-                        </p>
-                      </div>
-                    </main>
-
-                    <footer className="card__footer">
-                      <ul className="list list--info">
-                        <li>2016</li>
-                        <li>122 min</li>
-                        <li>Action | Sci-Fi</li>
-                      </ul>
-                    </footer>
+              <div class="container">
+                <div class="poster">
+                  <img
+                    class="poster__img"
+                    // style={{
+                    //   backgroundImage: `url(https://image.tmdb.org/t/p/w185${e.poster})`,
+                    // }}
+                    src={`https://image.tmdb.org/t/p/w185${e.poster}`}
+                    alt="nothing"
+                  />
+                  <div class="poster__info">
+                    <h1 class="poster__title">{e.title}</h1>
+                    <p class="poster__text">
+                      <DeleteIcon onClick={()=>{delWatchlist(e.movieId)}}/>
+                    </p>
                   </div>
                 </div>
-              </>
-            );
-        })
-      }
-     
+              </div>
+              </Grid>
+            </>
+          )
+        )}
+      </Grid>
     </>
   );
 }
