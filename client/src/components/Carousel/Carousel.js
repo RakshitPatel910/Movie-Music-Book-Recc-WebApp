@@ -16,7 +16,7 @@ import { moviesGenre } from '../../constants/genreId.js';
 
 import useStyles from "./styles.js";
 
-function Carousel({ genre, title, reccMovieList }) {
+function Carousel({ genre, title, reccMovieList, setShowRecc }) {
 
     const dispatch = useDispatch();
 
@@ -39,7 +39,13 @@ function Carousel({ genre, title, reccMovieList }) {
         }
         else {
             const list = dispatch(getReccGenreCall(JSON.parse(localStorage.getItem('profile')).profile.email)).then( res => {
-                setMovieList(res);
+
+                if ( res === undefined ) {
+                    setShowRecc(false)
+                }
+                else {
+                    setMovieList(res);
+                }
                 // setTimeout(() => {
                 //     console.log()
                 // }, 2000);
