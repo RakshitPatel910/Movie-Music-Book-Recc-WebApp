@@ -119,7 +119,7 @@ export default function Home(){
             <Routes>
                 <Route path="" exact element={
                     <>
-                        <Carousel title={'Recommended'} reccMovieList={true}/>
+                        {/* <Carousel title={'Recommended'} reccMovieList={true}/> */}
                         <Carousel title={'Popular Now'} reccMovieList={false} />
                         {
                             genreList.map((genreObj) => (

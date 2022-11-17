@@ -32,45 +32,48 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        
         {/* <Appbar/>  */}
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
-        <Watchlist />
+        {/* <Watchlist /> */}
         {/* <Profilepage /> */}
 
         {/* <Navbar />
         <Searchbar /> */}
 
+        <Appbar setIsLogged={setIsLogged} />
 
-        {/* <Appbar setIsLogged={setIsLogged} /> */}
-        
         {/* <Forgpass />     */}
         {/* <Signinappbar /> */}
         {/* <Home /> */}
         {/* <Timeline /> */}
 
-          <Routes>
-            {/* <Route path="/" exact element={<Auth />} /> */}
+        <Routes>
+          {/* <Route path="/" exact element={<Auth />} /> */}
 
-            {/* <Route path="/home/*"  element={<Home />} />
+          {/* <Route path="/home/*"  element={<Home />} />
             <Route path="/home/:genre_name" exact element={<SearchResults />} /> */}
 
           {/* <Route path="/movieinfo" exact element={<Movieinfo />} /> */}
 
-
-            {/* {user ? <Route path="/*" element={<Home/>} /> : <Route path="/" exact element={<Auth setIsLogged = {setIsLogged} />} />} */}
-
+          {user ? (
+            <Route path="/*" element={<Home />} />
+          ) : (
+            <Route
+              path="/"
+              exact
+              element={<Auth setIsLogged={setIsLogged} />}
+            />
+          )}
+          <Route path="/forgetPassword" element={<Forgpass />} />
 
           {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
-
-          </Routes> 
+        </Routes>
       </BrowserRouter>
-          {/* <Radar/> */}
-          {/* <Timeline/> */}
-          
-    </>     
+      {/* <Radar/> */}
+      {/* <Timeline/> */}
+    </>
   );
 } 
 

@@ -70,7 +70,7 @@ router.get('/getGenre',async (req,res)=>{
 
 router.post('/addToWatchlist',async (req,res)=>{
     try {
-        const { _id, movieId } = req.body;
+        const { _id, movieId} = req.body;
         // const id = mongoose.Types.ObjectId(_id)
         console.log(req.body._id);
         const movie = await axios.get(

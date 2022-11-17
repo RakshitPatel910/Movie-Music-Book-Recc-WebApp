@@ -193,7 +193,7 @@ function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
               </Grid>
               <Grid container >
               <Grid item xs sx={{ml:2}}>
-                <Link href="#" variant="body2" sx={{textDecoration:"none"}}>
+                <Link href="#" variant="body2" to="/forgetPassword" sx={{textDecoration:"none"}}>
                   Forgot password?
                 </Link>
               </Grid>
