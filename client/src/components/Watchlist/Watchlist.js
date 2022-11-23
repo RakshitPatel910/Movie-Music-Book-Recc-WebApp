@@ -1,6 +1,8 @@
 import * as React from "react";
 import {useState,useEffect} from "react"
 import { Stack, Button, Grid, Menu, MenuItem, Avatar } from "@mui/material";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import {  Typography, CircularProgress } from "@material-ui/core";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
@@ -84,7 +86,7 @@ export default function Watchlist() {
   
   return (
     <>
-      <Stack spacing={2} direction="row" marginTop={2.5}>
+      {/* <Stack spacing={2} direction="row" marginTop={2.5}>
         <Grid></Grid>
         <Grid></Grid>{" "}
         <PopupState variant="popover" popupId="demo-popup-menu">
@@ -101,36 +103,44 @@ export default function Watchlist() {
             </React.Fragment>
           )}
         </PopupState>
-      </Stack>
+      </Stack> */}
       {console.log("movie", movie)}
-      <Grid container item spacing={0}>
-        {movie.map((e) => (
+      <div className="parent_container">
+        <Grid container item spacing={0}>
+          {movie.map((e) => (
             <>
-              <Grid  item xs={3}>
-
-              <div class="container">
-                <div class="poster">
-                  <img
-                    class="poster__img"
-                    // style={{
-                    //   backgroundImage: `url(https://image.tmdb.org/t/p/w185${e.poster})`,
-                    // }}
-                    src={`https://image.tmdb.org/t/p/w185${e.poster}`}
-                    alt="nothing"
-                  />
-                  <div class="poster__info">
-                    <h1 class="poster__title">{e.title}</h1>
-                    <p class="poster__text">
-                      <DeleteIcon onClick={()=>{delWatchlist(e.movieId)}}/>
-                    </p>
+              <Grid item xs={3}>
+                <div className="container">
+                  <div className="poster">
+                    <Link to={`/${e.movieId}`}>
+                      <img
+                        className="poster__img"
+                        // style={{
+                        //   backgroundImage: `url(https://image.tmdb.org/t/p/w185${e.poster})`,
+                        // }}
+                        src={`https://image.tmdb.org/t/p/w185${e.poster}`}
+                        alt="nothing"
+                        component={Link}
+                        to={`/${e.movieId}`}
+                      />
+                    </Link>
+                    <div className="poster__info">
+                      <h1 className="poster__title">{e.title}</h1>
+                      <p className="poster__text">
+                        <DeleteIcon
+                          onClick={() => {
+                            delWatchlist(e.movieId);
+                          }}
+                        />
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
               </Grid>
             </>
-          )
-        )}
-      </Grid>
+          ))}
+        </Grid>
+      </div>
     </>
   );
 }

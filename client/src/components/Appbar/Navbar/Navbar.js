@@ -282,7 +282,7 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             </ListItem>
           </ListItemButton>
 
-          <ListItemButton component={Link} to={`/timeline`}>
+          <ListItemButton component={Link} to={`/watchlist`}>
             <ListItem>
               <ListItemIcon>
                 <WorkHistoryIcon />

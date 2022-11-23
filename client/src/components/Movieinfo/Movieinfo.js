@@ -5,6 +5,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Chip from "@mui/material/Chip";
+import Rating from "@mui/material/Rating";
 // import CardActions from "@mui/material/CardActions";
 import ImageIcon from "@mui/icons-material/Image";
 import Avatar from "@mui/material/Avatar";
@@ -79,19 +80,41 @@ function Movieinfo() {
   const [lang, setLang] = useState([]);
   const [company, setCompany] = useState([]);
   const [country, setCountry] = useState([]);
+  const [list, setList] = useState([]);
+  const [inList,setInList]  = useState(false)
   const [id,setId] = useState()
   // const [avatar,setAvatar] = useState("");
 
 
   const theme = useTheme();
 
+  const checkWatchlist = () =>{
+    list.map((e) => {
+      if (e.movieId === movie_id) {
+        setInList(true);
+      }
+    })
+  }
+
+  useEffect(()=>{
+    checkWatchlist();
+  },[list])
+
+  
+
   const addToWatchlist = async (movie_id) => {
     console.log(id)
-    const movieId = await axios.post("http://localhost:3010/addToWatchlist", {
-      _id: JSON.parse(localStorage.getItem("profile")).profile._id,
-      movieId: movie_id,
-    });
+    if(inList === false){
+
+      const movieId = await axios.post("http://localhost:3010/addToWatchlist", {
+        _id: JSON.parse(localStorage.getItem("profile")).profile._id,
+        movieId: movie_id,
+      });
     console.log("movie id ",movieId)
+    }
+    else{
+      console.log("already added to watchlist")
+    }
   };
 
   const handleChange = (event, newValue) => {
@@ -117,6 +140,20 @@ function Movieinfo() {
       `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=f20575175c2deae7974eb547727d1ace&language=en-US`
     );
 
+    const watchlist = async () =>
+      await axios
+        .post("http://localhost:3010/getWatchlist", {
+          _id: JSON.parse(localStorage.getItem("profile")).profile._id,
+        })
+        .then((e) => {
+          console.log(e.data.watchlist);
+          // console.log(e.data.watchlist);
+          setList(e.data.watchlist);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
   useEffect(() => {
     let isMounted = true;
      const user = JSON.parse(localStorage.getItem("profile"));
@@ -131,6 +168,9 @@ function Movieinfo() {
       if (isMounted) {
         const path = result.data.poster_path;
         
+        watchlist()
+        
+
         setImage(`https://image.tmdb.org/t/p/w185${path}`);
         setOverview(result.data.overview);
         setGenre(result.data.genres);
@@ -141,6 +181,8 @@ function Movieinfo() {
         setLang(result.data.spoken_languages);
         setCompany(result.data.production_companies);
         setCountry(result.data.production_countries);
+
+        
       }
     }
 
@@ -205,15 +247,38 @@ function Movieinfo() {
               <p className="text">{overview}</p>
             </div>
             <div className="movie_social">
-              <Chip
-                className="social"
-                label="Add to Watchlist"
-                color="primary"
-                sx={{ backgroundColor: "#0055b3" }}
-                onClick={() => {
-                  addToWatchlist(movie_id);
-                }}
-              />
+              {console.log("list", list)}
+              {console.log("inList", inList)}
+              {inList == true ? (
+                <>
+                  <Chip
+                    className="social"
+                    label={
+                      inList == true
+                        ? "Already Added to Watchlist"
+                        : "Add to Watchlist"
+                    }
+                    color="primary"
+                    sx={{ backgroundColor: "#0055b3", opacity: "0.2" }}
+                    onClick={() => {
+                      addToWatchlist(movie_id);
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <Chip
+                    className="social"
+                    label="Add to Watchlist"
+                    color="primary"
+                    sx={{ backgroundColor: "#0055b3" }}
+                    onClick={() => {
+                      addToWatchlist(movie_id);
+                    }}
+                  />
+                </>
+              )}
+              {/* <Rating name="half-rating" defaultValue={2.5} precision={0.5} /> */}
             </div>
           </div>
           <div
@@ -284,11 +349,12 @@ function Movieinfo() {
                   <hr className="customHR"></hr>
                   <p>
                     Budget{" "}
-                    {info.budget == "" || info.budget == null || info.budget === 0 ? (
+                    {info.budget == "" ||
+                    info.budget == null ||
+                    info.budget === 0 ? (
                       <>
                         <h4 className="stats">NA</h4>
                       </>
-                      
                     ) : (
                       <>
                         <h4 className="stats">{info.budget}</h4>
@@ -297,7 +363,9 @@ function Movieinfo() {
                   </p>
                   <p>
                     Revenue{" "}
-                    {info.revenue == "" || info.revenue == null || info.revenue === 0 ? (
+                    {info.revenue == "" ||
+                    info.revenue == null ||
+                    info.revenue === 0 ? (
                       <>
                         <h4 className="stats">NA</h4>
                       </>

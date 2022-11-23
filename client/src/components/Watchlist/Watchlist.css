@@ -40,6 +40,12 @@ body {
     background: linear-gradient(130deg, #e67e22 10%, #e74c3c 100%);
   } */
 
+.parent_container{
+  width:1210px;
+  margin:auto;
+  margin-top: 50px;
+}
+
 .poster {
   margin: 20px 20px;
   width: 67%;
@@ -58,20 +64,31 @@ body {
   }
   .poster__info {
     width:100%;
-    background: #fff;
+    /* background: #00004d; */
+    /* background: #151B54; */
+    background: #000c19;
     padding: 25px 25px 40px;
   }
   .poster__title {
     font-size: 1.2em;
     font-weight: 300;
     margin-bottom: .4em;
+    /* color: rgb(193, 188, 188); */
+    color: #9ac7fa;
   }
   .poster__text {
     font-size: .9em;
-    color: #999;
+    color: rgb(193, 188, 188);
     font-weight: 300;
     margin-top: 29px;
     margin-bottom: -31px;
+  }
+
+  
+
+  .container:hover{
+    transform: scale(1.055, 1.055);
+    transition: transform 330ms ease-in-out;
   }
 
 /* .linkie {
