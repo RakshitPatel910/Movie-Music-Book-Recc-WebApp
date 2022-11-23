@@ -39,11 +39,12 @@ function Carousel({ genre, title, reccMovieList, setShowRecc }) {
         }
         else {
             const list = dispatch(getReccGenreCall(JSON.parse(localStorage.getItem('profile')).profile.email)).then( res => {
-
+                console.log(res)
                 if ( res === undefined ) {
                     setShowRecc(false)
                 }
                 else {
+                    setShowRecc(true)
                     setMovieList(res);
                 }
                 // setTimeout(() => {

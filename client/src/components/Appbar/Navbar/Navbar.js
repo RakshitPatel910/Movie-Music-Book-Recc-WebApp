@@ -243,13 +243,13 @@ export default function PersistentDrawerRight({ setIsLogged }) {
           /> */}
           {/* {console.log(image)} */}
 
-          {image === null ? (
+          {image === null || image==""? (
             (console.log("image is null"),
-            (<img src={avatar} alt="profile" id="output" width="200" />))
+            (<img src={avatar} alt={avatar} id="output" width="200" />))
           ) : (
             <img
               src={`data:image/png;base64,${image.image}`}
-              alt="profile"
+              alt={avatar}
               id="output"
               width="200"
             />
