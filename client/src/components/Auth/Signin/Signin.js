@@ -173,10 +173,10 @@ function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
                 </Fab>
               </Grid>
               <Grid item xs={12} sm={12}>
-              <FormControlLabel
+              {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
               </Grid>
               <Grid item xs={12} sm={12}>
               <Button
@@ -192,11 +192,11 @@ function Signin({ isSignUp, setIsSignUp, setIsLogged }) {
               </Button>
               </Grid>
               <Grid container >
-              <Grid item xs sx={{ml:2}}>
+              {/* <Grid item xs sx={{ml:2}}>
                 <Link href="#" variant="body2" to="/forgetPassword" sx={{textDecoration:"none"}}>
                   Forgot password?
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Link href="#" variant="body2" sx={{textDecoration:"none"}} onClick={()=>{setIsSignUp(1)}}>
                   {"Don't have an account? Sign Up"}

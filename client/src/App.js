@@ -65,7 +65,7 @@ function App() {
               element={<Auth setIsLogged={setIsLogged} />}
             />
           )}
-          <Route path="/forgetPassword" element={<Forgpass />} />
+          {/* <Route path="/forgetPassword" element={<Forgpass />} /> */}
 
           {/* <Route path="/" exact element={<Auth />} />
             <Route path="/home/*"  element={<Home />} /> */}
