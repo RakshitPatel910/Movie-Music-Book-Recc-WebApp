@@ -110,7 +110,7 @@ export default function Watchlist() {
           {movie.map((e) => (
             <>
               <Grid item xs={3}>
-                <div className="container">
+                <div className="container">  
                   <div className="poster">
                     <Link to={`/${e.movieId}`}>
                       <img
