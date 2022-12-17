@@ -66,9 +66,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerRight({ setIsLogged }) {
   const name = JSON.parse(localStorage.getItem('profile'))
-  
+  // const [image,setImage] =useState(); 
   const theme = useTheme();
- 
+  
   // const [user,setUser] = useState()
   let id = useRef(null)
   const [image,setImage]  = useState({
@@ -195,8 +195,8 @@ export default function PersistentDrawerRight({ setIsLogged }) {
             onClick={handleDrawerOpen}
             style={{ ...(open && { display: "none" }) }}
           >
-            <Avatar style={{ background: "#281E5D" }}>
-              <FlashOnOutlinedIcon />
+            <Avatar style={{ background: "#281E5D" }} >
+              {/* <FlashOnOutlinedIcon /> */}
             </Avatar>
           </IconButton>
         </Toolbar>

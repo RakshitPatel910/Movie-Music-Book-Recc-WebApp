@@ -2,9 +2,10 @@ const express = require('express')
 const axios = require('axios') 
 const moment = require('moment')
 const router  = express.Router()
-
+// const mongoose = require('mongoose')
 require("../db/conn");
 const Insight = require("../model/insightSchema");
+const { mongo, default: mongoose } = require('mongoose')
 
 let value = 0
 
@@ -181,12 +182,15 @@ router.post('/userStat',async (req,res)=>{
 
 
 router.post('/userHistory',async (req,res)=>{
-  try {
+  // try {
     const { userId } = req.body;
+    console.log(userId)
     const nowDate = moment(new Date());
 
     console.log(nowDate);
-    const { history } = await Insight.findOne({ userId: userId });
+    const user = await Insight.findOne({ userId: userId });
+    console.log(user)
+    const history = user.history;
     // console.log(history)
     let history1 = await Promise.all(
       history.map(async (e) => {
@@ -232,9 +236,9 @@ router.post('/userHistory',async (req,res)=>{
     );
 
     return res.json({ history: history1, status: true });
-  } catch (error) {
-    console.log("error ",error)
-  }
+  // } catch (error) {
+  //   console.log("error ",error)
+  // }
   
 })
 

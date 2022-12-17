@@ -43,7 +43,7 @@ function Timeline(){
             userId: JSON.stringify(id),
           })
           .then((e) => {
-            console.log("e", e.data.history);
+            console.log("history", e.data.history);
             setMovieInfo(e.data.history)
           });
 
