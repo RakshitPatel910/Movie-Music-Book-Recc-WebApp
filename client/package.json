@@ -55,7 +55,7 @@
     "eject": "react-scripts eject",
     "electron-build": "electron-builder",
     "electron-react": "concurrently \"cross-env  npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "npm run react-build && npm run electron-build"
+    "build": "npm run react-build"
   },
   "eslintConfig": {
     "extends": [
