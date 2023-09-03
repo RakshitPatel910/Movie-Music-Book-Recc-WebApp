@@ -49,13 +49,13 @@
   },
   "main": "public/electron.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "set SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "react-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "electron-react": "concurrently \"cross-env  npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "npm run react-build"
+    "electron-react": "concurrently \"cross-env  npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": [
