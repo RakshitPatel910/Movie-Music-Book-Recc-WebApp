@@ -3,7 +3,11 @@ const { application } = require('express');
 const cors = require('cors')
 const express = require('express');
 var bodyParser = require("body-parser");
-const app = express()
+const app = express();
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+require('./router/oauth')
+const oAuthRoute = require('./router/oAuthRoute')
 
 dotenv.config({path:'./config.env'}) 
 
@@ -18,6 +22,16 @@ app.use(require('./router/watchlist'))
 app.use(require('./router/user'))
 app.use(require('./router/stats'))
 app.use(require('./router/recommendation'))
+// app.use(require('./router/oauth'))
+
+app.use(
+  cookieSession({
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      keys:['thisisthekey']
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
@@ -27,6 +41,8 @@ app.use(
     parameterLimit: 50000,
   })
 );
+
+oAuthRoute(app)
 
 // app.all('*',function(req,res,next){
 //     res.setHeader(
@@ -54,7 +70,7 @@ const port = process.env.PORT;
 
  
 app.listen(port,()=>{ 
-    console.log('serve is running at port 3010')
+    console.log(`serve is running at port ${port}`)
 })
 
 

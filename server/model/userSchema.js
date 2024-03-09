@@ -5,10 +5,8 @@ const userSchema = new mongoose.Schema({
   userName: {
     type: String,
     required: true,
-    allowNull:false,
-    unique:true
   },
-
+  
   name: {
     type: String,
     default: null,
@@ -22,18 +20,16 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    allowNull:false,
-    unique:true
   },
 
   phone: {
     type: Number,
-    required: false,
+    // required: false,
     default: null,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   
   watchlist: [
@@ -48,6 +44,11 @@ const userSchema = new mongoose.Schema({
       ],
       date: Date,
     },
+  ],
+  musiclist:[
+    {
+      musicId: String,
+    }
   ],
   profilePhoto: {
     type: String,
