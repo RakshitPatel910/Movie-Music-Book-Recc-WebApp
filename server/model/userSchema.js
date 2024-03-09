@@ -4,9 +4,12 @@ const userSchema = new mongoose.Schema({
   // _id:String,
   userName: {
     type: String,
-    required: true,
+    // required: true,
   },
-
+  googleId: {
+    type: String
+  },
+  
   name: {
     type: String,
     default: null,
@@ -19,17 +22,17 @@ const userSchema = new mongoose.Schema({
 
   email: {
     type: String,
-    required: true,
+    // required: true,
   },
 
   phone: {
     type: Number,
-    required: false,
+    // required: false,
     default: null,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   watchlist: [
     {
