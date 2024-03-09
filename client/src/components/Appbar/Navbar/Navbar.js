@@ -183,9 +183,24 @@ export default function PersistentDrawerRight({ setIsLogged }) {
           </IconButton>
           <Typography
             variant="h4"
+            component={Link} to="/"
             style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
           >
             Movicon
+          </Typography>
+          <Typography
+            variant="h4"
+            component={Link} to="/books"
+            style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
+          >
+            Books
+          </Typography>
+          <Typography
+            variant="h4"
+            component={Link} to="/music"
+            style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
+          >
+            Music
           </Typography>
 
           <IconButton

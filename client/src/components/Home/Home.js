@@ -11,6 +11,8 @@ import SearchBarSearchedResults from '../SearchResults/SearchBarSearchedResults.
 import Watchlist from "../Watchlist/Watchlist.js";
 import Timeline from "../Chart/Timeline.js";
 import Profilepage from "../Profilepage/Profilepage.js";
+import MusicPage from "../MusicPage/MusicPage.js";
+import BookPage from "../BookPage/BookPage.js";
 
 import { getReccGenre } from "../../api/backend.js";
 import { getReccGenreCall } from "../../actions/genreSelector.js"
@@ -144,6 +146,8 @@ export default function Home(){
                 <Route path="watchlist" exact element={<Watchlist />} />
                 <Route path="timeline/:movie_id" exact element={<Movieinfo />} />
                 <Route path="user/profile" exact element={<Profilepage />} />
+                <Route path="musics" exact element={<MusicPage />} />
+                <Route path="books" exact element={<BookPage />} />
             </Routes>
         </>
     )
