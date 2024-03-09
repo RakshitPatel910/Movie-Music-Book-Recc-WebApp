@@ -50,6 +50,11 @@ const userSchema = new mongoose.Schema({
       musicId: String,
     }
   ],
+  booklist:[
+    {
+      volumeId:String,
+    }
+  ],
   profilePhoto: {
     type: String,
     default: null,

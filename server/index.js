@@ -19,6 +19,7 @@ app.use(cors())
 
 app.use(require('./router/auth')); // we link router file to rout easy
 app.use(require('./router/watchlist'))
+app.use(require('./router/booklist'))
 app.use(require('./router/user'))
 app.use(require('./router/stats'))
 app.use(require('./router/recommendation'))
