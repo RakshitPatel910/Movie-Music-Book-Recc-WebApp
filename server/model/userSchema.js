@@ -5,6 +5,8 @@ const userSchema = new mongoose.Schema({
   userName: {
     type: String,
     required: true,
+    allowNull:false,
+    unique:true
   },
 
   name: {
@@ -20,6 +22,8 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    allowNull:false,
+    unique:true
   },
 
   phone: {
@@ -31,6 +35,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  
   watchlist: [
     {
       movieId: String,
