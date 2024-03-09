@@ -260,8 +260,8 @@ router.post('/addToBooklist', async (req, res) => {
         throw new Error('Failed to find user');
       });
   
-      user.booklist = user.booklist.filter((e) => e.volumeId !== volumeId);
-  
+      user.booklist = user.booklist.filter((e) => e.volumeId !== JSON.stringify(volumeId));
+      console.log(user.booklist)
       const updatedUser = await User.findByIdAndUpdate(_id, user, { new: true }).catch(error => {
         console.error(error);
         throw new Error('Failed to update user');
