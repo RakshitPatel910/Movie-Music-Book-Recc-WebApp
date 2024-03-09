@@ -4,10 +4,7 @@ const userSchema = new mongoose.Schema({
   // _id:String,
   userName: {
     type: String,
-    // required: true,
-  },
-  googleId: {
-    type: String
+    required: true,
   },
   
   name: {
@@ -22,7 +19,7 @@ const userSchema = new mongoose.Schema({
 
   email: {
     type: String,
-    // required: true,
+    required: true,
   },
 
   phone: {
@@ -34,6 +31,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  
   watchlist: [
     {
       movieId: String,
@@ -46,6 +44,11 @@ const userSchema = new mongoose.Schema({
       ],
       date: Date,
     },
+  ],
+  musiclist:[
+    {
+      musicId: String,
+    }
   ],
   profilePhoto: {
     type: String,
