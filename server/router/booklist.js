@@ -203,80 +203,130 @@ router.get('/getGenre',async (req,res)=>{
 })
 
 router.post('/addToBooklist', async (req, res) => {
-  const { _id, volumeId } = req.body;
-
-  const book = await getData(volumeId);
-  const user = await User.findById(_id);
-
-  const existingBook = user.booklist.find((e) => e.volumeId === volumeId);
-
-  if (existingBook) {
-    return res.json({
-      message: 'Book is already in the user\'s booklist',
-      status: false,
-    });
-  }
-
-  const newBook = {
-    volumeId,
-    // genre: [],
-    // date: new Date().toLocaleString(),
-  };
-
-  user.booklist.push(newBook);
-
-  const updatedUser = await User.findByIdAndUpdate(_id, user, { new: true });
-
-  res.json({
-    message: 'Book added to booklist',
-    status: true,
-    book: updatedUser.booklist,
+    const { _id, volumeId } = req.body;
+  
+    try {
+    //   const book = await getData(volumeId).catch(error => {
+    //     console.error(error);
+    //     throw new Error('Failed to get book data');
+    //   });
+  
+      const user = await User.findById(_id).catch(error => {
+        console.error(error);
+        throw new Error('Failed to find user');
+      });
+  
+      const existingBook = user.booklist.find((e) => e.volumeId === volumeId);
+  
+      if (existingBook) {
+        return res.json({
+          message: 'Book is already in the user\'s booklist',
+          status: false,
+        });
+      }
+  
+      const newBook = {
+        volumeId,
+        // genre: [],
+        // date: new Date().toLocaleString(),
+      };
+  
+      user.booklist.push(newBook);
+  
+      const updatedUser = await User.findByIdAndUpdate(_id, user, { new: true }).catch(error => {
+        console.error(error);
+        throw new Error('Failed to update user');
+      });
+  
+      res.json({
+        message: 'Book added to booklist',
+        status: true,
+        book: updatedUser.booklist,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        status: false,
+      });
+    }
   });
-});
-
-router.post('/deleteFromBooklist', async (req, res) => {
-  const { _id, volumeId } = req.body;
-
-  const user = await User.findById(_id);
-
-  user.booklist = user.booklist.filter((e) => e.volumeId !== volumeId);
-
-  const updatedUser = await User.findByIdAndUpdate(_id, user, { new: true });
-
-  res.json({
-    message: 'Book removed from booklist',
-    status: true,
-    book: updatedUser.booklist,
+  
+  router.post('/deleteFromBooklist', async (req, res) => {
+    const { _id, volumeId } = req.body;
+  
+    try {
+      const user = await User.findById(_id).catch(error => {
+        console.error(error);
+        throw new Error('Failed to find user');
+      });
+  
+      user.booklist = user.booklist.filter((e) => e.volumeId !== volumeId);
+  
+      const updatedUser = await User.findByIdAndUpdate(_id, user, { new: true }).catch(error => {
+        console.error(error);
+        throw new Error('Failed to update user');
+      });
+  
+      res.json({
+        message: 'Book removed from booklist',
+        status: true,
+        book: updatedUser.booklist,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        status: false,
+      });
+    }
   });
-});
-
-router.post('/deleteBooklist', async (req, res) => {
-  const { _id } = req.body;
-
-  const user = await User.findById(_id);
-
-  user.booklist.splice(0, user.booklist.length);
-
-  await User.findByIdAndUpdate(_id, user);
-
-  res.json({
-    message: 'Booklist deleted',
-    status: true,
+  
+  router.post('/deleteBooklist', async (req, res) => {
+    const { _id } = req.body;
+  
+    try {
+      const user = await User.findById(_id).catch(error => {
+        console.error(error);
+        throw new Error('Failed to find user');
+      });
+  
+      user.booklist.splice(0, user.booklist.length);
+  
+      await User.findByIdAndUpdate(_id, user);
+  
+      res.json({
+        message: 'Booklist deleted',
+        status: true,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        status: false,
+      });
+    }
   });
-});
-
-router.get('/getBooklist', async (req, res) => {
-  const { _id } = req.body;
-
-  const user = await User.findById(_id);
-
-  const watchedBooks = user.booklist.filter((e) => e.isWatched);
-
-  res.json({
-    Books: watchedBooks,
-    status: true,
+  
+  router.get('/getBooklist', async (req, res) => {
+    const { _id } = req.body;
+  
+    try {
+      const user = await User.findById(_id).catch(error => {
+        console.error(error);
+        throw new Error('Failed to find user');
+      });
+  
+      const watchedBooks = user.booklist.filter((e) => e.isWatched);
+  
+      res.json({
+        Books: watchedBooks,
+        status: true,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+        status: false,
+      });
+    }
   });
-});
 // router.post('/addToWatchedlist',async (req,res)=>{
 //     const {_id,movieId} = req.body
 //     let user = await User.findById(_id)
