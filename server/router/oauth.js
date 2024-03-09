@@ -22,11 +22,11 @@ passport.use(new GoogleStrategy({
     // console.log(req)
     console.log(profile)
 
-    const existingUser = await User.findOne({googleId:req})
+    const existingUser = await User.findOne({googleId:profile.id})
         if(existingUser){
             //already have a record with the profile id
             return done(null,existingUser);
         }
-        const user = await new User ({googleId: req}).save();
+        const user = await new User ({googleId: profile.id}).save();
         done(null,user);
 }));
