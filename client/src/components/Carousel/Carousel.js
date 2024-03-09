@@ -28,13 +28,17 @@ function Carousel({ genre, title, reccMovieList, setShowRecc }) {
     const carousel = useRef(0);
     const progressBar = useRef(null);
 
-    const fetchMovies = (page) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genre}`);
+    var fetchMovies = (page, genre) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}`);
+    if( genre !== -100){
+        fetchMovies = (page, genre) => axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genre}`)
+    }
+
 
     const getMovies = async () => {
         console.log(reccMovieList)
         if ( reccMovieList === false ) {
-            const movies1 = await fetchMovies(1);
-            const movies2 = await fetchMovies(2);
+            const movies1 = await fetchMovies(1, genre);
+            const movies2 = await fetchMovies(2, genre);
             setMovieList(movies1.data.results.concat(movies2.data.results));
         }
         else {
