@@ -16,7 +16,7 @@ function SearchResults() {
 
     const{ genre_name, genreId } = useParams();
 
-    const fetchMovies = (page, genre) => axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genre}`);
+    const fetchMovies = (page, genre) => axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=f20575175c2deae7974eb547727d1ace&language=en-US&page=${page}&with_genres=${genre}`);
 
     const getMovies = async () => {
       const movies = await fetchMovies(page, genreId);
