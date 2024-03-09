@@ -44,6 +44,11 @@ const userSchema = new mongoose.Schema({
       date: Date,
     },
   ],
+  musiclist:[
+    {
+      musicId: String,
+    }
+  ],
   profilePhoto: {
     type: String,
     default: null,
