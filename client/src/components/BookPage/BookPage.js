@@ -25,26 +25,30 @@ export default function BookPage() {
   return (
     <>
       {/* <Typography
-      variant="h4"
-      style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
+        variant="h4"
+        style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
       >
-      Books
+        Books
       </Typography> */}
-      {bookList.length ==0? <div>No books found</div>:
-      // <BookPageCarousel menuList={bookList}/>
+      <div className="bookpage">
+        {bookList.length == 0 ? <div>No books found</div> :
+          // <BookPageCarousel menuList={bookList}/>
 
-      (
-        bookList.map(e =>(
-          <BookPageCard
-              key={e.id}
-              name={e.volumeInfo.title}
+          (
+            bookList.map(e => (
+              <BookPageCard
+                key={e.id}
+                name={e.volumeInfo.title}
+                authors={e.volumeInfo.authors}
+                publisher={e.volumeInfo.publisher}
               // image={e.volumeInfo.imageLinks.smallThumbnail}
               // price={menuItem.price}
-            />
-        ))
-  )
+              />
+            ))
+          )
 
-      }
+        }
+      </div>
     </>
   )
 }

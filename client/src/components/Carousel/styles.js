@@ -18,6 +18,7 @@ export default makeStyles((theme) => ({
 
   titleContainer: {
     margin: '0 5rem 0 0',
+    // color: "black",
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -32,6 +33,7 @@ export default makeStyles((theme) => ({
   carouselTitle: {
     // width: '330px',
     // width: '25%',
+    // color:"black",
     margin: '5px 3.3%',
     padding: '0.34rem 0.47rem 0 0.47rem',
     display: 'flex',
@@ -40,7 +42,7 @@ export default makeStyles((theme) => ({
   },
   
   listName: {
-    color: 'white'
+    color: 'black'
   },
 
   titleArrow: {

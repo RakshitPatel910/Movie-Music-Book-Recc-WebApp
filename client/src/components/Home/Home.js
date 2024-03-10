@@ -125,10 +125,10 @@ export default function Home(){
                     <>
                         {
                             showRecc === true ? 
-                            <Carousel title={'Recommended'} reccMovieList={true} setShowRecc={setShowRecc}/> :
+                            <Carousel genre={0} title={'Recommended'} reccMovieList={true} setShowRecc={setShowRecc}/> :
                             ""
                         }
-                        <Carousel genre={-100} title={'Popular Now'} reccMovieList={false} />
+                        <Carousel genre={-100} title={'Recommended'} reccMovieList={false} />
                         {
                             genreList.map((genreObj) => (
                                 <Carousel genre={genreObj.id} title={genreObj.name} key={genreObj.id} reccMovieList={false} />
