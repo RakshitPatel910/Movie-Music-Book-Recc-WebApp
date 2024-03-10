@@ -24,12 +24,12 @@ export default function BookPage() {
 
   return (
     <>
-      <Typography
+      {/* <Typography
       variant="h4"
       style={{ flexGrow: 1, textDecoration: "none", color: "white" }}
       >
       Books
-      </Typography>
+      </Typography> */}
       {bookList.length ==0? <div>No books found</div>:
       // <BookPageCarousel menuList={bookList}/>
 
